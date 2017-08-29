@@ -137,6 +137,116 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-RxJava-Retrofit-史上最精简封装（RxHttpUtils-2-x）使用说明" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/29/RxJava-Retrofit-史上最精简封装（RxHttpUtils-2-x）使用说明/">RxJava+Retrofit 史上最精简封装（RxHttpUtils 2.x）使用说明</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/29/RxJava-Retrofit-史上最精简封装（RxHttpUtils-2-x）使用说明/" class="archive-article-date">
+  	<time datetime="2017-08-29T08:25:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="重磅推出-RxHttpUtils-2-x-版本"><a href="#重磅推出-RxHttpUtils-2-x-版本" class="headerlink" title="重磅推出 RxHttpUtils 2.x 版本"></a>重磅推出 RxHttpUtils 2.x 版本</h1><h2 id="RxJava-Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用"><a href="#RxJava-Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用" class="headerlink" title="RxJava+Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用"></a>RxJava+Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用</h2><blockquote>
+<h2 id="上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！"><a href="#上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！" class="headerlink" title="上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！"></a>上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！</h2></blockquote>
+<h3 id="添加Gradle依赖"><a href="#添加Gradle依赖" class="headerlink" title="添加Gradle依赖"></a>添加Gradle依赖</h3><p>先在项目根目录的 build.gradle 的 repositories 添加:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> allprojects &#123;</div><div class="line">     repositories &#123;</div><div class="line">        ...</div><div class="line">        maven &#123; url &quot;https://jitpack.io&quot; &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p> 然后在dependencies添加:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">...</div><div class="line">        compile &apos;com.github.lygttpod:RxHttpUtils:2.0.1&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h1><h3 id="1、使用前自己的application类必须继承BaseRxHttpApplication"><a href="#1、使用前自己的application类必须继承BaseRxHttpApplication" class="headerlink" title="1、使用前自己的application类必须继承BaseRxHttpApplication"></a>1、使用前自己的application类必须继承BaseRxHttpApplication</h3><blockquote>
+<h5 id="继承BaseRxHttpApplication之后在自己的Application的onCreate方法中进行初始化配置"><a href="#继承BaseRxHttpApplication之后在自己的Application的onCreate方法中进行初始化配置" class="headerlink" title="继承BaseRxHttpApplication之后在自己的Application的onCreate方法中进行初始化配置"></a>继承BaseRxHttpApplication之后在自己的Application的onCreate方法中进行初始化配置</h5></blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">public class MyApplication extends BaseRxHttpApplication &#123;</div><div class="line"></div><div class="line">    Map&lt;String, Object&gt; headerMaps = new HashMap&lt;&gt;();</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate() &#123;</div><div class="line">        super.onCreate();</div><div class="line"></div><div class="line">        headerMaps.put(&quot;header1&quot;, &quot;header1&quot;);</div><div class="line">        headerMaps.put(&quot;header1&quot;, &quot;header1&quot;);</div><div class="line"></div><div class="line">        /**</div><div class="line">         * 全局请求的统一配置</div><div class="line">         */</div><div class="line">        RxHttpUtils</div><div class="line">                .getInstance()</div><div class="line">                //开启全局配置</div><div class="line">                .config()</div><div class="line">                //全局的BaseUrl,必须配置(baseurl以 / 结尾)</div><div class="line">                .setBaseUrl(BuildConfig.BASE_URL)</div><div class="line">                //开启缓存策略</div><div class="line">                .setCache()</div><div class="line">                //全局的请求头信息</div><div class="line">                .setHeaders(headerMaps)</div><div class="line">                //全局持久话cookie,保存本地每次都会携带在header中</div><div class="line">                .setCookie(false)</div><div class="line">                //全局ssl证书认证，支持三种方式</div><div class="line">                //1、信任所有证书,不安全有风险</div><div class="line">                .setSslSocketFactory()</div><div class="line">                //2、使用预埋证书，校验服务端证书（自签名证书）</div><div class="line">                //.setSslSocketFactory(getAssets().open(&quot;your.cer&quot;))</div><div class="line">                //3、使用bks证书和密码管理客户端证书（双向认证），使用预埋证书，校验服务端证书（自签名证书）</div><div class="line">                //.setSslSocketFactory(getAssets().open(&quot;your.bks&quot;), &quot;123456&quot;, getAssets().open(&quot;your.cer&quot;))</div><div class="line">                //全局超时配置</div><div class="line">                .setReadTimeout(10)</div><div class="line">                //全局超时配置</div><div class="line">                .setWriteTimeout(10)</div><div class="line">                //全局超时配置</div><div class="line">                .setConnectTimeout(10)</div><div class="line">                //全局是否打开请求log日志</div><div class="line">                .setLog(true);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2、自己定义的实体类必须继承BaseResponse基类"><a href="#2、自己定义的实体类必须继承BaseResponse基类" class="headerlink" title="2、自己定义的实体类必须继承BaseResponse基类"></a>2、自己定义的实体类必须继承BaseResponse基类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Created by allen on 2017/6/23.</div><div class="line"> * &lt;p&gt;</div><div class="line"> * 请求结果基类   所有请求结果继承此类</div><div class="line"> */</div><div class="line"></div><div class="line">public class BaseResponse &#123;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 错误码</div><div class="line">     */</div><div class="line">    private int code;</div><div class="line">    /**</div><div class="line">     * 错误描述</div><div class="line">     */</div><div class="line">    private String msg;</div><div class="line"></div><div class="line">    public int getCode() &#123;</div><div class="line">        return code;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setCode(int code) &#123;</div><div class="line">        this.code = code;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getMsg() &#123;</div><div class="line">        return msg;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setMsg(String msg) &#123;</div><div class="line">        this.msg = msg;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String toString() &#123;</div><div class="line">        return &quot;BaseResponse&#123;&quot; +</div><div class="line">                &quot;code=&quot; + code +</div><div class="line">                &quot;, msg=&apos;&quot; + msg + &apos;\&apos;&apos; +</div><div class="line">                &apos;&#125;&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="代码实例—–具体参数意义请看下边的参数说明"><a href="#代码实例—–具体参数意义请看下边的参数说明" class="headerlink" title="代码实例—–具体参数意义请看下边的参数说明"></a>代码实例—–具体参数意义请看下边的参数说明</h1><h3 id="1、使用Application里边的全局配置参数的请求示例"><a href="#1、使用Application里边的全局配置参数的请求示例" class="headerlink" title="1、使用Application里边的全局配置参数的请求示例"></a>1、使用Application里边的全局配置参数的请求示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">RxHttpUtils</div><div class="line">        .createApi(ApiService.class)</div><div class="line">        .getBook()</div><div class="line">        .compose(Transformer.&lt;BookBean&gt;switchSchedulers())</div><div class="line">        .subscribe(new CommonObserver&lt;BookBean&gt;() &#123;</div><div class="line">            @Override</div><div class="line">            protected void getDisposable(Disposable d) &#123;</div><div class="line">                 //方法暴露出来使用者根据需求去取消订阅</div><div class="line">                 //d.dispose();在onDestroy方法中调用</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            protected void onError(String errorMsg) &#123;</div><div class="line">                //错误处理</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            protected void onSuccess(BookBean bookBean) &#123;</div><div class="line">                //业务处理</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<h3 id="2、单个请求配置参数示例-可以根据需求选择性的配置"><a href="#2、单个请求配置参数示例-可以根据需求选择性的配置" class="headerlink" title="2、单个请求配置参数示例(可以根据需求选择性的配置)"></a>2、单个请求配置参数示例(可以根据需求选择性的配置)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">//单个请求使用默认配置的参数</div><div class="line">RxHttpUtils</div><div class="line">        .getSInstance()</div><div class="line">        .baseUrl(&quot;https://api.douban.com/&quot;)</div><div class="line">        .createSApi(ApiService.class)</div><div class="line">        .getTop250(10)</div><div class="line">        .compose(Transformer.&lt;Top250Bean&gt;switchSchedulers(loading_dialog))</div><div class="line">        .subscribe(new CommonObserver&lt;Top250Bean&gt;(loading_dialog) &#123;</div><div class="line">            @Override</div><div class="line">            protected void getDisposable(Disposable d) &#123;</div><div class="line">                //方法暴露出来使用者根据需求去取消订阅</div><div class="line">                disposables.add(d);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            protected void onError(String errorMsg) &#123;</div><div class="line">                //错误处理</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            protected void onSuccess(Top250Bean top250Bean) &#123;</div><div class="line">               //业务处理</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line"></div><div class="line">//单个请求自己配置相关参数</div><div class="line">RxHttpUtils</div><div class="line">        .getSInstance()</div><div class="line">        .baseUrl(&quot;https://api.douban.com/&quot;)</div><div class="line">        .addHeaders(headerMaps)</div><div class="line">        .cache(true)</div><div class="line">        .cachePath(&quot;cachePath&quot;, 1024 * 1024 * 100)</div><div class="line">        .sslSocketFactory()</div><div class="line">        .saveCookie(true)</div><div class="line">        .writeTimeout(10)</div><div class="line">        .readTimeout(10)</div><div class="line">        .connectTimeout(10)</div><div class="line">        .log(true)</div><div class="line">        .createSApi(ApiService.class)</div><div class="line">        .getTop250(10)</div><div class="line">        .compose(Transformer.&lt;Top250Bean&gt;switchSchedulers(loading_dialog))</div><div class="line">        .subscribe(new CommonObserver&lt;Top250Bean&gt;(loading_dialog) &#123;</div><div class="line">            @Override</div><div class="line">            protected void getDisposable(Disposable d) &#123;</div><div class="line">                //方法暴露出来使用者根据需求去取消订阅</div><div class="line">                disposables.add(d);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            protected void onError(String errorMsg) &#123;</div><div class="line">                //错误处理</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            protected void onSuccess(Top250Bean top250Bean) &#123;</div><div class="line">               //业务处理</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<h3 id="3、链式请求–请求参数是上个请求的结果"><a href="#3、链式请求–请求参数是上个请求的结果" class="headerlink" title="3、链式请求–请求参数是上个请求的结果"></a>3、链式请求–请求参数是上个请求的结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">RxHttpUtils</div><div class="line">        .createApi(ApiService.class)</div><div class="line">        .getBook()</div><div class="line">        .flatMap(new Function&lt;BookBean, ObservableSource&lt;Top250Bean&gt;&gt;() &#123;</div><div class="line">            @Override</div><div class="line">            public ObservableSource&lt;Top250Bean&gt; apply(@NonNull BookBean bookBean) throws Exception &#123;</div><div class="line">                return RxHttpUtils</div><div class="line">                        .createApi(ApiService.class)</div><div class="line">                        .getTop250(20);</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">        .compose(Transformer.&lt;Top250Bean&gt;switchSchedulers(loading_dialog))</div><div class="line">        .subscribe(new CommonObserver&lt;Top250Bean&gt;(loading_dialog) &#123;</div><div class="line">            @Override</div><div class="line">            protected void getDisposable(Disposable d) &#123;</div><div class="line">                //方法暴露出来使用者根据需求去取消订阅</div><div class="line">                disposables.add(d);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            protected void onError(String errorMsg) &#123;</div><div class="line">                //错误处理</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            protected void onSuccess(Top250Bean top250Bean) &#123;</div><div class="line">               //业务处理</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<h3 id="4、文件下载-—-使用简单粗暴"><a href="#4、文件下载-—-使用简单粗暴" class="headerlink" title="4、文件下载 —-使用简单粗暴"></a>4、文件下载 —-使用简单粗暴</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">String url = &quot;https://t.alipayobjects.com/L1/71/100/and/alipay_wap_main.apk&quot;;</div><div class="line">String fileName = &quot;alipay.apk&quot;;</div><div class="line"></div><div class="line">RxHttpUtils</div><div class="line">        .downloadFile(url)</div><div class="line">        .subscribe(new DownloadObserver(fileName) &#123;</div><div class="line">            @Override</div><div class="line">            protected void getDisposable(Disposable d) &#123;</div><div class="line">                //方法暴露出来使用者根据需求去取消订阅</div><div class="line">                //d.dispose();在onDestroy方法中调用</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            protected void onError(String errorMsg) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            protected void onSuccess(long bytesRead, long contentLength, float progress, boolean done, String filePath) &#123;</div><div class="line">                log.d(&quot;allen&quot;,&quot;下载中：&quot; + progress + &quot;%&quot;);</div><div class="line">                if (done) &#123;</div><div class="line">                    showToast(&quot;下载完成---文件路径&quot;+filePath);</div><div class="line">                &#125;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<h1 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h1><blockquote>
+<p>全局参数：在application中配置的参数都是以setXXX开头的,根据实际需求配置相应参数即可</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">//开启全局配置</div><div class="line">.config()</div><div class="line">//全局的BaseUrl</div><div class="line">.setBaseUrl(BuildConfig.BASE_URL)</div><div class="line">//开启缓存策略</div><div class="line">.setCache()</div><div class="line">//全局的请求头信息</div><div class="line">.setHeaders(headerMaps)</div><div class="line">//全局持久话cookie,保存本地每次都会携带在header中</div><div class="line">.setCookie(false)</div><div class="line">//全局ssl证书认证，支持三种方式</div><div class="line">//信任所有证书,不安全有风险</div><div class="line">.setSslSocketFactory()</div><div class="line">//使用预埋证书，校验服务端证书（自签名证书）</div><div class="line">//.setSslSocketFactory(getAssets().open(&quot;your.cer&quot;))</div><div class="line">//使用bks证书和密码管理客户端证书（双向认证），使用预埋证书，校验服务端证书（自签名证书）</div><div class="line">//.setSslSocketFactory(getAssets().open(&quot;your.bks&quot;), &quot;123456&quot;, getAssets().open(&quot;your.cer&quot;))</div><div class="line">//全局超时配置</div><div class="line">.setReadTimeout(10)</div><div class="line">//全局超时配置</div><div class="line">.setWriteTimeout(10)</div><div class="line">//全局超时配置</div><div class="line">.setConnectTimeout(10)</div><div class="line">//全局是否打开请求log日志</div><div class="line">.setLog(true);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>单个请求参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">//单个请求的实例getSInstance(getSingleInstance的缩写)</div><div class="line">.getSInstance()</div><div class="line">//单个请求的baseUrl</div><div class="line">.baseUrl(&quot;https://api.douban.com/&quot;)</div><div class="line">//单个请求的header</div><div class="line">.addHeaders(headerMaps)</div><div class="line">//单个请求是否开启缓存</div><div class="line">.cache(true)</div><div class="line">//单个请求的缓存路径及缓存大小，不设置的话有默认值</div><div class="line">.cachePath(&quot;cachePath&quot;, 1024 * 1024 * 100)</div><div class="line">//单个请求的ssl证书认证，支持三种方式</div><div class="line">                        //1、信任所有证书,不安全有风险</div><div class="line">.setSslSocketFactory()</div><div class="line">                        //2、使用预埋证书，校验服务端证书（自签名证书）</div><div class="line">//.setSslSocketFactory(getAssets().open(&quot;your.cer&quot;))</div><div class="line">                        //3、使用bks证书和密码管理客户端证书（双向认证），使用预埋证书，校验服务端证书（自签名证书）</div><div class="line">//.setSslSocketFactory(getAssets().open(&quot;your.bks&quot;), &quot;123456&quot;, getAssets().open(&quot;your.cer&quot;))</div><div class="line">//单个请求是否持久化cookie</div><div class="line">.saveCookie(true)</div><div class="line">//单个请求超时</div><div class="line">.writeTimeout(10)</div><div class="line">.readTimeout(10)</div><div class="line">.connectTimeout(10)</div><div class="line">//单个请求是否开启log日志</div><div class="line">.log(true)</div><div class="line">//区分全局变量的请求createSApi(createSingleApi的缩写)</div><div class="line">.createSApi(ApiService.class)</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h1 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h1><p>适合请求结果是以下情况的（当然用户可以根据自己的实际需求稍微修改一下代码就能满足自己的需求）</p>
+<pre><code>code为错误状态码 ; msg为错误描述信息
+注意：请求成功时，msg字段可有可无。
+{
+code: 0/400/401...,
+msg: 错误描述...,
+...
+...
+...
+}
+如果你的服务器返回不是以上格式不要惊慌，下载源码，源码其实很简单，自己重写一个BaseResponse基类，根据自己需求处理，
+修改一下BaseObserver和ISubscriber中泛型继承的类就行了
+</code></pre><h1 id="后面会陆续完成文件上传的封装，敬请期待…"><a href="#后面会陆续完成文件上传的封装，敬请期待…" class="headerlink" title="后面会陆续完成文件上传的封装，敬请期待…"></a>后面会陆续完成文件上传的封装，敬请期待…</h1><p>如果遇到问题或者好的建议，请反馈到：<a href="https://github.com/lygttpod/RxHttpUtils/issues" target="_blank" rel="external">issue</a>、<a href="mailto:lygttpod@163.com" target="_blank" rel="external">lygttpod@163.com</a> 或者<a href="mailto:lygttpod@gmail.com" target="_blank" rel="external">lygttpod@gmail.com</a></p>
+<p>如果觉得对你有用的话，点一下右上的星星赞一下吧!</p>
+<h1 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h1><p><a href="http://www.jianshu.com/p/8ec37f9d5519" target="_blank" rel="external"><strong>RXjava+Retrofit 史上最精简封装（RxHttpUtils 1.x）使用说明</strong></a></p>
+<p><a href="http://www.jianshu.com/p/3147b31b2672" target="_blank" rel="external"><strong>RxJava+Retrofit 史上最精简封装（RxHttpUtils 2.x）如何封装</strong></a></p>
+<h1 id="Demo下载地址-或者扫码下载demo"><a href="#Demo下载地址-或者扫码下载demo" class="headerlink" title="Demo下载地址 或者扫码下载demo"></a><a href="https://fir.im/dzm1" target="_blank" rel="external"><strong>Demo下载地址</strong></a> 或者扫码下载demo</h1><p><img src="http://upload-images.jianshu.io/upload_images/2057501-d124727b987f8c33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="扫码下载demo.png"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 工具 封装 retrofit rxjava</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/08/29/RxJava-Retrofit-史上最精简封装（RxHttpUtils-2-x）使用说明/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-SuperTextView-万能android布局工具类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -931,7 +1041,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Android 库文件 SuperTextView</a>
         		</li>
       		
 		</ul>
@@ -971,6 +1081,748 @@
 
 
   
+    <article id="post-Android实用View系列之SuperButton（实现shape的大部分功能）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/Android实用View系列之SuperButton（实现shape的大部分功能）/">Android实用View系列之SuperButton（实现shape的大部分功能）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/11/Android实用View系列之SuperButton（实现shape的大部分功能）/" class="archive-article-date">
+  	<time datetime="2017-07-11T08:24:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在开发过程中我们的按钮基本都有自己的样式风格，有的时候需要搞个圆角，有时候需要边框，有的时候需要虚线边框亦或者需要一个圆形的按钮。想大部分的实现方式都是写一个shape文件，在里边定义边框圆角等相关属性，如果项目中类似按钮很多切风格各不相同，那我们就需要写很多很多shape文件，这是我们无法忍受的。而SuperButton的出现可以帮你解决以上问题，从此远离shape文件的编写。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-47ca706058b4832d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h3 id="有图有真相"><a href="#有图有真相" class="headerlink" title="有图有真相"></a>有图有真相</h3><p><img src="http://upload-images.jianshu.io/upload_images/2057501-ff8bb2ab43ab2bb2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="SuperButton.png"></p>
+<hr>
+<h1 id="github源码地址传送门"><a href="#github源码地址传送门" class="headerlink" title="github源码地址传送门"></a>github源码地址<a href="https://github.com/lygttpod/SuperTextView" target="_blank" rel="external"><strong>传送门</strong></a></h1><h3 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h3><p>开始之前我们先来看看shape文件是如何编写的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;shape</div><div class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:shape=[&quot;rectangle&quot; | &quot;oval&quot; | &quot;line&quot; | &quot;ring&quot;] &gt;</div><div class="line">    &lt;corners</div><div class="line">        android:radius=&quot;integer&quot;</div><div class="line">        android:topLeftRadius=&quot;integer&quot;</div><div class="line">        android:topRightRadius=&quot;integer&quot;</div><div class="line">        android:bottomLeftRadius=&quot;integer&quot;</div><div class="line">        android:bottomRightRadius=&quot;integer&quot; /&gt;</div><div class="line">    &lt;gradient</div><div class="line">        android:angle=&quot;integer&quot;</div><div class="line">        android:centerX=&quot;integer&quot;</div><div class="line">        android:centerY=&quot;integer&quot;</div><div class="line">        android:centerColor=&quot;integer&quot;</div><div class="line">        android:endColor=&quot;color&quot;</div><div class="line">        android:gradientRadius=&quot;integer&quot;</div><div class="line">        android:startColor=&quot;color&quot;</div><div class="line">        android:type=[&quot;linear&quot; | &quot;radial&quot; | &quot;sweep&quot;]</div><div class="line">        android:useLevel=[&quot;true&quot; | &quot;false&quot;] /&gt;</div><div class="line">    &lt;size</div><div class="line">        android:width=&quot;integer&quot;</div><div class="line">        android:height=&quot;integer&quot; /&gt;</div><div class="line">    &lt;solid</div><div class="line">        android:color=&quot;color&quot; /&gt;</div><div class="line">    &lt;stroke</div><div class="line">        android:width=&quot;integer&quot;</div><div class="line">        android:color=&quot;color&quot;</div><div class="line">        android:dashWidth=&quot;integer&quot;</div><div class="line">        android:dashGap=&quot;integer&quot; /&gt;</div><div class="line">&lt;/shape&gt;</div></pre></td></tr></table></figure></p>
+<p>以上shape文件列出了常用的属性，当然并不是所有属性都会用到，我们就以这个shape文件作为参考开始本篇文章的分析。</p>
+<p>我们知道写好shape文件之后是通过android:background=”@drawable/shape”这样的方式引入的，那么Android有没有方法去获取shape相关属性的类呐，经过一番查阅发现还是有个GradientDrawable类可以实现的，关于GradientDrawable的介绍请自行Google了解。</p>
+<p>通过GradientDrawable的源码可以看到里边有很多方法和shape各个节点的名称一样，所以这正是我们需要的类，剩下的就是开始用GradientDrawable实现我们的封装之路。</p>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><p>由于代码不复杂，看下注释也都能理解，就直接贴代码了</p>
+<blockquote>
+<p>先初始化一下gradientDrawable = new GradientDrawable();</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">  * 设置shape类型，对应shape的四个属性</div><div class="line">  */</div><div class="line"> private void setShape() &#123;</div><div class="line"></div><div class="line">     switch (shapeType) &#123;</div><div class="line">         case RECTANGLE:</div><div class="line">             gradientDrawable.setShape(GradientDrawable.RECTANGLE);</div><div class="line">             break;</div><div class="line">         case OVAL:</div><div class="line">             gradientDrawable.setShape(GradientDrawable.OVAL);</div><div class="line">             break;</div><div class="line">         case LINE:</div><div class="line">             gradientDrawable.setShape(GradientDrawable.LINE);</div><div class="line">             break;</div><div class="line">         case RING:</div><div class="line">             gradientDrawable.setShape(GradientDrawable.RING);</div><div class="line">             break;</div><div class="line">     &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>通过一下方法可以整体设置四个圆角也可以对各个角分别设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 只有类型是矩形的时候设置圆角半径才有效</div><div class="line"> */</div><div class="line">private void setRadius() &#123;</div><div class="line">    if (shapeType == GradientDrawable.RECTANGLE) &#123;</div><div class="line">        if (cornersRadius != 0) &#123;</div><div class="line">            gradientDrawable.setCornerRadius(dip2px(mContext, cornersRadius));//设置圆角的半径</div><div class="line">        &#125; else &#123;</div><div class="line">            //1、2两个参数表示左上角，3、4表示右上角，5、6表示右下角，7、8表示左下角</div><div class="line">            gradientDrawable.setCornerRadii(</div><div class="line">                    new float[]</div><div class="line">                            &#123;</div><div class="line">                                    cornersTopLeftRadius, cornersTopLeftRadius,</div><div class="line">                                    cornersTopRightRadius, cornersTopRightRadius,</div><div class="line">                                    cornersBottomRightRadius, cornersBottomRightRadius,</div><div class="line">                                    cornersBottomLeftRadius, cornersBottomLeftRadius</div><div class="line">                            &#125;</div><div class="line">            );</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>设置渐变色的相关属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">/**</div><div class="line"> * 设置背景颜色</div><div class="line"> * 如果设定的有Orientation 就默认为是渐变色的Button，否则就是纯色的Button</div><div class="line"> */</div><div class="line">private void setOrientation() &#123;</div><div class="line">    if (gradientOrientation != -1) &#123;</div><div class="line">        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.JELLY_BEAN) &#123;</div><div class="line">            gradientDrawable.setOrientation(getOrientation(gradientOrientation));</div><div class="line"></div><div class="line">            if (gradientCenterColor == -1) &#123;</div><div class="line">                gradientDrawable.setColors(new int[]&#123;gradientStartColor, gradientEndColor&#125;);</div><div class="line">            &#125; else &#123;</div><div class="line">                gradientDrawable.setColors(new int[]&#123;gradientStartColor, gradientCenterColor, gradientEndColor&#125;);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            switch (gradientType) &#123;</div><div class="line">                case linear:</div><div class="line">                    gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);</div><div class="line">                    break;</div><div class="line">                case radial:</div><div class="line">                    gradientDrawable.setGradientType(GradientDrawable.RADIAL_GRADIENT);</div><div class="line">                    gradientDrawable.setGradientRadius(gradientGradientRadius);</div><div class="line"></div><div class="line">                    break;</div><div class="line">                case sweep:</div><div class="line">                    gradientDrawable.setGradientType(GradientDrawable.SWEEP_GRADIENT);</div><div class="line">                    break;</div><div class="line">            &#125;</div><div class="line"></div><div class="line"></div><div class="line">            gradientDrawable.setUseLevel(gradientUseLevel);</div><div class="line"></div><div class="line">            if (gradientCenterX != 0 &amp;&amp; gradientCenterY != 0) &#123;</div><div class="line">                gradientDrawable.setGradientCenter(gradientCenterX, gradientCenterY);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125; else &#123;</div><div class="line">        gradientDrawable.setColor(solidColor);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">/**</div><div class="line"> * 设置颜色渐变类型</div><div class="line"> *</div><div class="line"> * @param gradientOrientation gradientOrientation</div><div class="line"> * @return Orientation</div><div class="line"> */</div><div class="line">private GradientDrawable.Orientation getOrientation(int gradientOrientation) &#123;</div><div class="line">    GradientDrawable.Orientation orientation = null;</div><div class="line">    switch (gradientOrientation) &#123;</div><div class="line">        case TOP_BOTTOM:</div><div class="line">            orientation = GradientDrawable.Orientation.TOP_BOTTOM;</div><div class="line">            break;</div><div class="line">        case TR_BL:</div><div class="line">            orientation = GradientDrawable.Orientation.TR_BL;</div><div class="line">            break;</div><div class="line">        case RIGHT_LEFT:</div><div class="line">            orientation = GradientDrawable.Orientation.RIGHT_LEFT;</div><div class="line">            break;</div><div class="line">        case BR_TL:</div><div class="line">            orientation = GradientDrawable.Orientation.BR_TL;</div><div class="line">            break;</div><div class="line">        case BOTTOM_TOP:</div><div class="line">            orientation = GradientDrawable.Orientation.BOTTOM_TOP;</div><div class="line">            break;</div><div class="line">        case BL_TR:</div><div class="line">            orientation = GradientDrawable.Orientation.BL_TR;</div><div class="line">            break;</div><div class="line">        case LEFT_RIGHT:</div><div class="line">            orientation = GradientDrawable.Orientation.LEFT_RIGHT;</div><div class="line">            break;</div><div class="line">        case TL_BR:</div><div class="line">            orientation = GradientDrawable.Orientation.TL_BR;</div><div class="line">            break;</div><div class="line">    &#125;</div><div class="line">    return orientation;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>对应shape中的size设置shape布局大小及设置边框和分割线<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">* 设置size的值</div><div class="line">*/</div><div class="line">    private void setSize() &#123;</div><div class="line">        if (shapeType == RECTANGLE) &#123;</div><div class="line">            gradientDrawable.setSize(sizeWidth, sizeHeight);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 设置边框  宽度  颜色  虚线  间隙</div><div class="line">     */</div><div class="line">    private void setBorder() &#123;</div><div class="line">        gradientDrawable.setStroke(dip2px(mContext, strokeWidth), strokeColor, strokeDashWidth, strokeDashGap);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>至此需要的方法都已经写完了，剩下的就是自定义view继承button，添加自己定义的属性</p>
+<p>然后在代码中这样使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;com.allen.library.SuperButton</div><div class="line">    android:layout_width=&quot;70dp&quot;</div><div class="line">    android:layout_height=&quot;70dp&quot;</div><div class="line">    android:layout_margin=&quot;5dp&quot;</div><div class="line">    android:text=&quot;圆角边框&quot;</div><div class="line">    stv:sCornersRadius=&quot;5dp&quot;</div><div class="line">    stv:sStrokeColor=&quot;@color/colorAccent&quot;</div><div class="line">    stv:sStrokeWidth=&quot;0.2dp&quot; /&gt;</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-2576a83ebaa334c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>通过配置shapeType的类型可以以此实现矩形，椭圆，线和圆环</p>
+<p>至此关于shape代码实现的部分已经完成了，可以实现shape很多中效果，不过细心的你发现按钮按下的触摸反馈没有了，以前都是通过selector去实现的，那么代码能否实现呐。答案肯定是OK啦<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 获取设置之后的Selector</div><div class="line"> *</div><div class="line"> * @return stateListDrawable</div><div class="line"> */</div><div class="line">public StateListDrawable getSelector() &#123;</div><div class="line"></div><div class="line">    StateListDrawable stateListDrawable = new StateListDrawable();</div><div class="line"></div><div class="line">    //注意该处的顺序，只要有一个状态与之相配，背景就会被换掉</div><div class="line">    //所以不要把大范围放在前面了，如果sd.addState(new[]&#123;&#125;,normal)放在第一个的话，就没有什么效果了</div><div class="line">    stateListDrawable.addState(new int[]&#123;android.R.attr.state_pressed, android.R.attr.state_enabled&#125;, getDrawable(android.R.attr.state_pressed));</div><div class="line">    stateListDrawable.addState(new int[]&#123;-android.R.attr.state_enabled&#125;, getDrawable(-android.R.attr.state_enabled));</div><div class="line">    stateListDrawable.addState(new int[]&#123;&#125;, getDrawable(android.R.attr.state_enabled));</div><div class="line"></div><div class="line">    return stateListDrawable;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后把selector设置到setBackground中就好了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if (Build.VERSION.SDK_INT &lt; 16) &#123;</div><div class="line">            setBackgroundDrawable(useSelector ? getSelector() : getDrawable(0));</div><div class="line">        &#125; else &#123;</div><div class="line">            setBackground(useSelector ? getSelector() : getDrawable(0));</div><div class="line">        &#125;</div></pre></td></tr></table></figure></p>
+<p>在运行一下，看看效果</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-9fa5d69815d6ec11.gif?imageMogr2/auto-orient/strip" alt="触摸效果.gif"></p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>看了以上介绍是不是感觉很简单，那就赶快撸起袖子，自己撸一个玩玩吧！毕竟以后不用在写那么多shape文件了，哈哈！以后可以少搬点砖了</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-aefafec3fb20bd24.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="搬砖.png"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Android View 自定义</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/11/Android实用View系列之SuperButton（实现shape的大部分功能）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Android实用View-水波动画效果多种实现方式详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/20/Android实用View-水波动画效果多种实现方式详解/">Android实用View------水波动画效果多种实现方式详解</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/20/Android实用View-水波动画效果多种实现方式详解/" class="archive-article-date">
+  	<time datetime="2017-06-20T08:24:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这次给大家带来的是一篇关于自定义View实现水波动画效果的文章，其实在去年项目中使用过类似的动画，当时就自定义View也实现了预期的效果，最近项目中又使用了相似的效果，于是对代码重新整理了一下并且记录下来，便于以后有类似需求可以当作参考！<br> 按照惯例，无图无真相</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-54627974b2ad1172.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/280" alt="image.png"></p>
+<blockquote>
+<p>实现方式：<br>1、正余弦函数实现<br>2、贝塞尔曲线实现</p>
+</blockquote>
+<h3 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h3><p>看到上边的两种实现方式是不是感觉都和数学公式有关呐，这对于毕业多年之后的我们来说如果当初数学基础不是很好现在估计也全部还给老师了吧，所以一提到相关的数学计算公式只能用一个表情表达了。。。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-446557da3b08f646.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这TM都是什么.jpg"></p>
+<h3 id="1、正余弦函数实现"><a href="#1、正余弦函数实现" class="headerlink" title="1、正余弦函数实现"></a>1、正余弦函数实现</h3><p>正余弦的函数不知道大家还记不记得，我们温习一下相关参数的意义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">y=A*sin(ωx+φ)+k</div><div class="line"> A—振幅越大，波形在y轴上最大与最小值的差值越大</div><div class="line"> ω—角速度， 控制正弦周期(单位角度内震动的次数)</div><div class="line"> φ—初相，反映在坐标系上则为图像的左右移动。这里通过不断改变φ,达到波浪移动效果</div><div class="line"> k—偏距，反映在坐标系上则为图像的上移或下移。</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-bf78d0285b32cc65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="正余弦函数图.png"></p>
+<p>我们要实现移动的波形首先是先画出静态的波形，那么怎么来绘制一个波形图呐，Math函数里已经提供了相应的方法，我们可以直接使用</p>
+<blockquote>
+<p> A<em> Math.sin(ω </em> x + φ ) + K)<br>开始绘制之前首先定义相关画笔之类的参数，在此就不做过多说明了，根据上边的公式我们知道需要哪些参数，首先是A，这是振幅，就是波形最高和最低点的差值，我们可以设置定值或者外界传入；其次是ω，角速度，给一个定制或者外界传入；φ，相位，我们就是根据不断改变相位来达到波形移动的效果，每次移动多少可以从外界传入，便于控制速度；K，波形偏移上下的距离，知道了以上各个参数的具体使用意义，下边就可以直接通过代码看下具体实现效果了，毕竟公式都有了，参数也发给你了，剩下的就是根据公式填写以下相应参数就ok了</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">private void drawSin(Canvas canvas) &#123;</div><div class="line"></div><div class="line">      φ -= 0.03;</div><div class="line">      float y;</div><div class="line"></div><div class="line">      path.reset();</div><div class="line">      path.moveTo(0, getHeight());</div><div class="line"></div><div class="line">      for (float x = 0; x &lt;= getWidth(); x += 20) &#123;</div><div class="line">          y = (float) (A * Math.sin(ω * x + φ ) + K);</div><div class="line">          path.lineTo(x, getHeight() - y);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      canvas.drawPath(path, paint);</div><div class="line"></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-cfa3fc462d692d21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="静态的波形图.png"></p>
+<p>静态的波形出来之后我们就要借助属性动画来让波形动起来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">private void initAnimation() &#123;</div><div class="line">    valueAnimator = ValueAnimator.ofInt(0, getWidth());</div><div class="line">    valueAnimator.setDuration(1000);</div><div class="line">    valueAnimator.setRepeatCount(ValueAnimator.INFINITE);</div><div class="line">    valueAnimator.setInterpolator(new LinearInterpolator());</div><div class="line">    valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">        @Override</div><div class="line">        public void onAnimationUpdate(ValueAnimator animation) &#123;</div><div class="line">            /**</div><div class="line">             * 刷新页面调取onDraw方法，通过变更φ 达到移动效果</div><div class="line">             */</div><div class="line">            invalidate();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">    if (waveStart) &#123;</div><div class="line">        valueAnimator.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>开启动画之后再运行一下看看效果吧</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-3f16ab58ff1e0b9a.gif?imageMogr2/auto-orient/strip" alt="gif录制不流畅，真机效果很好哦.gif"></p>
+<p>看到这里只是一个单纯的波形，我们一般使用的时候并不是这样的，而是一个封闭的波形，可以向上封闭也可以向下封闭，我们在波形绘制完成之后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.........省略部分代码</div><div class="line">//填充矩形</div><div class="line">        path.lineTo(getWidth(), getHeight());</div><div class="line">        path.lineTo(0, getHeight());</div><div class="line">        path.close();</div></pre></td></tr></table></figure></p>
+<p>这样就绘制出封闭的波形了，然后画笔设成填充就ok</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-52af38ccc5393c93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>代码中我已经对向下密封还是向上密封封装了方法，在此就不再赘述，需要的可以看源码哦，除此之外还有其他的参数都进行了可配置话，可以通过xml进行设置，至此通过正余弦函数进行绘制波形图已经介绍完毕了。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-2f453c720bb88907.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h3 id="2、贝塞尔曲线实现"><a href="#2、贝塞尔曲线实现" class="headerlink" title="2、贝塞尔曲线实现"></a>2、贝塞尔曲线实现</h3><p>对贝塞尔曲线不是很了解的可以自行百度，概念性的东东就不在此赘述，我们使用二阶的贝塞尔进行绘制，为什么选择二阶的呐，看一个图就知道啦</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-77ed94910b7752c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/360" alt="二阶贝塞尔曲线.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-99d98724e5070d0c.gif?imageMogr2/auto-orient/strip" alt="二阶贝塞尔曲线.gif"><br> 一段完整的波形其实就是两个二阶的贝塞尔组成的，来看下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * sin函数图像的波形</div><div class="line"> *</div><div class="line"> * @param canvas</div><div class="line"> */</div><div class="line">private void drawSinPath(Canvas canvas) &#123;</div><div class="line">    mWavePath.reset();</div><div class="line"></div><div class="line">    mWavePath.moveTo(-mWaveLength + mOffset, mWaveAmplitude);</div><div class="line"></div><div class="line">     //相信很多人会疑惑为什么控制点的纵坐标是以下值,</div><div class="line">     //是根据公式计算出来的,具体计算方法情况文章内容</div><div class="line"></div><div class="line">    for (int i = 0; i &lt; mWaveCount; i++) &#123;</div><div class="line"></div><div class="line">        //第一个控制点的坐标为(-mWaveLength * 3 / 4,-mWaveAmplitude)</div><div class="line">        mWavePath.quadTo(-mWaveLength * 3 / 4 + mOffset + i * mWaveLength,</div><div class="line">                -mWaveAmplitude,</div><div class="line">                -mWaveLength / 2 + mOffset + i * mWaveLength,</div><div class="line">                mWaveAmplitude);</div><div class="line"></div><div class="line">        //第二个控制点的坐标为(-mWaveLength / 4,3 * mWaveAmplitude)</div><div class="line">        mWavePath.quadTo(-mWaveLength / 4 + mOffset + i * mWaveLength,</div><div class="line">                3 * mWaveAmplitude,</div><div class="line">                mOffset + i * mWaveLength,</div><div class="line">                mWaveAmplitude);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    mWavePath.lineTo(getWidth(), getHeight());</div><div class="line">    mWavePath.lineTo(0, getHeight());</div><div class="line">    mWavePath.close();</div><div class="line"></div><div class="line">    canvas.drawPath(mWavePath, mWavePaint);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-32a8fc8204cd227d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/360" alt="当时的手绘内容，可能有点乱，只是大致描述一下.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-e00cc93880b06942.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/360" alt="计算控制点纵坐标的方式.png"></p>
+<blockquote>
+<p>根据计算得到起点和控制点坐标之后就可以写代码运行了效果和上边的运行效果一样就不再展示了，上边的计算内容就解释了代码提出的问题</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-9066d77672dae515.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="代码中提出的问题.png"></p>
+<h3 id="3、两种方式对比总结"><a href="#3、两种方式对比总结" class="headerlink" title="3、两种方式对比总结"></a>3、两种方式对比总结</h3><p>图像的绘制其实都不复杂，不过关键点还是有几个的。<br>正余弦函数的波形使用是根据相位控制的，而贝塞尔曲线实现的波形效果是不断改变波的起始位置控制的，并且使用贝塞尔曲线的话需要先在屏幕外边绘制一个完整的波形，保证在平移的过程中可以看到图像不间断的移动来达到移动的波形效果。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-43358432099e1e71.gif?imageMogr2/auto-orient/strip" alt="最终效果--录制模拟感觉有点卡顿，请真机测试哦.gif"></p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>看到这里你是你会感觉到这边文章的内容其实很简单，只要中间的几个点注意一下就可以实现相应的效果了，建议朋友们动手敲一遍代码，加深一下印象，毕竟真是做出来和知道理论没有实践还是有很大区别的！</p>
+<hr>
+<h1 id="github源码地址传送门"><a href="#github源码地址传送门" class="headerlink" title="github源码地址传送门"></a>github源码地址<a href="https://github.com/lygttpod/AndroidCustomView/blob/master/app/src/main/java/com/allen/androidcustomview/widget/WaveViewBySinCos.java" target="_blank" rel="external"><strong>传送门</strong></a></h1><hr>
+<blockquote>
+<p>谨以此篇来记录自己项目中遇到的问题，献给需要类似功能的小伙伴们。如果你有好的建议欢迎评论指出，大家一起讨论、学习、进步！</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/20/Android实用View-水波动画效果多种实现方式详解/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Android实用View系列-TextView实现打印机效果" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/11/Android实用View系列-TextView实现打印机效果/">Android实用View系列------TextView实现打印机效果</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/11/Android实用View系列-TextView实现打印机效果/" class="archive-article-date">
+  	<time datetime="2017-06-11T08:23:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>在审美疲劳的今天，如何能开发出一款应用让用户耳目一新呐，适当的动画特效能为你的APP加分不少，这一点在海外的APP上表现颇为明显。今天为大家带来一篇实用的自定义view，就是是TextView实现文字逐个显示（类似打印机打字一样，逐个显示的效果）。</p>
+</blockquote>
+<h5 id="按照惯例，无图无真相"><a href="#按照惯例，无图无真相" class="headerlink" title="按照惯例，无图无真相"></a>按照惯例，无图无真相</h5><p><img src="http://upload-images.jianshu.io/upload_images/2057501-a7a751b456b25494.gif?imageMogr2/auto-orient/strip" alt="FadeInTextView.gif"><br><img src="http://upload-images.jianshu.io/upload_images/2057501-cd8637ab476d003b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="绘制过程.png"></p>
+<h3 id="1、开篇"><a href="#1、开篇" class="headerlink" title="1、开篇"></a>1、开篇</h3><p>在开始讲解之前先问一下大家，看到这样的一个动画效果，脑海中首先先闪的思路是什么，如果你的UI设计师让你去实现的话，你要怎么做呐，希望读者在思考片刻之后再继续阅读，看看我们的设计思路是不是一样，如果不一样比较一下哪种实现起来更方便，哪种效率更高，欢迎评论交流。你有一个思想，我有一个思想，交换一下我们都有两个思想。</p>
+<h6 id="当你读到这里的时候说明你应该思考过上边的问题了，就问你第一想法是不是网上搜相关资料，看看有没有现成的，有的话直接拿来，没的话换个方式继续搜索。。。比如到各个开发群里询问有没有类似效果的demo之类的。。。"><a href="#当你读到这里的时候说明你应该思考过上边的问题了，就问你第一想法是不是网上搜相关资料，看看有没有现成的，有的话直接拿来，没的话换个方式继续搜索。。。比如到各个开发群里询问有没有类似效果的demo之类的。。。" class="headerlink" title="当你读到这里的时候说明你应该思考过上边的问题了，就问你第一想法是不是网上搜相关资料，看看有没有现成的，有的话直接拿来，没的话换个方式继续搜索。。。比如到各个开发群里询问有没有类似效果的demo之类的。。。"></a>当你读到这里的时候说明你应该思考过上边的问题了，就问你第一想法是不是网上搜相关资料，看看有没有现成的，有的话直接拿来，没的话换个方式继续搜索。。。比如到各个开发群里询问有没有类似效果的demo之类的。。。</h6><p><img src="http://upload-images.jianshu.io/upload_images/2057501-a85fb59fa751e268.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="城市套路深，我要回农村.jpg"></p>
+<p>哈哈，开个玩笑啦，第一时间去网上搜索不见得不好，汲取各个大神设计思路之精华嘛，不过我好想近期没这么做哦，因为被伤过，曾经也是一有问题就直接复制到网上和各个开发群询问，但大部分得到的反馈都是没人叼，记得收到回复最多的是这张图！有种被鄙视的感觉有没有。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-070de7e0f1da2b4f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="程序猿看到这张图内心是崩溃的.jpg"></p>
+<h3 id="2、实现"><a href="#2、实现" class="headerlink" title="2、实现"></a>2、实现</h3><blockquote>
+<p>扯了半天蛋，终于步入正题了。</p>
+</blockquote>
+<p>其实这样的效果实现思路还是挺多的，有的是动态生成多个TextView,每次设置一个字符控制显示隐藏，有的继承自View完全自定义，从头绘制到底。这里我的方式是继承自TextView，我们只需实现文字逐个显示的效果的逻辑就ok了，至于设置文字颜色，字体大小之类的属性我们直接使用TextView自己属性就好了，这样大大简化了我们的开发流程。</p>
+<p>实现步骤：</p>
+<p>1、重写onDraw方法，绘制文字<br>2、利用属性动画在固定时间内重绘显示的文字<br>3、封装并暴露外部调用的方法</p>
+<h4 id="2-1-、重绘文字"><a href="#2-1-、重绘文字" class="headerlink" title="2.1 、重绘文字"></a>2.1 、重绘文字</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onDraw(final Canvas canvas) &#123;</div><div class="line">    super.onDraw(canvas);</div><div class="line">    if (stringBuffer != null) &#123;</div><div class="line">        drawText(canvas, stringBuffer.toString());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>stringBuffer就是需要绘制的文字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 绘制文字   </div><div class="line"> *           </div><div class="line"> * @param canvas 画布</div><div class="line"> */</div><div class="line">private void drawText(Canvas canvas, String textString) &#123;</div><div class="line">     //设置文字绘制的区域</div><div class="line">    textRect.left = getPaddingLeft();</div><div class="line">    textRect.top = getPaddingTop();</div><div class="line">    textRect.right = getWidth() - getPaddingRight();</div><div class="line">    textRect.bottom = getHeight() - getPaddingBottom();</div><div class="line">    Paint.FontMetricsInt fontMetrics = getPaint().getFontMetricsInt();</div><div class="line">    int baseline = (textRect.bottom + textRect.top - fontMetrics.bottom - fontMetrics.top) / 2;</div><div class="line">    //文字绘制到整个布局的中心位置</div><div class="line">    canvas.drawText(textString, getPaddingLeft(), baseline, getPaint());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>看过我之前写的那几篇文章的朋友会发现我们自定义view系列的文章基本都有这个方法，可以封装一下，以后在任何需要使用的地方都可以拿来直接使用。这个方法没什么复杂的逻辑我们不过多解读了。</p>
+<h4 id="2-2、利用属性动画动态改变绘制的文字"><a href="#2-2、利用属性动画动态改变绘制的文字" class="headerlink" title="2.2、利用属性动画动态改变绘制的文字"></a>2.2、利用属性动画动态改变绘制的文字</h4><p>代码很好理解先上代码，跟着代码我们去学习实现思路<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">  * 文字逐个显示动画  通过插值的方式改变数据源</div><div class="line">  */</div><div class="line"> private void initAnimation() &#123;</div><div class="line"></div><div class="line">     //从0到textCount - 1  是设置从第一个字到最后一个字的变化因子</div><div class="line">     textAnimation = ValueAnimator.ofInt(0, textCount - 1);</div><div class="line">     //执行总时间就是每个字的时间乘以字数</div><div class="line">     textAnimation.setDuration(textCount * duration);</div><div class="line">     //匀速显示文字</div><div class="line">     textAnimation.setInterpolator(new LinearInterpolator());</div><div class="line">     textAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">         @Override</div><div class="line">         public void onAnimationUpdate(ValueAnimator valueAnimator) &#123;</div><div class="line">             int index = (int) valueAnimator.getAnimatedValue();</div><div class="line">             //过滤去重，保证每个字只重绘一次</div><div class="line">             if (currentIndex != index) &#123;</div><div class="line">                 stringBuffer.append(arr[index]);</div><div class="line"></div><div class="line">                 currentIndex = index;</div><div class="line">                 //所有文字都显示完成之后进度回调结束动画</div><div class="line">                 if (currentIndex == (textCount - 1)) &#123;</div><div class="line">                     if (textAnimationListener != null) &#123;</div><div class="line">                         textAnimationListener.animationFinish();</div><div class="line">                     &#125;</div><div class="line">                 &#125;</div><div class="line"></div><div class="line">                 invalidate();</div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">     &#125;);</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>思路是这样的：为每个文字显示的时间设置一个固定值duration，我这里默认显示300毫秒，动画执行的总时间就是总共的字数乘以每个字显示的时间（ textCount * duration），ValueAnimator.ofInt(0, textCount - 1)是为了根据这个字数的因子当做下标获取单个字符，每次追加到                    stringBuffer.append(arr[index])，代码中我做了过滤重绘的判断，保证每次只绘制一遍，提升性能，因为我们的valueAnimator.getAnimatedValue()这个变化因子会不断变化及时转成int类型，每次也是有很多重复的，所以去重这一步就显得格外重要，我们可以看一下打印日志。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-f6ab25a6863ac5e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="index每次的变化，看到这个就知道去重的重要性了.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-cd8637ab476d003b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="去重后保证每增加一个字符只绘制一次.png"></p>
+<p>看到这里其估计有人会问怎么设置要显示的字符串呐还有arr[index]十个什么鬼，不要着急，继续往下看就明白了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 设置逐渐显示的字符串</div><div class="line"> *</div><div class="line"> * @param textString</div><div class="line"> * @return</div><div class="line"> */</div><div class="line">public FadeInTextView setTextString(String textString) &#123;</div><div class="line">    if (textString != null) &#123;</div><div class="line">        //总字数</div><div class="line">        textCount = textString.length();</div><div class="line">        //存放单个字的数组</div><div class="line">        arr = new String[textCount];</div><div class="line">        for (int i = 0; i &lt; textCount; i++) &#123;</div><div class="line">            arr[i] = textString.substring(i, i + 1);</div><div class="line">        &#125;</div><div class="line">        initAnimation();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return this;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我把传入的字符串都存放到一个数组里边每次根据index去取相应的字符，好啦，到此这个功能的实现已经完成了。</p>
+<h3 id="3、对外暴露的方法"><a href="#3、对外暴露的方法" class="headerlink" title="3、对外暴露的方法"></a>3、对外暴露的方法</h3><p>设置字符的方法少不了，接下来开启动画和停止动画，然后就是动画结束的回调。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">  </div><div class="line">/**</div><div class="line"> * 开启动画</div><div class="line"> *</div><div class="line"> * @return</div><div class="line"> */</div><div class="line">public FadeInTextView startFadeInAnimation() &#123;</div><div class="line">    if (textAnimation != null) &#123;</div><div class="line">        //动画开启的时候参数都设置成初始状态</div><div class="line">        stringBuffer.setLength(0);</div><div class="line">        currentIndex = -1;</div><div class="line">        textAnimation.start();</div><div class="line">    &#125;</div><div class="line">    return this;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 停止动画</div><div class="line"> *</div><div class="line"> * @return</div><div class="line"> */</div><div class="line">public FadeInTextView stopFadeInAnimation() &#123;</div><div class="line">    if (textAnimation != null) &#123;</div><div class="line">        textAnimation.end();</div><div class="line">    &#125;</div><div class="line">    return this;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 回调接口</div><div class="line"> */</div><div class="line">public interface TextAnimationListener &#123;</div><div class="line">    void animationFinish();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="4、如何使用"><a href="#4、如何使用" class="headerlink" title="4、如何使用"></a>4、如何使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">fadeInTextView</div><div class="line">        .setTextString(&quot;自定义view实现字符串逐字显示&quot;)</div><div class="line">        .startFadeInAnimation()</div><div class="line">        .setTextAnimationListener(new FadeInTextView.TextAnimationListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void animationFinish() &#123;</div><div class="line">                </div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>至此本篇文章的介绍已经结束，接下来会继续推出相关系列的文章。小功能大智慧，功能再小还要新手敲一敲，不然。。。不然。。。看图意会吧，哈哈😆!</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-1d023c2dd1fa3b33.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="语言上的老司机，行动上的大怂逼.jpg"></p>
+<hr>
+<h1 id="github源码地址传送门"><a href="#github源码地址传送门" class="headerlink" title="github源码地址传送门"></a>github源码地址<a href="https://github.com/lygttpod/AndroidCustomView/blob/master/app/src/main/java/com/allen/androidcustomview/widget/FadeInTextView.java" target="_blank" rel="external"><strong>传送门</strong></a></h1><hr>
+<blockquote>
+<p>谨以此篇来记录自己项目中遇到的问题，献给需要类似功能的小伙伴们。如果你有好的建议欢迎评论指出，大家一起讨论、学习、进步！</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/11/Android实用View系列-TextView实现打印机效果/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Android实用view系列-炫酷的进度条" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/03/Android实用view系列-炫酷的进度条/">Android实用view系列------炫酷的进度条</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/03/Android实用view系列-炫酷的进度条/" class="archive-article-date">
+  	<time datetime="2017-06-03T08:23:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p> 不知不觉距离上次写文章已经过去大半个月了，原本计划每周写一篇的想法在坚持几周之后最终还是被生活中各种各样的琐事打乱，无奈中夹杂这对自己的一点失望。<br><img src="http://upload-images.jianshu.io/upload_images/2057501-2f7d716b6474a6e7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/200" alt="心痛.jpg"><br>当初的愿望实现了吗<br>事到如今只好祭奠吗<br>任岁月风干理想再也找不回真的我<br>抬头仰望着满天星河<br>那时候陪伴我的那颗<br>这里的故事你是否还记得</p>
+</blockquote>
+<h5 id="今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。"><a href="#今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。" class="headerlink" title="今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。"></a>今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。</h5><p> 按照惯例先上效果图，俗话说无图无有真相嘛。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-6a56cf5ae61b543f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="60%的进度条.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-2fef3dc9943f5f99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="100%的进度条.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-615ad5fe97faf782.gif?imageMogr2/auto-orient/strip" alt="模拟器的效果没有真机好.gif"></p>
+<p>我们可以看出来这其实就是一个进度条，此时的你或许心生疑惑，MD一个进度条有什么好说的，无论是官方的ProgressBar的还是GitHub开源的一抓一大把，这有什么好讲的。有这样的想法很正常，毕竟我曾经看别人写的文章的时候也会冒出这样的想法。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-79d6913926a01388.gif?imageMogr2/auto-orient/strip" alt="哈哈"></p>
+<p>那么我为什么还要写呐，首先并不是我们所有的需求都能在网上找到，其次，即使找到类似的代码修修补补也能用，但对我们的提升并不大，作为一名合格的开发人员只有亲手撸出来的代码用着才踏实嘛，我们是抱着学习的心态看问题，分析问题，并解决它的。</p>
+<h3 id="说了那么多废话下边就开始步入正题吧"><a href="#说了那么多废话下边就开始步入正题吧" class="headerlink" title="说了那么多废话下边就开始步入正题吧"></a>说了那么多废话下边就开始步入正题吧</h3><blockquote>
+<p>如果真是一个简简单单的进度条的话确实没什么好讲的，仔细观察效果图后你会发现其实还是有点内容的，麻雀虽小五脏俱全。</p>
+<p>这里边有几个点需要说明一下：<br>①、进度条有动画效果<br>②、进度条上边有个百分比的样式的绘制<br>③、百分比tip框跟随进度条移动需要注意的事项</p>
+</blockquote>
+<h4 id="1、带动画的进度条效果"><a href="#1、带动画的进度条效果" class="headerlink" title="1、带动画的进度条效果"></a>1、带动画的进度条效果</h4><p>因为我们是自定义view，看到的所有元素都是在onDraw里边绘制出来的，分析进度条效果我们可以分解出几个步骤，先绘制底层百分百进度条（也就是背景色），再绘制真实的进度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onDraw(Canvas canvas) &#123;</div><div class="line">    super.onDraw(canvas);</div><div class="line"></div><div class="line">    //  tipHeight + progressMarginTop其实是把进度条绘制到百分比tip框的下边</div><div class="line">    //  这里只是给出大概的计算，如有需求可以精确计算高度</div><div class="line">    //绘制背景</div><div class="line">    canvas.drawLine(getPaddingLeft(),</div><div class="line">            tipHeight + progressMarginTop,</div><div class="line">            getWidth(),</div><div class="line">            tipHeight + progressMarginTop,</div><div class="line">            bgPaint);</div><div class="line">    //绘制真实进度</div><div class="line">    canvas.drawLine(getPaddingLeft(),</div><div class="line">            tipHeight + progressMarginTop,</div><div class="line">            currentProgress,</div><div class="line">            tipHeight + progressMarginTop,</div><div class="line">            progressPaint);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>进度条画完之后就是让它动起来，我们使用属性动画试试改变当前进度的值重新绘制就可以了，动画效果我们继续使用ValueAnimator<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">   * 进度移动动画  通过插值的方式改变移动的距离</div><div class="line">   */</div><div class="line">  private void initAnimation() &#123;</div><div class="line">      progressAnimator = ValueAnimator.ofFloat(0, mProgress);</div><div class="line">      progressAnimator.setDuration(duration);</div><div class="line">      progressAnimator.setStartDelay(startDelay);</div><div class="line">      progressAnimator.setInterpolator(new LinearInterpolator());</div><div class="line">      progressAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">          @Override</div><div class="line">          public void onAnimationUpdate(ValueAnimator valueAnimator) &#123;</div><div class="line">              float value = (float) valueAnimator.getAnimatedValue();</div><div class="line">              //这是我们自己的需求进度只显示整数</div><div class="line">              textString = formatNum(format2Int(value));</div><div class="line">              //百分比的进度转换成view宽度一样的比例</div><div class="line">              currentProgress = value * mWidth / 100;</div><div class="line">              //进度回调方法</div><div class="line">              if (progressListener != null) &#123;</div><div class="line">                  progressListener.currentProgressListener(value);</div><div class="line">              &#125;               </div><div class="line">              invalidate();</div><div class="line">          &#125;</div><div class="line">      &#125;);</div><div class="line">      progressAnimator.start();</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>到此带动画的进度条就实现了，一起看一下效果吧</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-cac05310af11b961.gif?imageMogr2/auto-orient/strip" alt="progress1.gif"></p>
+<h4 id="2、绘制上边的百分比布局"><a href="#2、绘制上边的百分比布局" class="headerlink" title="2、绘制上边的百分比布局"></a>2、绘制上边的百分比布局</h4><p><img src="http://upload-images.jianshu.io/upload_images/2057501-928e96a9e021f9eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>看到这个百分比的提示框，你会想到如何实现呐，很多人会选择使用图片然后变更图片的位置来达到效果，作为一个有追求的程序猿怎能满足于此呐，自己绘制出来岂不更好。<img src="http://upload-images.jianshu.io/upload_images/2057501-0416873e5601def3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="很强势.jpg"><br>接下来我们来分析一下如何绘制这个带三角的矩形</p>
+<blockquote>
+<p>这里说一下我们实现思路：其实第一次我是准备从起点到终点用过画闭合的线做的，需要计算七个点的坐标，最终能实现，但是这种方法太笨了，根本拿不出手哦<br><img src="http://upload-images.jianshu.io/upload_images/2057501-bb303270ea674651.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="根据点绘制闭合的线.png"></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>在苦思的时候突然又看了一眼设计图发现这个矩形是带圆角的，我这样绘制闭合的线是达不到圆角效果的，等等，圆角？圆角不是可以通过绘制圆角矩形画出来么，我擦，貌似这是一个不错的思路，赶紧去验证。<br><img src="http://upload-images.jianshu.io/upload_images/2057501-7bf4c15bbd18b17b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="圆角矩形+三角形.png"></p>
+</blockquote>
+<p>果不其然，堪称完美，先绘制一个圆角矩形，在其下边绘制一个三角形，至于里边的进度数值直接drawText就行了<br><img src="http://upload-images.jianshu.io/upload_images/2057501-7dd12b21adaa8f94.gif?imageMogr2/auto-orient/strip" alt="嘚瑟.gif"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 绘制进度上边提示百分比的view</div><div class="line"> *</div><div class="line"> * @param canvas</div><div class="line"> */</div><div class="line">private void drawTipView(Canvas canvas) &#123;</div><div class="line">    drawRoundRect(canvas);</div><div class="line">    drawTriangle(canvas);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">/**</div><div class="line"> * 绘制圆角矩形</div><div class="line"> *</div><div class="line"> * @param canvas</div><div class="line"> */</div><div class="line">private void drawRoundRect(Canvas canvas) &#123;</div><div class="line">    rectF.set(moveDis, 0, tipWidth + moveDis, tipHeight);</div><div class="line">    canvas.drawRoundRect(rectF, roundRectRadius, roundRectRadius, tipPaint);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 绘制三角形</div><div class="line"> *</div><div class="line"> * @param canvas</div><div class="line"> */</div><div class="line">private void drawTriangle(Canvas canvas) &#123;</div><div class="line">    path.moveTo(tipWidth / 2 - triangleHeight + moveDis, tipHeight);</div><div class="line">    path.lineTo(tipWidth / 2 + moveDis, tipHeight + triangleHeight);</div><div class="line">    path.lineTo(tipWidth / 2 + triangleHeight + moveDis, tipHeight);</div><div class="line">    canvas.drawPath(path, tipPaint);</div><div class="line">    path.reset();</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="3、计算百分比Tip框的起始位置及移动分析"><a href="#3、计算百分比Tip框的起始位置及移动分析" class="headerlink" title="3、计算百分比Tip框的起始位置及移动分析"></a>3、计算百分比Tip框的起始位置及移动分析</h4><p>样式绘制出来接下来就是各种计算了，先来张手绘图凑合着看哈</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-ca13ff89043bb230.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="手绘图，忽略字迹看内容哈.png"></p>
+<blockquote>
+<p>担心图片不清晰就再对图片内容描述一下，重要信息有四个，进度的起始点A和B、tip框的起始点M和N，动画执行过程是这样的：刚开始的时候只有进度条移动，此时tip框是不动的，当进度条到达tip框中间三角形顶点x坐标的时候，tip框跟着进度开始一起移动，当tip框右边界到达整个进度的右边界的时候，tip框停止移动，进度条继续移动一直到终点。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">    * 进度移动动画  通过插值的方式改变移动的距离</div><div class="line">    */</div><div class="line">   private void initAnimation() &#123;</div><div class="line">       progressAnimator = ValueAnimator.ofFloat(0, mProgress);</div><div class="line">       progressAnimator.setDuration(duration);</div><div class="line">       progressAnimator.setStartDelay(startDelay);</div><div class="line">       progressAnimator.setInterpolator(new LinearInterpolator());</div><div class="line">       progressAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">           @Override</div><div class="line">           public void onAnimationUpdate(ValueAnimator valueAnimator) &#123;</div><div class="line">               float value = (float) valueAnimator.getAnimatedValue();</div><div class="line">               //进度数值只显示整数，我们自己的需求，可以忽略</div><div class="line">               textString = formatNum(format2Int(value));</div><div class="line">               //把当前百分比进度转化成view宽度对应的比例</div><div class="line">               currentProgress = value * mWidth / 100;</div><div class="line">               //进度回调方法</div><div class="line">               if (progressListener != null) &#123;</div><div class="line">                   progressListener.currentProgressListener(value);</div><div class="line">               &#125;</div><div class="line">               //移动百分比提示框，只有当前进度到提示框中间位置之后开始移动，</div><div class="line">               //当进度框移动到最右边的时候停止移动，但是进度条还可以继续移动</div><div class="line">               //moveDis是tip框移动的距离</div><div class="line">               if (currentProgress &gt;= (tipWidth / 2) &amp;&amp;</div><div class="line">                       currentProgress &lt;= (mWidth - tipWidth / 2)) &#123;</div><div class="line">                   moveDis = currentProgress - tipWidth / 2;</div><div class="line">               &#125;</div><div class="line">               invalidate();</div><div class="line">           &#125;</div><div class="line">       &#125;);</div><div class="line">       progressAnimator.start();</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h5 id="最终实现的效果"><a href="#最终实现的效果" class="headerlink" title="最终实现的效果"></a>最终实现的效果</h5><p><img src="http://upload-images.jianshu.io/upload_images/2057501-615ad5fe97faf782.gif?imageMogr2/auto-orient/strip" alt="progress.gif"></p>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>到此本篇文章终点部分已经结束，按照惯例应该做下总结的，但今天并没有这个打算(毕竟文章里边技术点描述的很清楚了，哈哈😆)。这里就分享一下我的一些看法吧，敲代码其实是一件很枯燥的事，每天面对一大堆字母时间久了或多或少会心烦，那么我们怎样才能保持一个好的状态去coding呐，培养自己的兴趣，兴趣真的很重要，有了兴趣你会把敲代码当做生活的一部分而不仅仅是工作。这样生活才有意义，否则时间久了真的会颓废。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-a2b4eca9a8ddfc04.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="网络图片，仅供娱乐"></p>
+<hr>
+<h1 id="github源码地址传送门"><a href="#github源码地址传送门" class="headerlink" title="github源码地址传送门"></a>github源码地址<a href="https://github.com/lygttpod/AndroidCustomView/blob/master/app/src/main/java/com/allen/androidcustomview/widget/HorizontalProgressBar.java" target="_blank" rel="external"><strong>传送门</strong></a></h1><hr>
+<blockquote>
+<p>谨以此篇来记录自己项目中遇到的问题，献给需要类似功能的小伙伴们。如果你有好的建议欢迎评论指出，大家一起讨论、学习、进步！</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/03/Android实用view系列-炫酷的进度条/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Android实用View系列-仿微信支付宝等风格的支付密码输入框的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/07/Android实用View系列-仿微信支付宝等风格的支付密码输入框的实现/">Android实用View系列-----仿微信支付宝等风格的支付密码输入框的实现</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/07/Android实用View系列-仿微信支付宝等风格的支付密码输入框的实现/" class="archive-article-date">
+  	<time datetime="2017-05-07T08:23:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p> 开始阅读本篇文章之前先来说一下使用场景吧，我们知道如今移动支付已经占据我们日常支付的90%的份额，以微信支付和支付宝支付为主，也越来越多的APP开始添加支付模块，不管使用哪种支付有一个步骤是少不了的，那就是输入支付密码(指纹支付再此就不做讨论了哦)，所以今天来给大家带来一篇自定义支付密码输入框的设计和实现方式，同时记录自己工作中遇到的问题及解决办法。</p>
+</blockquote>
+<hr>
+<h1 id="github源码地址传送门"><a href="#github源码地址传送门" class="headerlink" title="github源码地址传送门"></a>github源码地址<a href="https://github.com/lygttpod/AndroidCustomView/blob/master/app/src/main/java/com/allen/androidcustomview/widget/PayPsdInputView.java" target="_blank" rel="external"><strong>传送门</strong></a></h1><hr>
+<h5 id="按照惯例我们先看看微信和支付宝支付密码输入框的样式吧"><a href="#按照惯例我们先看看微信和支付宝支付密码输入框的样式吧" class="headerlink" title="按照惯例我们先看看微信和支付宝支付密码输入框的样式吧"></a>按照惯例我们先看看微信和支付宝支付密码输入框的样式吧</h5><p><img src="http://upload-images.jianshu.io/upload_images/2057501-3f88acf3ff12f333.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="微信支付密码"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-19692affea7ac536.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="支付宝支付密码"></p>
+<h5 id="看到这样的效果相信很多开发者第一反应就是先网上搜一下看看有没有现成的（哈哈，我也不例外哦），因为这都是简单的一些view不涉及动画所以网上相关例子还是很多的，我这边总结了一下大致可以分为一下几类"><a href="#看到这样的效果相信很多开发者第一反应就是先网上搜一下看看有没有现成的（哈哈，我也不例外哦），因为这都是简单的一些view不涉及动画所以网上相关例子还是很多的，我这边总结了一下大致可以分为一下几类" class="headerlink" title="看到这样的效果相信很多开发者第一反应就是先网上搜一下看看有没有现成的（哈哈，我也不例外哦），因为这都是简单的一些view不涉及动画所以网上相关例子还是很多的，我这边总结了一下大致可以分为一下几类"></a>看到这样的效果相信很多开发者第一反应就是先网上搜一下看看有没有现成的（哈哈，我也不例外哦），因为这都是简单的一些view不涉及动画所以网上相关例子还是很多的，我这边总结了一下大致可以分为一下几类</h5><p>1、通过布局的方式：</p>
+<blockquote>
+<p>在布局里边放置6个EditView,在每个输入框中间再放置一个view用于设置中间分割线，每个EditVIew只允许输入一个字符，然后对每个进行监听，一个密码输入完之后让另一个EditView获取焦点，以此类推就可以大致实现图中的效果了（这样确实可以实现，实现起来也很简单，但是代码量不少，而且这种方式是不是显得逼格不够高或者没有逼格呐）</p>
+</blockquote>
+<p> 2、完全自定义view（继承View）：</p>
+<blockquote>
+<p>这个就稍微复杂一点，大致流程是，先监听触摸事件，按下时弹出键盘，然后对软键盘进行监听，获取每次点击键盘对应的字符串，然后在onDraw方法里边画6个圆，在绘制外边框，然后是中间的分割线。这里边有个问题就是每次都要对软键盘进行监听取值等一系列操作，加上Android机型众多整不好哪块软键盘就出问题了呐。（虽然有逼格，但是不实用哦）<br><img src="http://upload-images.jianshu.io/upload_images/2057501-c44b427f30d67465.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="欲步又止"></p>
+</blockquote>
+<p> 3、继承自EditView实现自定义view:</p>
+<blockquote>
+<p>大致流程和上一种差不多，不过我们不需要对软键盘进行处理了,少了很多繁琐及兼容性的操作，同时又不失逼格，哈哈。</p>
+</blockquote>
+<h5 id="看到以上三种实现方式想必你大概已经知道我们要使用哪种方式实现了，没错就是集成EditView的自定义view-这样我们还可以使用很多EditView的属性哦"><a href="#看到以上三种实现方式想必你大概已经知道我们要使用哪种方式实现了，没错就是集成EditView的自定义view-这样我们还可以使用很多EditView的属性哦" class="headerlink" title="看到以上三种实现方式想必你大概已经知道我们要使用哪种方式实现了，没错就是集成EditView的自定义view,这样我们还可以使用很多EditView的属性哦"></a>看到以上三种实现方式想必你大概已经知道我们要使用哪种方式实现了，没错就是集成EditView的自定义view,这样我们还可以使用很多EditView的属性哦</h5><h1 id="开发前先整理一下实现步骤："><a href="#开发前先整理一下实现步骤：" class="headerlink" title="开发前先整理一下实现步骤："></a>开发前先整理一下实现步骤：</h1><blockquote>
+<p>1、绘制外边框（可以是直角也可以是圆角，设计师要什么我们就给他什么）<br>2、绘制密码之间的分割线（竖线）<br>3、绘制实心圆代替输入的字符<br>4、对输入字符进行监听，便于扩展处理<br>5、实现一些常用的外部接口方法调用</p>
+</blockquote>
+<h1 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h1><h5 id="1、绘制外边框："><a href="#1、绘制外边框：" class="headerlink" title="1、绘制外边框："></a>1、绘制外边框：</h5><h6 id="要想绘制边框我们首先要知道view的宽高，通过onSizeChanged方法去初始化宽高等数据，然后绘制圆角矩形（默认让他矩形显示直接传入圆角半径为0即可）"><a href="#要想绘制边框我们首先要知道view的宽高，通过onSizeChanged方法去初始化宽高等数据，然后绘制圆角矩形（默认让他矩形显示直接传入圆角半径为0即可）" class="headerlink" title="要想绘制边框我们首先要知道view的宽高，通过onSizeChanged方法去初始化宽高等数据，然后绘制圆角矩形（默认让他矩形显示直接传入圆角半径为0即可）"></a>要想绘制边框我们首先要知道view的宽高，通过onSizeChanged方法去初始化宽高等数据，然后绘制圆角矩形（默认让他矩形显示直接传入圆角半径为0即可）</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">@Override</div><div class="line">protected void onSizeChanged(int w, int h, int oldw, int oldh) &#123;</div><div class="line">    super.onSizeChanged(w, h, oldw, oldh);</div><div class="line">    height = h;</div><div class="line">    width = w;</div><div class="line"></div><div class="line">    divideLineWStartX = w / maxCount;</div><div class="line"></div><div class="line">    startX = w / maxCount / 2; //第一个圆心的x坐标</div><div class="line">    startY = h / 2; //第一个圆心的y坐标</div><div class="line"></div><div class="line">    bottomLineLength = w / (maxCount + 2);</div><div class="line"></div><div class="line">    rectF.set(0, 0, width, height);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">RectF rectF = new RectF()</div><div class="line">rectF.set(0, 0, width, height);</div><div class="line"></div><div class="line">canvas.drawRoundRect(rectF, rectAngle, rectAngle, borderPaint);</div></pre></td></tr></table></figure>
+<h5 id="2、绘制密码之间的分割线："><a href="#2、绘制密码之间的分割线：" class="headerlink" title="2、绘制密码之间的分割线："></a>2、绘制密码之间的分割线：</h5><h6 id="既然是分割线肯定是等均分的，假设我们的密码最大输入maxCount-6，那么我们只需画5个分割线就可以了，分割线坐标的计算"><a href="#既然是分割线肯定是等均分的，假设我们的密码最大输入maxCount-6，那么我们只需画5个分割线就可以了，分割线坐标的计算" class="headerlink" title="既然是分割线肯定是等均分的，假设我们的密码最大输入maxCount=6，那么我们只需画5个分割线就可以了，分割线坐标的计算"></a>既然是分割线肯定是等均分的，假设我们的密码最大输入maxCount=6，那么我们只需画5个分割线就可以了，分割线坐标的计算</h6><p><img src="http://upload-images.jianshu.io/upload_images/2057501-c036f62a54567431.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="计算分割线的起点和终点的坐标"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">通过循环画出每个分割线</div><div class="line">for (int i = 0; i &lt; maxCount - 1; i++) &#123;</div><div class="line">            canvas.drawLine((i + 1) * divideLineWStartX,</div><div class="line">                    0,</div><div class="line">                    (i + 1) * divideLineWStartX,</div><div class="line">                    height,</div><div class="line">                    divideLinePaint);</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>完成这一步我们先运行一下看看边框效果吧</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-ffc8650ab8bd526a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="模拟器上运行效果"></p>
+<h5 id="3、绘制实心圆代替输入的字符："><a href="#3、绘制实心圆代替输入的字符：" class="headerlink" title="3、绘制实心圆代替输入的字符："></a>3、绘制实心圆代替输入的字符：</h5><p>这里需要监听EditView的输入，重写onTextChanged方法获取输入字符的长度,然后计算每个圆圆心的坐标位置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">    //第一个圆心的x坐标</div><div class="line">    startX = w / maxCount / 2;</div><div class="line">    //第一个圆心的y坐标</div><div class="line">    startY = h / 2;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 画密码实心圆</div><div class="line"> *</div><div class="line"> * @param canvas</div><div class="line"> */</div><div class="line">private void drawPsdCircle(Canvas canvas) &#123;</div><div class="line">    for (int i = 0; i &lt; textLength; i++) &#123;</div><div class="line">        canvas.drawCircle(startX + i * 2 * startX,</div><div class="line">                startY,</div><div class="line">                radius,</div><div class="line">                circlePaint);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>写到这里的时候是不是感觉样式问题已经完成的差不多了，运行以来输入几个字符串一看，MD出问题了(看图说话)<br><img src="http://upload-images.jianshu.io/upload_images/2057501-c874ff85c2765f6d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>从图中可以看出是绘制了相应的实心圆，但是自带的底部线、光标、字符还在，要是拿这个去交差绝逼会被产品骂死。<br><img src="http://upload-images.jianshu.io/upload_images/2057501-5c9272f1fafc688c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="产品的内心独白"><br>出现这个问题肯定是代码的问题喽，我们根据问题去一个一个解决，首先给view设置一个透明的背景色，然后隐藏光标，再跑一下看看<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">this.setBackgroundColor(Color.TRANSPARENT);</div><div class="line">this.setCursorVisible(false);</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-2eb902a15e6f185b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>这次底部的线和光标都见了，但是输入的字符还在，这又是什么问题？？？我们明明重写了onDraw方法，怎么还会出现原来的字符呐，等等。。。对啊，我们只是重写，他肯定还有自己的方法，我们只要把EditView内部重绘的方法干掉不就行了，想到这里喜出望外，拿跟辣条先压压惊，在ondraw方法中这样做<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">    @Override</div><div class="line">    protected void onDraw(Canvas canvas) &#123;</div><div class="line">        //不删除的话会默认绘制输入的文字</div><div class="line">       // super.onDraw(canvas);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">你没看错，就是这一行代码注释掉就ok，</div><div class="line">至于是为什么你肯定知道，</div><div class="line">不注释的话在我们重写之前他已经调用了内部方法</div><div class="line">去绘制输入的字符了，</div><div class="line">我们在重写后虽然我们的方法生效了，</div><div class="line">但它的方法也生效了哦。</div></pre></td></tr></table></figure></p>
+<p>此时压抑不住内心的小激动赶紧运行起来看看（哈哈，完美解决问题）<br><img src="http://upload-images.jianshu.io/upload_images/2057501-3ddeb0b87582796a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>至此主要功能已经完成，剩下的需要去封装一些方法供外部调用，我这里已经封装几个方法，我们知道这样设置支付密码的页面一般有两个：一个设置密码，一个重新设置密码，按照正常的逻辑我们去监听这个密码输入框，输入密码之后进行比较看是否相等就完事了，为了方便以后使用不要每次自己再去写一大堆监听方法，我们直接在内部封装好是不是对以后使用起来更方便一点呐<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">  * 密码比较监听</div><div class="line">  */</div><div class="line"> public interface onPasswordListener &#123;</div><div class="line">     void onDifference();</div><div class="line">     void onEqual(String psd);</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> //使用者需要调用的方法</div><div class="line"> public void setComparePassword(String comparePassword, onPasswordListener listener) &#123;</div><div class="line">     mComparePassword = comparePassword;</div><div class="line">     mListener = listener;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>这里就直接上代码了,代码通俗易懂<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) &#123;</div><div class="line">    super.onTextChanged(text, start, lengthBefore, lengthAfter);</div><div class="line">    textLength = text.toString().length();</div><div class="line"></div><div class="line">    if (mComparePassword != null &amp;&amp; textLength == maxCount) &#123;</div><div class="line">        if (TextUtils.equals(mComparePassword, getPasswordString())) &#123;</div><div class="line">            mListener.onEqual(getPasswordString());</div><div class="line">        &#125; else &#123;</div><div class="line">            mListener.onDifference();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    invalidate();</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>实际使用中我们这样设置(是不是瞬间感觉用的过程简单了很多)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">passwordInputView.setComparePassword(&quot;123456&quot;, new PayPsdInputView.onPasswordListener() &#123;</div><div class="line">    @Override</div><div class="line">    public void onDifference() &#123;</div><div class="line">        // TODO: 2017/5/7   和上次输入的密码不一致  做相应的业务逻辑处理 </div><div class="line">        Toast.makeText(MainActivity.this,&quot;两次密码输入不同&quot;,Toast.LENGTH_SHORT).show();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onEqual(String psd) &#123;</div><div class="line">        // TODO: 2017/5/7 两次输入密码相同，那就去进行支付楼 </div><div class="line">        Toast.makeText(MainActivity.this,&quot;密码相同&quot;+psd,Toast.LENGTH_SHORT).show();</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h2 id="文章到此本应该结束了，可是我们UI设计师给出的效果图不是这样子的，不按常理出牌（心中顿时飘过一万只草泥马）"><a href="#文章到此本应该结束了，可是我们UI设计师给出的效果图不是这样子的，不按常理出牌（心中顿时飘过一万只草泥马）" class="headerlink" title="文章到此本应该结束了，可是我们UI设计师给出的效果图不是这样子的，不按常理出牌（心中顿时飘过一万只草泥马）"></a>文章到此本应该结束了，可是我们UI设计师给出的效果图不是这样子的，不按常理出牌（心中顿时飘过一万只草泥马）</h2><p><img src="http://upload-images.jianshu.io/upload_images/2057501-03c297d8cb4eaaa5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="草泥马"></p>
+<p>来看看我们的效果图<br><img src="http://upload-images.jianshu.io/upload_images/2057501-0b4ffe583ec6b1e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="Paste_Image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-34d96808da101a95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="大哥，算了算了，还是去给他实现一下吧"></p>
+<p>他不按常量出牌，不过这也是他们一贯的作风，既然他们要这样的效果那我们就去做喽，整个流程还是一样的，唯一的不同就是外边框和密码之间的分割线变成了底部间断的线，这肯定难不倒我们啦，不就是画六条线吗，每根线的起点终点坐标和上边圆心左边计算差不多，就不多描述了看代码最实在<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 画底部显示的分割线</div><div class="line"> *</div><div class="line"> * @param canvas</div><div class="line"> */</div><div class="line">private void drawBottomBorder(Canvas canvas) &#123;</div><div class="line"></div><div class="line">    for (int i = 0; i &lt; maxCount; i++) &#123;</div><div class="line">        cX = startX + i * 2 * startX;</div><div class="line">        canvas.drawLine(cX - bottomLineLength / 2,</div><div class="line">                height,</div><div class="line">                cX + bottomLineLength / 2,</div><div class="line">                height, bottomLinePaint);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>项目至此完美收工，看看效果吧<br><img src="http://upload-images.jianshu.io/upload_images/2057501-5966bec7cb34dd21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="MD你要的效果给你.png"></p>
+<h1 id="最后总结"><a href="#最后总结" class="headerlink" title="最后总结"></a>最后总结</h1><blockquote>
+<p>以上微信支付密码和我们这种现实效果我都封装在PayPsdInputView中了，可以根据需求切换不同的样式，<br><img src="http://upload-images.jianshu.io/upload_images/2057501-8b24b3524f0cd749.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="Paste_Image.png"><br>如果以后还要其他的支付密码输入的样式的话同样会添加进来的，目的只有一个———&gt;下次开发省时省力。<br><img src="http://upload-images.jianshu.io/upload_images/2057501-3ca764c315dcdea2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="两种样式供你选择"></p>
+</blockquote>
+<h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2><blockquote>
+<p>我相信看到这里肯定有一部分小伙伴会说MDZZ,这不就是简单的画矩形、画圆、画线吗，有什么好写的，谁都会做。我想说的是你们说的没错，涉及的知识点是很简单，但是不要忘了，麻雀虽小五腑俱全，真正你去一行一行敲的时候你会发现有很多不曾注意过的问题都会浮出水面。只是单纯的会几个知识点其实没什么卵用，把所学知识点运用起来重组成一个功能模块的时候你才算真正的掌握。<br><img src="http://upload-images.jianshu.io/upload_images/2057501-0c1557eb6c1b9cac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="来，老表，抽根烟，平复一下暴躁的心情"></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>谨以此篇来记录自己项目中遇到的问题，献给需要类似功能的小伙伴们。如果你有好的建议欢迎评论指出，大家一起讨论、学习、进步！</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Android View 自定义</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/07/Android实用View系列-仿微信支付宝等风格的支付密码输入框的实现/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Android自定义动画酷炫的提交按钮" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/29/Android自定义动画酷炫的提交按钮/">Android自定义动画酷炫的提交按钮</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/29/Android自定义动画酷炫的提交按钮/" class="archive-article-date">
+  	<time datetime="2017-04-29T08:22:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="今天开始记录工作中遇到的需要实现的动画效果实现自定义view动画，后期会有一些列动画设计思路的文章。"><a href="#今天开始记录工作中遇到的需要实现的动画效果实现自定义view动画，后期会有一些列动画设计思路的文章。" class="headerlink" title="今天开始记录工作中遇到的需要实现的动画效果实现自定义view动画，后期会有一些列动画设计思路的文章。"></a>今天开始记录工作中遇到的需要实现的动画效果实现自定义view动画，后期会有一些列动画设计思路的文章。</h3><blockquote>
+<p>在这里分享的是设计实现思路，仅供学习使用，让大家拿到稍微复杂点的动画的时候要知道该如何去一步步分解实现，而不是抱怨<br>下边就先来看看设计需要的效果图及我们最终实现的效果图，毕竟有图有真相嘛！</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-d710bca1e166fbc4.gif?imageMogr2/auto-orient/strip" alt="99.gif"></p>
+<h5 id="其实我刚拿到设计图的时候心想，MD直接给一张gif图不就行了何必这个麻烦呐，"><a href="#其实我刚拿到设计图的时候心想，MD直接给一张gif图不就行了何必这个麻烦呐，" class="headerlink" title="其实我刚拿到设计图的时候心想，MD直接给一张gif图不就行了何必这个麻烦呐，"></a>其实我刚拿到设计图的时候心想，MD直接给一张gif图不就行了何必这个麻烦呐，</h5><p>随后冷静下来之后（其实就是抱怨之后）想想作为一名Android开发者总不能什么动画都依赖设计师吧，那样的话会显得我们开发者没什么卵用啊，说不定还会被设计师鄙视哦，<br><img src="http://upload-images.jianshu.io/upload_images/2057501-563392a36b5dee6f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/160" alt="设计师对你深深的鄙视"><br>于是就开始了动画分析及实现之旅。</p>
+<hr>
+<h3 id="通过这个gif动画我们分析出动画过程的实质："><a href="#通过这个gif动画我们分析出动画过程的实质：" class="headerlink" title="通过这个gif动画我们分析出动画过程的实质："></a>通过这个gif动画我们分析出动画过程的实质：</h3><blockquote>
+<p>一个长方形（或者是圆角长方形）逐渐过渡成为两边是半圆的长方形，于此同时长方形两边向中间靠拢最终形成一个圆，然后圆上升一定高度，最后在圆里边画出对勾(✔).整个动画分解的其实就是这几个部分，那么我们该如何实现呐，不要捉急，继续往下看。</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-63d1dc06ec577bf3.gif?imageMogr2/auto-orient/strip" alt="h"></p>
+<h2 id="第一步：我们要先画出一个圆角矩形吧"><a href="#第一步：我们要先画出一个圆角矩形吧" class="headerlink" title="第一步：我们要先画出一个圆角矩形吧"></a>第一步：我们要先画出一个圆角矩形吧</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 绘制带圆角的矩形</div><div class="line"> *</div><div class="line"> * @param canvas 画布</div><div class="line"> */</div><div class="line">  private void draw_oval_to_circle(Canvas canvas) &#123;</div><div class="line">  </div><div class="line">          //这里是对矩形的位置大小的设置</div><div class="line">          rectf.left = two_circle_distance;</div><div class="line">          rectf.top = 0;</div><div class="line">          rectf.right = width - two_circle_distance;</div><div class="line">          rectf.bottom = height;</div><div class="line">  </div><div class="line">          //画圆角矩形</div><div class="line">          canvas.drawRoundRect(rectf, circleAngle, circleAngle, paint);</div><div class="line">  </div><div class="line">      &#125;</div></pre></td></tr></table></figure>
+<h5 id="圆角矩形绘制完成之后就是改变圆角半径的大小使其两边形成半圆的效果，那么怎么才能让他成为半圆呐，来看看一张图，若要绘制成半圆效果，那么这个圆的直径就是view自身的高度，那么这个圆的半径就是height-2"><a href="#圆角矩形绘制完成之后就是改变圆角半径的大小使其两边形成半圆的效果，那么怎么才能让他成为半圆呐，来看看一张图，若要绘制成半圆效果，那么这个圆的直径就是view自身的高度，那么这个圆的半径就是height-2" class="headerlink" title="圆角矩形绘制完成之后就是改变圆角半径的大小使其两边形成半圆的效果，那么怎么才能让他成为半圆呐，来看看一张图，若要绘制成半圆效果，那么这个圆的直径就是view自身的高度，那么这个圆的半径就是height/2"></a>圆角矩形绘制完成之后就是改变圆角半径的大小使其两边形成半圆的效果，那么怎么才能让他成为半圆呐，来看看一张图，若要绘制成半圆效果，那么这个圆的直径就是view自身的高度，那么这个圆的半径就是height/2</h5><p><img src="http://upload-images.jianshu.io/upload_images/2057501-19ec89970d9a718c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">/**</div><div class="line"> * 设置矩形过度圆角矩形的动画</div><div class="line"> */</div><div class="line">private void set_rect_to_angle_animation() &#123;</div><div class="line">    animator_rect_to_angle = ValueAnimator.ofInt(0, height / 2);</div><div class="line">    animator_rect_to_angle.setDuration(duration);</div><div class="line">    animator_rect_to_angle.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">        @Override</div><div class="line">        public void onAnimationUpdate(ValueAnimator animation) &#123;</div><div class="line">            circleAngle = (int) animation.getAnimatedValue();</div><div class="line">            invalidate();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>添加动画之后的效果如下</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-e863b04adb9f2440.gif?imageMogr2/auto-orient/strip" alt="button_1.gif"></p>
+<h2 id="第二步：当矩形两边都是半圆之后就要处理使其向中间靠拢逐渐形成一个圆，那么问题又来了，需要向中间移动多少呐，并且怎么移动才能使两边都想中间聚拢呐"><a href="#第二步：当矩形两边都是半圆之后就要处理使其向中间靠拢逐渐形成一个圆，那么问题又来了，需要向中间移动多少呐，并且怎么移动才能使两边都想中间聚拢呐" class="headerlink" title="第二步：当矩形两边都是半圆之后就要处理使其向中间靠拢逐渐形成一个圆，那么问题又来了，需要向中间移动多少呐，并且怎么移动才能使两边都想中间聚拢呐"></a>第二步：当矩形两边都是半圆之后就要处理使其向中间靠拢逐渐形成一个圆，那么问题又来了，需要向中间移动多少呐，并且怎么移动才能使两边都想中间聚拢呐</h2><h5 id="下边来看一张图分析一下"><a href="#下边来看一张图分析一下" class="headerlink" title="下边来看一张图分析一下"></a>下边来看一张图分析一下</h5><p><img src="http://upload-images.jianshu.io/upload_images/2057501-4f0ded1fc136ae56.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<h5 id="有图可知移动的距离是-width-height-2-然后在写一个动画让其改变距离最终两个半圆靠拢在一起形成圆"><a href="#有图可知移动的距离是-width-height-2-然后在写一个动画让其改变距离最终两个半圆靠拢在一起形成圆" class="headerlink" title="有图可知移动的距离是(width-height)/2,然后在写一个动画让其改变距离最终两个半圆靠拢在一起形成圆"></a>有图可知移动的距离是(width-height)/2,然后在写一个动画让其改变距离最终两个半圆靠拢在一起形成圆</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 设置圆角矩形过度到圆的动画</div><div class="line"> * default_two_circle_distance = (w-h)/2</div><div class="line"> */</div><div class="line">private void set_rect_to_circle_animation() &#123;</div><div class="line">    animator_rect_to_square = ValueAnimator.ofInt(0, default_two_circle_distance);</div><div class="line">    animator_rect_to_square.setDuration(duration);</div><div class="line">    animator_rect_to_square.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">        @Override</div><div class="line">        public void onAnimationUpdate(ValueAnimator animation) &#123;</div><div class="line">            two_circle_distance = (int) animation.getAnimatedValue();</div><div class="line"></div><div class="line">            //在靠拢的过程中设置文字的透明度，使文字逐渐消失的效果</div><div class="line">            int alpha = 255 - (two_circle_distance * 255) / default_two_circle_distance;</div><div class="line"></div><div class="line">            textPaint.setAlpha(alpha);</div><div class="line"></div><div class="line">            invalidate();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>完成上边代码后再来看下效果</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-917b6211e11ba7b9.gif?imageMogr2/auto-orient/strip" alt="button_2.gif"></p>
+<h2 id="第三步：让圆上移移动距离。这个移动很好实现-直接改变Y轴方法的坐标就行了，这个很简单就直接看代码吧"><a href="#第三步：让圆上移移动距离。这个移动很好实现-直接改变Y轴方法的坐标就行了，这个很简单就直接看代码吧" class="headerlink" title="第三步：让圆上移移动距离。这个移动很好实现,直接改变Y轴方法的坐标就行了，这个很简单就直接看代码吧"></a>第三步：让圆上移移动距离。这个移动很好实现,直接改变Y轴方法的坐标就行了，这个很简单就直接看代码吧</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 设置view上移的动画</div><div class="line"> */</div><div class="line">private void set_move_to_up_animation() &#123;</div><div class="line">    final float curTranslationY = this.getTranslationY();</div><div class="line">    animator_move_to_up = ObjectAnimator.ofFloat(this, &quot;translationY&quot;, curTranslationY, curTranslationY - move_distance);</div><div class="line">    animator_move_to_up.setDuration(duration);</div><div class="line">    animator_move_to_up.setInterpolator(new AccelerateDecelerateInterpolator());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="第四步：在圆中绘制一个对勾，而且是带动画的对勾，让对勾以动画的形式慢慢绘制出来"><a href="#第四步：在圆中绘制一个对勾，而且是带动画的对勾，让对勾以动画的形式慢慢绘制出来" class="headerlink" title="第四步：在圆中绘制一个对勾，而且是带动画的对勾，让对勾以动画的形式慢慢绘制出来"></a>第四步：在圆中绘制一个对勾，而且是带动画的对勾，让对勾以动画的形式慢慢绘制出来</h2><p>如果对相关API不熟悉的话不知道会怎么去实现呐，或许你会想通过绘制线的方式，在对勾起点开始不断改变移动点的坐标进行绘制，那么怎么获取这些点的坐标呐，这里我们使用Path和DashPathEffect两个方法实现，对DashPathEffect不了解的小伙伴可以去查一下文档哦</p>
+<blockquote>
+<p>DashPathEffect这个类的作用就是将Path的线段虚线化。<br>构造函数为DashPathEffect(float[] intervals, float offset)，其中intervals为虚线的ON和OFF数组，该数组的length必须大于等于2，phase为绘制时的偏移量。</p>
+</blockquote>
+<h5 id="我们先拿到对勾的path路径在对其改变偏移量加上DashPathEffect就能实现动态绘制对勾的效果了，那么怎么计算对勾的起点折点和终点的坐标呐，在网上找了一个不错的图片，如果你的设计师直接把位置给你标明的很详细的话你就省了这些自己计算的麻烦"><a href="#我们先拿到对勾的path路径在对其改变偏移量加上DashPathEffect就能实现动态绘制对勾的效果了，那么怎么计算对勾的起点折点和终点的坐标呐，在网上找了一个不错的图片，如果你的设计师直接把位置给你标明的很详细的话你就省了这些自己计算的麻烦" class="headerlink" title="我们先拿到对勾的path路径在对其改变偏移量加上DashPathEffect就能实现动态绘制对勾的效果了，那么怎么计算对勾的起点折点和终点的坐标呐，在网上找了一个不错的图片，如果你的设计师直接把位置给你标明的很详细的话你就省了这些自己计算的麻烦"></a>我们先拿到对勾的path路径在对其改变偏移量加上DashPathEffect就能实现动态绘制对勾的效果了，那么怎么计算对勾的起点折点和终点的坐标呐，在网上找了一个不错的图片，如果你的设计师直接把位置给你标明的很详细的话你就省了这些自己计算的麻烦</h5><p><img src="http://upload-images.jianshu.io/upload_images/2057501-ca86ac42f1ec4b81.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="对勾的绘制位置.jpg"></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">  * 绘制对勾     </div><div class="line">  * 下边计算比例是参考网上一些例子加上自己一步一步尝试的出来的比例，仅供参考</div><div class="line">  * 如果条件允许最好还是让设计师给你标明一下比例哦！</div><div class="line">  */</div><div class="line"> private void initOk() &#123;</div><div class="line">     //对勾的路径</div><div class="line">     path.moveTo(default_two_circle_distance + height / 8 * 3, height / 2);</div><div class="line">     path.lineTo(default_two_circle_distance + height / 2, height / 5 * 3);</div><div class="line">     path.lineTo(default_two_circle_distance + height / 3 * 2, height / 5 * 2);</div><div class="line"></div><div class="line">     pathMeasure = new PathMeasure(path, true);</div><div class="line"></div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 绘制对勾的动画</div><div class="line"> */</div><div class="line">private void set_draw_ok_animation() &#123;</div><div class="line">    animator_draw_ok = ValueAnimator.ofFloat(1, 0);</div><div class="line">    animator_draw_ok.setDuration(duration);</div><div class="line">    animator_draw_ok.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">        @Override</div><div class="line">        public void onAnimationUpdate(ValueAnimator animation) &#123;</div><div class="line">            startDrawOk = true;</div><div class="line">            float value = (Float) animation.getAnimatedValue();</div><div class="line"></div><div class="line">            effect = new DashPathEffect(new float[]&#123;pathMeasure.getLength(), pathMeasure.getLength()&#125;, value * pathMeasure.getLength());</div><div class="line">            okPaint.setPathEffect(effect);</div><div class="line">            invalidate();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>再来看效果</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-673df7e71c2bccba.gif?imageMogr2/auto-orient/strip" alt="绘制对勾.gif"></p>
+<p>至此动画分解都已完成，但是机智的你应该已经发现问题了，就是感觉动画播放衔接的不是很好，那么接下来我们就处理这个问题，回到最初的效果图上，矩形变圆角和缩放成圆形是同时进行的，那么我们有什么办法可以实现动画同时播放呐，哈哈，身为老司机的想必已经知道了使用AnimatorSet，他可以播放动画集、顺序播放等，那么我们就开始处理吧</p>
+<blockquote>
+<p>我们让矩形变圆角和矩形往中间缩放同时进行，然后圆在上移，最后绘制对勾</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">animatorSet</div><div class="line">        .play(animator_move_to_up)</div><div class="line">        .before(animator_draw_ok)</div><div class="line">        .after(animator_rect_to_square)</div><div class="line">        .after(animator_rect_to_angle);</div></pre></td></tr></table></figure>
+<p>最终奉上我们自己一步一步完整实现的效果图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-0d1119721429bf71.gif?imageMogr2/auto-orient/strip" alt="button_animation.gif"><br>至此我们可以理直气壮地带着作品找设计师互怼了<br><img src="http://upload-images.jianshu.io/upload_images/2057501-79b33b27b17bc7e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/160" alt="向设计师抛出诡异的手势"></p>
+<h2 id="总结：看到这里是不是觉得这样的动画实现起来也不是很复杂嘛，也许你会觉得这样的动画没什么技术含量，实现起来真的没什么难度，何必再此大做文章呐，其实我这里也只是个抛砖引玉的作用，提供一种学习方法，也许今天我们遇到的只是一个简单的动画，可明天如果需要我们去做更复杂的动画呐，我们该怎么处理，怎么分析，怎么实现呐。只要我们把自己的需求分析拆解，把复杂的步骤简单化，分布实现在组合到一起就可以实现自己想要的效果（你要知道炫酷的电影特效也是一帧一帧动画合成的哦）。"><a href="#总结：看到这里是不是觉得这样的动画实现起来也不是很复杂嘛，也许你会觉得这样的动画没什么技术含量，实现起来真的没什么难度，何必再此大做文章呐，其实我这里也只是个抛砖引玉的作用，提供一种学习方法，也许今天我们遇到的只是一个简单的动画，可明天如果需要我们去做更复杂的动画呐，我们该怎么处理，怎么分析，怎么实现呐。只要我们把自己的需求分析拆解，把复杂的步骤简单化，分布实现在组合到一起就可以实现自己想要的效果（你要知道炫酷的电影特效也是一帧一帧动画合成的哦）。" class="headerlink" title="总结：看到这里是不是觉得这样的动画实现起来也不是很复杂嘛，也许你会觉得这样的动画没什么技术含量，实现起来真的没什么难度，何必再此大做文章呐，其实我这里也只是个抛砖引玉的作用，提供一种学习方法，也许今天我们遇到的只是一个简单的动画，可明天如果需要我们去做更复杂的动画呐，我们该怎么处理，怎么分析，怎么实现呐。只要我们把自己的需求分析拆解，把复杂的步骤简单化，分布实现在组合到一起就可以实现自己想要的效果（你要知道炫酷的电影特效也是一帧一帧动画合成的哦）。"></a>总结：看到这里是不是觉得这样的动画实现起来也不是很复杂嘛，也许你会觉得这样的动画没什么技术含量，实现起来真的没什么难度，何必再此大做文章呐，其实我这里也只是个抛砖引玉的作用，提供一种学习方法，也许今天我们遇到的只是一个简单的动画，可明天如果需要我们去做更复杂的动画呐，我们该怎么处理，怎么分析，怎么实现呐。只要我们把自己的需求分析拆解，把复杂的步骤简单化，分布实现在组合到一起就可以实现自己想要的效果（你要知道炫酷的电影特效也是一帧一帧动画合成的哦）。</h2><p><img src="http://upload-images.jianshu.io/upload_images/2057501-45c40b556d39f646.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="学无止境"></p>
+<h1 id="源码已经上传到github上了，需要参考学习的点击传送门哦"><a href="#源码已经上传到github上了，需要参考学习的点击传送门哦" class="headerlink" title="源码已经上传到github上了，需要参考学习的点击传送门哦"></a>源码已经上传到github上了，需要参考学习的点击<a href="https://github.com/lygttpod/AndroidCustomView/tree/master" target="_blank" rel="external"><strong>传送门</strong></a>哦</h1>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/29/Android自定义动画酷炫的提交按钮/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-RecyclerView通过GridLayoutManager实现多样式布局" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/15/RecyclerView通过GridLayoutManager实现多样式布局/">RecyclerView通过GridLayoutManager实现多样式布局</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/15/RecyclerView通过GridLayoutManager实现多样式布局/" class="archive-article-date">
+  	<time datetime="2017-04-15T08:22:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一、开篇<br>距离上次写文章已经有段时间了，说实话真不知道最近在忙些什么，现在沉下心来把最近项目中遇到的问题记录下来便于以后遇到中使用吧！<br>废话不多说，先看一下效果图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-f266b868c9bbf702.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="Paste_Image.png"></p>
+<p>###二、需求解析<br>1、先说下项目需求，不管是好评还是差评下边的Tag标签有不同的展示类型，有的字数多的会单独占一行处理（这边其实也可以扩充，比如说两三个字的可以一行显示三个Tag标签），第一眼看到这个需求准备使用网上的开源库TagLayout去实现，但是尝试了一下后发现其实他们实现的效果同项目要的效果还是有蛮大差距的，可以看到效果图里边是要求文字是居中对齐的，左右对称的。<br>2、想到使用GridView实现这个功能，定义adapter去实现没问题，问题是什么时候显示一行什么时候显示两行三行并不能确定，毕竟有时候服务端返回的没有类型标示只有tag_name和tag_id，你要根据什么设置类型呐，而且自从recyclerview之后现在要是还用GridView的话岂不是太落伍了。下边就重点介绍一下使用recyclerview实现如图效果。</p>
+<p>###三、功能实现<br>我们知道recyclerview实现GridView效果只需配置一下参数就行了</p>
+<pre><code>GridLayoutManager layoutManage = new GridLayoutManager(getContext(), 2);
+recycerView.setLayoutManager(layoutManage);
+</code></pre><p>可以看到GridLayoutManager需要传递两个参数，一个是上下文对象，另一个是一行显示几列的参数常量，既然这个常量可以指定那么是不是这个值可以去控制呐，答案当然是yes</p>
+<p>我们会注意到GridLayoutManager里边有个setSpanSizeLookup方法,本篇的重点就是这个方法（这个方法具体意义大家可以网上搜索，会有很多相关介绍，以及通过它实现一些复杂的布局，再次不做过多讨论）</p>
+<pre><code>layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return 0;
+            }
+        });
+</code></pre><p>其实getSpanSize返回值就是控制每行有几列的，根据这个思路我们不妨试试。因为recyclerview填充数据是根据adapter实现的，我们就把给adapter的数据源同样在setSpanSizeLookup这个方法里边判断一下不就行了吗？<br>根据这个思路于是有了下面的代码</p>
+<pre><code>/**
+ * 如果单个item显示的字数大于指定某个值就显示一列  默认2列
+ */
+
+ //设置item数据大于多少字只显示一行  默认 超过九个字的程度只显示一列
+
+ private static final int MAX = 9;
+
+
+private int setSpanSize(int position, List&lt;TagBean&gt; listEntities) {
+    int count;
+    if (listEntities.get(position).getTag_name().length() &gt; MAX) {
+        count = 2;
+    } else {
+        count = 1;
+    }
+
+    return count;
+}
+
+
+layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                     @Override
+                     public int getSpanSize(int position) {
+                         return setSpanSize(position,list);
+                     }
+                 });
+</code></pre><p>核心代码就这么多，我们可以根据自己的需求随意定制样式</p>
+<p>最后奉上源码地址：<a href="https://github.com/lygttpod/AndroidCustomView" target="_blank" rel="external">https://github.com/lygttpod/AndroidCustomView</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-a4d09d5892ca1518.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="Paste_Image.png"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/15/RecyclerView通过GridLayoutManager实现多样式布局/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -978,13 +1830,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/29/hello-world/">Hello World</a>
+      <a class="article-title" href="/2017/04/01/hello-world/">Hello World</a>
     </h1>
   
 
         
-        <a href="/2017/08/29/hello-world/" class="archive-article-date">
-  	<time datetime="2017-08-29T06:18:57.079Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-29</time>
+        <a href="/2017/04/01/hello-world/" class="archive-article-date">
+  	<time datetime="2017-04-01T08:19:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-01</time>
 </a>
         
       </header>
@@ -1012,7 +1864,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/29/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/04/01/hello-world/">展开全文 >></a>
         </p>
       
 
@@ -1127,7 +1979,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Android View 自定义</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Android 工具 封装 retrofit rxjava</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Android 库文件 SuperTextView</a>
               </li>
             
             <div class="clearfix"></div>

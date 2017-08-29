@@ -6,18 +6,33 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lygttpod.github.io">
-  <title>Archives: 2017/8 | Allen的博客</title>
+  <title>Android实用View------水波动画效果多种实现方式详解 | Allen的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在Android开发路上不断探索的菜鸟">
+  <meta name="description" content="这次给大家带来的是一篇关于自定义View实现水波动画效果的文章，其实在去年项目中使用过类似的动画，当时就自定义View也实现了预期的效果，最近项目中又使用了相似的效果，于是对代码重新整理了一下并且记录下来，便于以后有类似需求可以当作参考！ 按照惯例，无图无真相   实现方式：1、正余弦函数实现2、贝塞尔曲线实现  开篇看到上边的两种实现方式是不是感觉都和数学公式有关呐，这对于毕业多年之后的我们来说">
 <meta name="keywords" content="android">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Allen的博客">
-<meta property="og:url" content="https://lygttpod.github.io/archives/2017/08/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android实用View------水波动画效果多种实现方式详解">
+<meta property="og:url" content="https://lygttpod.github.io/2017/06/20/Android实用View-水波动画效果多种实现方式详解/index.html">
 <meta property="og:site_name" content="Allen的博客">
-<meta property="og:description" content="在Android开发路上不断探索的菜鸟">
+<meta property="og:description" content="这次给大家带来的是一篇关于自定义View实现水波动画效果的文章，其实在去年项目中使用过类似的动画，当时就自定义View也实现了预期的效果，最近项目中又使用了相似的效果，于是对代码重新整理了一下并且记录下来，便于以后有类似需求可以当作参考！ 按照惯例，无图无真相   实现方式：1、正余弦函数实现2、贝塞尔曲线实现  开篇看到上边的两种实现方式是不是感觉都和数学公式有关呐，这对于毕业多年之后的我们来说">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-54627974b2ad1172.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/280">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-446557da3b08f646.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-bf78d0285b32cc65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-cfa3fc462d692d21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-3f16ab58ff1e0b9a.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-52af38ccc5393c93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-2f453c720bb88907.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-77ed94910b7752c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/360">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-99d98724e5070d0c.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-32a8fc8204cd227d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/360">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-e00cc93880b06942.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/360">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-9066d77672dae515.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-43358432099e1e71.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2017-08-29T08:26:54.915Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Allen的博客">
-<meta name="twitter:description" content="在Android开发路上不断探索的菜鸟">
+<meta name="twitter:title" content="Android实用View------水波动画效果多种实现方式详解">
+<meta name="twitter:description" content="这次给大家带来的是一篇关于自定义View实现水波动画效果的文章，其实在去年项目中使用过类似的动画，当时就自定义View也实现了预期的效果，最近项目中又使用了相似的效果，于是对代码重新整理了一下并且记录下来，便于以后有类似需求可以当作参考！ 按照惯例，无图无真相   实现方式：1、正余弦函数实现2、贝塞尔曲线实现  开篇看到上边的两种实现方式是不是感觉都和数学公式有关呐，这对于毕业多年之后的我们来说">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2057501-54627974b2ad1172.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/280">
   
     <link rel="alternative" href="/atom.xml" title="Allen的博客" type="application/atom+xml">
   
@@ -135,98 +150,181 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Android实用View-水波动画效果多种实现方式详解" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/29/RxJava-Retrofit-史上最精简封装（RxHttpUtils-2-x）使用说明/" class="archive-article-date">
-  	<time datetime="2017-08-29T08:25:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/29/RxJava-Retrofit-史上最精简封装（RxHttpUtils-2-x）使用说明/">RxJava+Retrofit 史上最精简封装（RxHttpUtils 2.x）使用说明</a>
+    <h1 class="article-title" itemprop="name">
+      Android实用View------水波动画效果多种实现方式详解
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 工具 封装 retrofit rxjava</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/29/SuperTextView-万能android布局工具类/" class="archive-article-date">
-  	<time datetime="2017-08-29T08:19:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-29</time>
+        
+        <a href="/2017/06/20/Android实用View-水波动画效果多种实现方式详解/" class="archive-article-date">
+  	<time datetime="2017-06-20T08:24:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
 </a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这次给大家带来的是一篇关于自定义View实现水波动画效果的文章，其实在去年项目中使用过类似的动画，当时就自定义View也实现了预期的效果，最近项目中又使用了相似的效果，于是对代码重新整理了一下并且记录下来，便于以后有类似需求可以当作参考！<br> 按照惯例，无图无真相</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-54627974b2ad1172.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/280" alt="image.png"></p>
+<blockquote>
+<p>实现方式：<br>1、正余弦函数实现<br>2、贝塞尔曲线实现</p>
+</blockquote>
+<h3 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h3><p>看到上边的两种实现方式是不是感觉都和数学公式有关呐，这对于毕业多年之后的我们来说如果当初数学基础不是很好现在估计也全部还给老师了吧，所以一提到相关的数学计算公式只能用一个表情表达了。。。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-446557da3b08f646.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这TM都是什么.jpg"></p>
+<h3 id="1、正余弦函数实现"><a href="#1、正余弦函数实现" class="headerlink" title="1、正余弦函数实现"></a>1、正余弦函数实现</h3><p>正余弦的函数不知道大家还记不记得，我们温习一下相关参数的意义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">y=A*sin(ωx+φ)+k</div><div class="line"> A—振幅越大，波形在y轴上最大与最小值的差值越大</div><div class="line"> ω—角速度， 控制正弦周期(单位角度内震动的次数)</div><div class="line"> φ—初相，反映在坐标系上则为图像的左右移动。这里通过不断改变φ,达到波浪移动效果</div><div class="line"> k—偏距，反映在坐标系上则为图像的上移或下移。</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-bf78d0285b32cc65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="正余弦函数图.png"></p>
+<p>我们要实现移动的波形首先是先画出静态的波形，那么怎么来绘制一个波形图呐，Math函数里已经提供了相应的方法，我们可以直接使用</p>
+<blockquote>
+<p> A<em> Math.sin(ω </em> x + φ ) + K)<br>开始绘制之前首先定义相关画笔之类的参数，在此就不做过多说明了，根据上边的公式我们知道需要哪些参数，首先是A，这是振幅，就是波形最高和最低点的差值，我们可以设置定值或者外界传入；其次是ω，角速度，给一个定制或者外界传入；φ，相位，我们就是根据不断改变相位来达到波形移动的效果，每次移动多少可以从外界传入，便于控制速度；K，波形偏移上下的距离，知道了以上各个参数的具体使用意义，下边就可以直接通过代码看下具体实现效果了，毕竟公式都有了，参数也发给你了，剩下的就是根据公式填写以下相应参数就ok了</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">private void drawSin(Canvas canvas) &#123;</div><div class="line"></div><div class="line">      φ -= 0.03;</div><div class="line">      float y;</div><div class="line"></div><div class="line">      path.reset();</div><div class="line">      path.moveTo(0, getHeight());</div><div class="line"></div><div class="line">      for (float x = 0; x &lt;= getWidth(); x += 20) &#123;</div><div class="line">          y = (float) (A * Math.sin(ω * x + φ ) + K);</div><div class="line">          path.lineTo(x, getHeight() - y);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      canvas.drawPath(path, paint);</div><div class="line"></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-cfa3fc462d692d21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="静态的波形图.png"></p>
+<p>静态的波形出来之后我们就要借助属性动画来让波形动起来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">private void initAnimation() &#123;</div><div class="line">    valueAnimator = ValueAnimator.ofInt(0, getWidth());</div><div class="line">    valueAnimator.setDuration(1000);</div><div class="line">    valueAnimator.setRepeatCount(ValueAnimator.INFINITE);</div><div class="line">    valueAnimator.setInterpolator(new LinearInterpolator());</div><div class="line">    valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">        @Override</div><div class="line">        public void onAnimationUpdate(ValueAnimator animation) &#123;</div><div class="line">            /**</div><div class="line">             * 刷新页面调取onDraw方法，通过变更φ 达到移动效果</div><div class="line">             */</div><div class="line">            invalidate();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">    if (waveStart) &#123;</div><div class="line">        valueAnimator.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>开启动画之后再运行一下看看效果吧</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-3f16ab58ff1e0b9a.gif?imageMogr2/auto-orient/strip" alt="gif录制不流畅，真机效果很好哦.gif"></p>
+<p>看到这里只是一个单纯的波形，我们一般使用的时候并不是这样的，而是一个封闭的波形，可以向上封闭也可以向下封闭，我们在波形绘制完成之后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.........省略部分代码</div><div class="line">//填充矩形</div><div class="line">        path.lineTo(getWidth(), getHeight());</div><div class="line">        path.lineTo(0, getHeight());</div><div class="line">        path.close();</div></pre></td></tr></table></figure></p>
+<p>这样就绘制出封闭的波形了，然后画笔设成填充就ok</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-52af38ccc5393c93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>代码中我已经对向下密封还是向上密封封装了方法，在此就不再赘述，需要的可以看源码哦，除此之外还有其他的参数都进行了可配置话，可以通过xml进行设置，至此通过正余弦函数进行绘制波形图已经介绍完毕了。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-2f453c720bb88907.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h3 id="2、贝塞尔曲线实现"><a href="#2、贝塞尔曲线实现" class="headerlink" title="2、贝塞尔曲线实现"></a>2、贝塞尔曲线实现</h3><p>对贝塞尔曲线不是很了解的可以自行百度，概念性的东东就不在此赘述，我们使用二阶的贝塞尔进行绘制，为什么选择二阶的呐，看一个图就知道啦</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-77ed94910b7752c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/360" alt="二阶贝塞尔曲线.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-99d98724e5070d0c.gif?imageMogr2/auto-orient/strip" alt="二阶贝塞尔曲线.gif"><br> 一段完整的波形其实就是两个二阶的贝塞尔组成的，来看下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * sin函数图像的波形</div><div class="line"> *</div><div class="line"> * @param canvas</div><div class="line"> */</div><div class="line">private void drawSinPath(Canvas canvas) &#123;</div><div class="line">    mWavePath.reset();</div><div class="line"></div><div class="line">    mWavePath.moveTo(-mWaveLength + mOffset, mWaveAmplitude);</div><div class="line"></div><div class="line">     //相信很多人会疑惑为什么控制点的纵坐标是以下值,</div><div class="line">     //是根据公式计算出来的,具体计算方法情况文章内容</div><div class="line"></div><div class="line">    for (int i = 0; i &lt; mWaveCount; i++) &#123;</div><div class="line"></div><div class="line">        //第一个控制点的坐标为(-mWaveLength * 3 / 4,-mWaveAmplitude)</div><div class="line">        mWavePath.quadTo(-mWaveLength * 3 / 4 + mOffset + i * mWaveLength,</div><div class="line">                -mWaveAmplitude,</div><div class="line">                -mWaveLength / 2 + mOffset + i * mWaveLength,</div><div class="line">                mWaveAmplitude);</div><div class="line"></div><div class="line">        //第二个控制点的坐标为(-mWaveLength / 4,3 * mWaveAmplitude)</div><div class="line">        mWavePath.quadTo(-mWaveLength / 4 + mOffset + i * mWaveLength,</div><div class="line">                3 * mWaveAmplitude,</div><div class="line">                mOffset + i * mWaveLength,</div><div class="line">                mWaveAmplitude);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    mWavePath.lineTo(getWidth(), getHeight());</div><div class="line">    mWavePath.lineTo(0, getHeight());</div><div class="line">    mWavePath.close();</div><div class="line"></div><div class="line">    canvas.drawPath(mWavePath, mWavePaint);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-32a8fc8204cd227d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/360" alt="当时的手绘内容，可能有点乱，只是大致描述一下.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-e00cc93880b06942.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/360" alt="计算控制点纵坐标的方式.png"></p>
+<blockquote>
+<p>根据计算得到起点和控制点坐标之后就可以写代码运行了效果和上边的运行效果一样就不再展示了，上边的计算内容就解释了代码提出的问题</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-9066d77672dae515.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="代码中提出的问题.png"></p>
+<h3 id="3、两种方式对比总结"><a href="#3、两种方式对比总结" class="headerlink" title="3、两种方式对比总结"></a>3、两种方式对比总结</h3><p>图像的绘制其实都不复杂，不过关键点还是有几个的。<br>正余弦函数的波形使用是根据相位控制的，而贝塞尔曲线实现的波形效果是不断改变波的起始位置控制的，并且使用贝塞尔曲线的话需要先在屏幕外边绘制一个完整的波形，保证在平移的过程中可以看到图像不间断的移动来达到移动的波形效果。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-43358432099e1e71.gif?imageMogr2/auto-orient/strip" alt="最终效果--录制模拟感觉有点卡顿，请真机测试哦.gif"></p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>看到这里你是你会感觉到这边文章的内容其实很简单，只要中间的几个点注意一下就可以实现相应的效果了，建议朋友们动手敲一遍代码，加深一下印象，毕竟真是做出来和知道理论没有实践还是有很大区别的！</p>
+<hr>
+<h1 id="github源码地址传送门"><a href="#github源码地址传送门" class="headerlink" title="github源码地址传送门"></a>github源码地址<a href="https://github.com/lygttpod/AndroidCustomView/blob/master/app/src/main/java/com/allen/androidcustomview/widget/WaveViewBySinCos.java" target="_blank" rel="external"><strong>传送门</strong></a></h1><hr>
+<blockquote>
+<p>谨以此篇来记录自己项目中遇到的问题，献给需要类似功能的小伙伴们。如果你有好的建议欢迎评论指出，大家一起讨论、学习、进步！</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/29/SuperTextView-万能android布局工具类/">SuperTextView 万能android布局工具类</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Android 库文件 SuperTextView</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://lygttpod.github.io/2017/06/20/Android实用View-水波动画效果多种实现方式详解/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/07/11/Android实用View系列之SuperButton（实现shape的大部分功能）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Android实用View系列之SuperButton（实现shape的大部分功能）
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/06/11/Android实用View系列-TextView实现打印机效果/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android实用View系列------TextView实现打印机效果</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -249,8 +347,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

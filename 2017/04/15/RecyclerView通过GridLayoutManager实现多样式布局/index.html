@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lygttpod.github.io">
-  <title>Archives: 2017/8 | Allen的博客</title>
+  <title>RecyclerView通过GridLayoutManager实现多样式布局 | Allen的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在Android开发路上不断探索的菜鸟">
-<meta name="keywords" content="android">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Allen的博客">
-<meta property="og:url" content="https://lygttpod.github.io/archives/2017/08/index.html">
+  <meta name="description" content="一、开篇距离上次写文章已经有段时间了，说实话真不知道最近在忙些什么，现在沉下心来把最近项目中遇到的问题记录下来便于以后遇到中使用吧！废话不多说，先看一下效果图  ###二、需求解析1、先说下项目需求，不管是好评还是差评下边的Tag标签有不同的展示类型，有的字数多的会单独占一行处理（这边其实也可以扩充，比如说两三个字的可以一行显示三个Tag标签），第一眼看到这个需求准备使用网上的开源库TagLayo">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RecyclerView通过GridLayoutManager实现多样式布局">
+<meta property="og:url" content="https://lygttpod.github.io/2017/04/15/RecyclerView通过GridLayoutManager实现多样式布局/index.html">
 <meta property="og:site_name" content="Allen的博客">
-<meta property="og:description" content="在Android开发路上不断探索的菜鸟">
+<meta property="og:description" content="一、开篇距离上次写文章已经有段时间了，说实话真不知道最近在忙些什么，现在沉下心来把最近项目中遇到的问题记录下来便于以后遇到中使用吧！废话不多说，先看一下效果图  ###二、需求解析1、先说下项目需求，不管是好评还是差评下边的Tag标签有不同的展示类型，有的字数多的会单独占一行处理（这边其实也可以扩充，比如说两三个字的可以一行显示三个Tag标签），第一眼看到这个需求准备使用网上的开源库TagLayo">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-f266b868c9bbf702.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-a4d09d5892ca1518.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
+<meta property="og:updated_time" content="2017-08-29T08:31:46.947Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Allen的博客">
-<meta name="twitter:description" content="在Android开发路上不断探索的菜鸟">
+<meta name="twitter:title" content="RecyclerView通过GridLayoutManager实现多样式布局">
+<meta name="twitter:description" content="一、开篇距离上次写文章已经有段时间了，说实话真不知道最近在忙些什么，现在沉下心来把最近项目中遇到的问题记录下来便于以后遇到中使用吧！废话不多说，先看一下效果图  ###二、需求解析1、先说下项目需求，不管是好评还是差评下边的Tag标签有不同的展示类型，有的字数多的会单独占一行处理（这边其实也可以扩充，比如说两三个字的可以一行显示三个Tag标签），第一眼看到这个需求准备使用网上的开源库TagLayo">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2057501-f266b868c9bbf702.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
   
     <link rel="alternative" href="/atom.xml" title="Allen的博客" type="application/atom+xml">
   
@@ -135,98 +139,197 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-RecyclerView通过GridLayoutManager实现多样式布局" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/29/RxJava-Retrofit-史上最精简封装（RxHttpUtils-2-x）使用说明/" class="archive-article-date">
-  	<time datetime="2017-08-29T08:25:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/29/RxJava-Retrofit-史上最精简封装（RxHttpUtils-2-x）使用说明/">RxJava+Retrofit 史上最精简封装（RxHttpUtils 2.x）使用说明</a>
+    <h1 class="article-title" itemprop="name">
+      RecyclerView通过GridLayoutManager实现多样式布局
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/04/15/RecyclerView通过GridLayoutManager实现多样式布局/" class="archive-article-date">
+  	<time datetime="2017-04-15T08:22:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一、开篇<br>距离上次写文章已经有段时间了，说实话真不知道最近在忙些什么，现在沉下心来把最近项目中遇到的问题记录下来便于以后遇到中使用吧！<br>废话不多说，先看一下效果图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-f266b868c9bbf702.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="Paste_Image.png"></p>
+<p>###二、需求解析<br>1、先说下项目需求，不管是好评还是差评下边的Tag标签有不同的展示类型，有的字数多的会单独占一行处理（这边其实也可以扩充，比如说两三个字的可以一行显示三个Tag标签），第一眼看到这个需求准备使用网上的开源库TagLayout去实现，但是尝试了一下后发现其实他们实现的效果同项目要的效果还是有蛮大差距的，可以看到效果图里边是要求文字是居中对齐的，左右对称的。<br>2、想到使用GridView实现这个功能，定义adapter去实现没问题，问题是什么时候显示一行什么时候显示两行三行并不能确定，毕竟有时候服务端返回的没有类型标示只有tag_name和tag_id，你要根据什么设置类型呐，而且自从recyclerview之后现在要是还用GridView的话岂不是太落伍了。下边就重点介绍一下使用recyclerview实现如图效果。</p>
+<p>###三、功能实现<br>我们知道recyclerview实现GridView效果只需配置一下参数就行了</p>
+<pre><code>GridLayoutManager layoutManage = new GridLayoutManager(getContext(), 2);
+recycerView.setLayoutManager(layoutManage);
+</code></pre><p>可以看到GridLayoutManager需要传递两个参数，一个是上下文对象，另一个是一行显示几列的参数常量，既然这个常量可以指定那么是不是这个值可以去控制呐，答案当然是yes</p>
+<p>我们会注意到GridLayoutManager里边有个setSpanSizeLookup方法,本篇的重点就是这个方法（这个方法具体意义大家可以网上搜索，会有很多相关介绍，以及通过它实现一些复杂的布局，再次不做过多讨论）</p>
+<pre><code>layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return 0;
+            }
+        });
+</code></pre><p>其实getSpanSize返回值就是控制每行有几列的，根据这个思路我们不妨试试。因为recyclerview填充数据是根据adapter实现的，我们就把给adapter的数据源同样在setSpanSizeLookup这个方法里边判断一下不就行了吗？<br>根据这个思路于是有了下面的代码</p>
+<pre><code>/**
+ * 如果单个item显示的字数大于指定某个值就显示一列  默认2列
+ */
+
+ //设置item数据大于多少字只显示一行  默认 超过九个字的程度只显示一列
+
+ private static final int MAX = 9;
+
+
+private int setSpanSize(int position, List&lt;TagBean&gt; listEntities) {
+    int count;
+    if (listEntities.get(position).getTag_name().length() &gt; MAX) {
+        count = 2;
+    } else {
+        count = 1;
+    }
+
+    return count;
+}
+
+
+layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                     @Override
+                     public int getSpanSize(int position) {
+                         return setSpanSize(position,list);
+                     }
+                 });
+</code></pre><p>核心代码就这么多，我们可以根据自己的需求随意定制样式</p>
+<p>最后奉上源码地址：<a href="https://github.com/lygttpod/AndroidCustomView" target="_blank" rel="external">https://github.com/lygttpod/AndroidCustomView</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-a4d09d5892ca1518.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="Paste_Image.png"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 工具 封装 retrofit rxjava</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://lygttpod.github.io/2017/04/15/RecyclerView通过GridLayoutManager实现多样式布局/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/29/SuperTextView-万能android布局工具类/" class="archive-article-date">
-  	<time datetime="2017-08-29T08:19:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-29</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/04/29/Android自定义动画酷炫的提交按钮/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Android自定义动画酷炫的提交按钮
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/01/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/29/SuperTextView-万能android布局工具类/">SuperTextView 万能android布局工具类</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Android 库文件 SuperTextView</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -249,8 +352,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

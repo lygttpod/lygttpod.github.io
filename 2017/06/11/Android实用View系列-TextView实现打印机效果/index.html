@@ -6,18 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lygttpod.github.io">
-  <title>Archives: 2017/8 | Allen的博客</title>
+  <title>Android实用View系列------TextView实现打印机效果 | Allen的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在Android开发路上不断探索的菜鸟">
+  <meta name="description" content="在审美疲劳的今天，如何能开发出一款应用让用户耳目一新呐，适当的动画特效能为你的APP加分不少，这一点在海外的APP上表现颇为明显。今天为大家带来一篇实用的自定义view，就是是TextView实现文字逐个显示（类似打印机打字一样，逐个显示的效果）。  按照惯例，无图无真相 1、开篇在开始讲解之前先问一下大家，看到这样的一个动画效果，脑海中首先先闪的思路是什么，如果你的UI设计师让你去实现的话，你">
 <meta name="keywords" content="android">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Allen的博客">
-<meta property="og:url" content="https://lygttpod.github.io/archives/2017/08/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android实用View系列------TextView实现打印机效果">
+<meta property="og:url" content="https://lygttpod.github.io/2017/06/11/Android实用View系列-TextView实现打印机效果/index.html">
 <meta property="og:site_name" content="Allen的博客">
-<meta property="og:description" content="在Android开发路上不断探索的菜鸟">
+<meta property="og:description" content="在审美疲劳的今天，如何能开发出一款应用让用户耳目一新呐，适当的动画特效能为你的APP加分不少，这一点在海外的APP上表现颇为明显。今天为大家带来一篇实用的自定义view，就是是TextView实现文字逐个显示（类似打印机打字一样，逐个显示的效果）。  按照惯例，无图无真相 1、开篇在开始讲解之前先问一下大家，看到这样的一个动画效果，脑海中首先先闪的思路是什么，如果你的UI设计师让你去实现的话，你">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-a7a751b456b25494.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-cd8637ab476d003b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-a85fb59fa751e268.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-070de7e0f1da2b4f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-f6ab25a6863ac5e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-cd8637ab476d003b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-1d023c2dd1fa3b33.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-08-29T08:27:31.715Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Allen的博客">
-<meta name="twitter:description" content="在Android开发路上不断探索的菜鸟">
+<meta name="twitter:title" content="Android实用View系列------TextView实现打印机效果">
+<meta name="twitter:description" content="在审美疲劳的今天，如何能开发出一款应用让用户耳目一新呐，适当的动画特效能为你的APP加分不少，这一点在海外的APP上表现颇为明显。今天为大家带来一篇实用的自定义view，就是是TextView实现文字逐个显示（类似打印机打字一样，逐个显示的效果）。  按照惯例，无图无真相 1、开篇在开始讲解之前先问一下大家，看到这样的一个动画效果，脑海中首先先闪的思路是什么，如果你的UI设计师让你去实现的话，你">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2057501-a7a751b456b25494.gif?imageMogr2/auto-orient/strip">
   
     <link rel="alternative" href="/atom.xml" title="Allen的博客" type="application/atom+xml">
   
@@ -135,98 +144,175 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Android实用View系列-TextView实现打印机效果" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/29/RxJava-Retrofit-史上最精简封装（RxHttpUtils-2-x）使用说明/" class="archive-article-date">
-  	<time datetime="2017-08-29T08:25:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/29/RxJava-Retrofit-史上最精简封装（RxHttpUtils-2-x）使用说明/">RxJava+Retrofit 史上最精简封装（RxHttpUtils 2.x）使用说明</a>
+    <h1 class="article-title" itemprop="name">
+      Android实用View系列------TextView实现打印机效果
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 工具 封装 retrofit rxjava</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/29/SuperTextView-万能android布局工具类/" class="archive-article-date">
-  	<time datetime="2017-08-29T08:19:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-29</time>
+        
+        <a href="/2017/06/11/Android实用View系列-TextView实现打印机效果/" class="archive-article-date">
+  	<time datetime="2017-06-11T08:23:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
 </a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>在审美疲劳的今天，如何能开发出一款应用让用户耳目一新呐，适当的动画特效能为你的APP加分不少，这一点在海外的APP上表现颇为明显。今天为大家带来一篇实用的自定义view，就是是TextView实现文字逐个显示（类似打印机打字一样，逐个显示的效果）。</p>
+</blockquote>
+<h5 id="按照惯例，无图无真相"><a href="#按照惯例，无图无真相" class="headerlink" title="按照惯例，无图无真相"></a>按照惯例，无图无真相</h5><p><img src="http://upload-images.jianshu.io/upload_images/2057501-a7a751b456b25494.gif?imageMogr2/auto-orient/strip" alt="FadeInTextView.gif"><br><img src="http://upload-images.jianshu.io/upload_images/2057501-cd8637ab476d003b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="绘制过程.png"></p>
+<h3 id="1、开篇"><a href="#1、开篇" class="headerlink" title="1、开篇"></a>1、开篇</h3><p>在开始讲解之前先问一下大家，看到这样的一个动画效果，脑海中首先先闪的思路是什么，如果你的UI设计师让你去实现的话，你要怎么做呐，希望读者在思考片刻之后再继续阅读，看看我们的设计思路是不是一样，如果不一样比较一下哪种实现起来更方便，哪种效率更高，欢迎评论交流。你有一个思想，我有一个思想，交换一下我们都有两个思想。</p>
+<h6 id="当你读到这里的时候说明你应该思考过上边的问题了，就问你第一想法是不是网上搜相关资料，看看有没有现成的，有的话直接拿来，没的话换个方式继续搜索。。。比如到各个开发群里询问有没有类似效果的demo之类的。。。"><a href="#当你读到这里的时候说明你应该思考过上边的问题了，就问你第一想法是不是网上搜相关资料，看看有没有现成的，有的话直接拿来，没的话换个方式继续搜索。。。比如到各个开发群里询问有没有类似效果的demo之类的。。。" class="headerlink" title="当你读到这里的时候说明你应该思考过上边的问题了，就问你第一想法是不是网上搜相关资料，看看有没有现成的，有的话直接拿来，没的话换个方式继续搜索。。。比如到各个开发群里询问有没有类似效果的demo之类的。。。"></a>当你读到这里的时候说明你应该思考过上边的问题了，就问你第一想法是不是网上搜相关资料，看看有没有现成的，有的话直接拿来，没的话换个方式继续搜索。。。比如到各个开发群里询问有没有类似效果的demo之类的。。。</h6><p><img src="http://upload-images.jianshu.io/upload_images/2057501-a85fb59fa751e268.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="城市套路深，我要回农村.jpg"></p>
+<p>哈哈，开个玩笑啦，第一时间去网上搜索不见得不好，汲取各个大神设计思路之精华嘛，不过我好想近期没这么做哦，因为被伤过，曾经也是一有问题就直接复制到网上和各个开发群询问，但大部分得到的反馈都是没人叼，记得收到回复最多的是这张图！有种被鄙视的感觉有没有。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-070de7e0f1da2b4f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="程序猿看到这张图内心是崩溃的.jpg"></p>
+<h3 id="2、实现"><a href="#2、实现" class="headerlink" title="2、实现"></a>2、实现</h3><blockquote>
+<p>扯了半天蛋，终于步入正题了。</p>
+</blockquote>
+<p>其实这样的效果实现思路还是挺多的，有的是动态生成多个TextView,每次设置一个字符控制显示隐藏，有的继承自View完全自定义，从头绘制到底。这里我的方式是继承自TextView，我们只需实现文字逐个显示的效果的逻辑就ok了，至于设置文字颜色，字体大小之类的属性我们直接使用TextView自己属性就好了，这样大大简化了我们的开发流程。</p>
+<p>实现步骤：</p>
+<p>1、重写onDraw方法，绘制文字<br>2、利用属性动画在固定时间内重绘显示的文字<br>3、封装并暴露外部调用的方法</p>
+<h4 id="2-1-、重绘文字"><a href="#2-1-、重绘文字" class="headerlink" title="2.1 、重绘文字"></a>2.1 、重绘文字</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onDraw(final Canvas canvas) &#123;</div><div class="line">    super.onDraw(canvas);</div><div class="line">    if (stringBuffer != null) &#123;</div><div class="line">        drawText(canvas, stringBuffer.toString());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>stringBuffer就是需要绘制的文字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 绘制文字   </div><div class="line"> *           </div><div class="line"> * @param canvas 画布</div><div class="line"> */</div><div class="line">private void drawText(Canvas canvas, String textString) &#123;</div><div class="line">     //设置文字绘制的区域</div><div class="line">    textRect.left = getPaddingLeft();</div><div class="line">    textRect.top = getPaddingTop();</div><div class="line">    textRect.right = getWidth() - getPaddingRight();</div><div class="line">    textRect.bottom = getHeight() - getPaddingBottom();</div><div class="line">    Paint.FontMetricsInt fontMetrics = getPaint().getFontMetricsInt();</div><div class="line">    int baseline = (textRect.bottom + textRect.top - fontMetrics.bottom - fontMetrics.top) / 2;</div><div class="line">    //文字绘制到整个布局的中心位置</div><div class="line">    canvas.drawText(textString, getPaddingLeft(), baseline, getPaint());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>看过我之前写的那几篇文章的朋友会发现我们自定义view系列的文章基本都有这个方法，可以封装一下，以后在任何需要使用的地方都可以拿来直接使用。这个方法没什么复杂的逻辑我们不过多解读了。</p>
+<h4 id="2-2、利用属性动画动态改变绘制的文字"><a href="#2-2、利用属性动画动态改变绘制的文字" class="headerlink" title="2.2、利用属性动画动态改变绘制的文字"></a>2.2、利用属性动画动态改变绘制的文字</h4><p>代码很好理解先上代码，跟着代码我们去学习实现思路<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">  * 文字逐个显示动画  通过插值的方式改变数据源</div><div class="line">  */</div><div class="line"> private void initAnimation() &#123;</div><div class="line"></div><div class="line">     //从0到textCount - 1  是设置从第一个字到最后一个字的变化因子</div><div class="line">     textAnimation = ValueAnimator.ofInt(0, textCount - 1);</div><div class="line">     //执行总时间就是每个字的时间乘以字数</div><div class="line">     textAnimation.setDuration(textCount * duration);</div><div class="line">     //匀速显示文字</div><div class="line">     textAnimation.setInterpolator(new LinearInterpolator());</div><div class="line">     textAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">         @Override</div><div class="line">         public void onAnimationUpdate(ValueAnimator valueAnimator) &#123;</div><div class="line">             int index = (int) valueAnimator.getAnimatedValue();</div><div class="line">             //过滤去重，保证每个字只重绘一次</div><div class="line">             if (currentIndex != index) &#123;</div><div class="line">                 stringBuffer.append(arr[index]);</div><div class="line"></div><div class="line">                 currentIndex = index;</div><div class="line">                 //所有文字都显示完成之后进度回调结束动画</div><div class="line">                 if (currentIndex == (textCount - 1)) &#123;</div><div class="line">                     if (textAnimationListener != null) &#123;</div><div class="line">                         textAnimationListener.animationFinish();</div><div class="line">                     &#125;</div><div class="line">                 &#125;</div><div class="line"></div><div class="line">                 invalidate();</div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">     &#125;);</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>思路是这样的：为每个文字显示的时间设置一个固定值duration，我这里默认显示300毫秒，动画执行的总时间就是总共的字数乘以每个字显示的时间（ textCount * duration），ValueAnimator.ofInt(0, textCount - 1)是为了根据这个字数的因子当做下标获取单个字符，每次追加到                    stringBuffer.append(arr[index])，代码中我做了过滤重绘的判断，保证每次只绘制一遍，提升性能，因为我们的valueAnimator.getAnimatedValue()这个变化因子会不断变化及时转成int类型，每次也是有很多重复的，所以去重这一步就显得格外重要，我们可以看一下打印日志。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-f6ab25a6863ac5e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="index每次的变化，看到这个就知道去重的重要性了.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-cd8637ab476d003b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="去重后保证每增加一个字符只绘制一次.png"></p>
+<p>看到这里其估计有人会问怎么设置要显示的字符串呐还有arr[index]十个什么鬼，不要着急，继续往下看就明白了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 设置逐渐显示的字符串</div><div class="line"> *</div><div class="line"> * @param textString</div><div class="line"> * @return</div><div class="line"> */</div><div class="line">public FadeInTextView setTextString(String textString) &#123;</div><div class="line">    if (textString != null) &#123;</div><div class="line">        //总字数</div><div class="line">        textCount = textString.length();</div><div class="line">        //存放单个字的数组</div><div class="line">        arr = new String[textCount];</div><div class="line">        for (int i = 0; i &lt; textCount; i++) &#123;</div><div class="line">            arr[i] = textString.substring(i, i + 1);</div><div class="line">        &#125;</div><div class="line">        initAnimation();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return this;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我把传入的字符串都存放到一个数组里边每次根据index去取相应的字符，好啦，到此这个功能的实现已经完成了。</p>
+<h3 id="3、对外暴露的方法"><a href="#3、对外暴露的方法" class="headerlink" title="3、对外暴露的方法"></a>3、对外暴露的方法</h3><p>设置字符的方法少不了，接下来开启动画和停止动画，然后就是动画结束的回调。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">  </div><div class="line">/**</div><div class="line"> * 开启动画</div><div class="line"> *</div><div class="line"> * @return</div><div class="line"> */</div><div class="line">public FadeInTextView startFadeInAnimation() &#123;</div><div class="line">    if (textAnimation != null) &#123;</div><div class="line">        //动画开启的时候参数都设置成初始状态</div><div class="line">        stringBuffer.setLength(0);</div><div class="line">        currentIndex = -1;</div><div class="line">        textAnimation.start();</div><div class="line">    &#125;</div><div class="line">    return this;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 停止动画</div><div class="line"> *</div><div class="line"> * @return</div><div class="line"> */</div><div class="line">public FadeInTextView stopFadeInAnimation() &#123;</div><div class="line">    if (textAnimation != null) &#123;</div><div class="line">        textAnimation.end();</div><div class="line">    &#125;</div><div class="line">    return this;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 回调接口</div><div class="line"> */</div><div class="line">public interface TextAnimationListener &#123;</div><div class="line">    void animationFinish();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="4、如何使用"><a href="#4、如何使用" class="headerlink" title="4、如何使用"></a>4、如何使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">fadeInTextView</div><div class="line">        .setTextString(&quot;自定义view实现字符串逐字显示&quot;)</div><div class="line">        .startFadeInAnimation()</div><div class="line">        .setTextAnimationListener(new FadeInTextView.TextAnimationListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void animationFinish() &#123;</div><div class="line">                </div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>至此本篇文章的介绍已经结束，接下来会继续推出相关系列的文章。小功能大智慧，功能再小还要新手敲一敲，不然。。。不然。。。看图意会吧，哈哈😆!</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-1d023c2dd1fa3b33.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="语言上的老司机，行动上的大怂逼.jpg"></p>
+<hr>
+<h1 id="github源码地址传送门"><a href="#github源码地址传送门" class="headerlink" title="github源码地址传送门"></a>github源码地址<a href="https://github.com/lygttpod/AndroidCustomView/blob/master/app/src/main/java/com/allen/androidcustomview/widget/FadeInTextView.java" target="_blank" rel="external"><strong>传送门</strong></a></h1><hr>
+<blockquote>
+<p>谨以此篇来记录自己项目中遇到的问题，献给需要类似功能的小伙伴们。如果你有好的建议欢迎评论指出，大家一起讨论、学习、进步！</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/29/SuperTextView-万能android布局工具类/">SuperTextView 万能android布局工具类</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Android 库文件 SuperTextView</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://lygttpod.github.io/2017/06/11/Android实用View系列-TextView实现打印机效果/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/06/20/Android实用View-水波动画效果多种实现方式详解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Android实用View------水波动画效果多种实现方式详解
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/06/03/Android实用view系列-炫酷的进度条/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android实用view系列------炫酷的进度条</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -249,8 +335,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

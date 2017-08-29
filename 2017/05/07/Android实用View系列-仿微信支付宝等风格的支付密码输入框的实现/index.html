@@ -6,18 +6,36 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lygttpod.github.io">
-  <title>Archives: 2017/8 | Allen的博客</title>
+  <title>Android实用View系列-----仿微信支付宝等风格的支付密码输入框的实现 | Allen的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在Android开发路上不断探索的菜鸟">
-<meta name="keywords" content="android">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Allen的博客">
-<meta property="og:url" content="https://lygttpod.github.io/archives/2017/08/index.html">
+  <meta name="description" content="开始阅读本篇文章之前先来说一下使用场景吧，我们知道如今移动支付已经占据我们日常支付的90%的份额，以微信支付和支付宝支付为主，也越来越多的APP开始添加支付模块，不管使用哪种支付有一个步骤是少不了的，那就是输入支付密码(指纹支付再此就不做讨论了哦)，所以今天来给大家带来一篇自定义支付密码输入框的设计和实现方式，同时记录自己工作中遇到的问题及解决办法。   github源码地址传送门 按照惯例我">
+<meta name="keywords" content="Android View 自定义">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android实用View系列-----仿微信支付宝等风格的支付密码输入框的实现">
+<meta property="og:url" content="https://lygttpod.github.io/2017/05/07/Android实用View系列-仿微信支付宝等风格的支付密码输入框的实现/index.html">
 <meta property="og:site_name" content="Allen的博客">
-<meta property="og:description" content="在Android开发路上不断探索的菜鸟">
+<meta property="og:description" content="开始阅读本篇文章之前先来说一下使用场景吧，我们知道如今移动支付已经占据我们日常支付的90%的份额，以微信支付和支付宝支付为主，也越来越多的APP开始添加支付模块，不管使用哪种支付有一个步骤是少不了的，那就是输入支付密码(指纹支付再此就不做讨论了哦)，所以今天来给大家带来一篇自定义支付密码输入框的设计和实现方式，同时记录自己工作中遇到的问题及解决办法。   github源码地址传送门 按照惯例我">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-3f88acf3ff12f333.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-19692affea7ac536.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-c44b427f30d67465.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-c036f62a54567431.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-ffc8650ab8bd526a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-c874ff85c2765f6d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-5c9272f1fafc688c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-2eb902a15e6f185b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-3ddeb0b87582796a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-03c297d8cb4eaaa5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-0b4ffe583ec6b1e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-34d96808da101a95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-5966bec7cb34dd21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-8b24b3524f0cd749.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-3ca764c315dcdea2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-0c1557eb6c1b9cac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:updated_time" content="2017-08-29T08:31:03.492Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Allen的博客">
-<meta name="twitter:description" content="在Android开发路上不断探索的菜鸟">
+<meta name="twitter:title" content="Android实用View系列-----仿微信支付宝等风格的支付密码输入框的实现">
+<meta name="twitter:description" content="开始阅读本篇文章之前先来说一下使用场景吧，我们知道如今移动支付已经占据我们日常支付的90%的份额，以微信支付和支付宝支付为主，也越来越多的APP开始添加支付模块，不管使用哪种支付有一个步骤是少不了的，那就是输入支付密码(指纹支付再此就不做讨论了哦)，所以今天来给大家带来一篇自定义支付密码输入框的设计和实现方式，同时记录自己工作中遇到的问题及解决办法。   github源码地址传送门 按照惯例我">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2057501-3f88acf3ff12f333.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
   
     <link rel="alternative" href="/atom.xml" title="Allen的博客" type="application/atom+xml">
   
@@ -135,98 +153,202 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Android实用View系列-仿微信支付宝等风格的支付密码输入框的实现" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/29/RxJava-Retrofit-史上最精简封装（RxHttpUtils-2-x）使用说明/" class="archive-article-date">
-  	<time datetime="2017-08-29T08:25:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/29/RxJava-Retrofit-史上最精简封装（RxHttpUtils-2-x）使用说明/">RxJava+Retrofit 史上最精简封装（RxHttpUtils 2.x）使用说明</a>
+    <h1 class="article-title" itemprop="name">
+      Android实用View系列-----仿微信支付宝等风格的支付密码输入框的实现
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/05/07/Android实用View系列-仿微信支付宝等风格的支付密码输入框的实现/" class="archive-article-date">
+  	<time datetime="2017-05-07T08:23:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p> 开始阅读本篇文章之前先来说一下使用场景吧，我们知道如今移动支付已经占据我们日常支付的90%的份额，以微信支付和支付宝支付为主，也越来越多的APP开始添加支付模块，不管使用哪种支付有一个步骤是少不了的，那就是输入支付密码(指纹支付再此就不做讨论了哦)，所以今天来给大家带来一篇自定义支付密码输入框的设计和实现方式，同时记录自己工作中遇到的问题及解决办法。</p>
+</blockquote>
+<hr>
+<h1 id="github源码地址传送门"><a href="#github源码地址传送门" class="headerlink" title="github源码地址传送门"></a>github源码地址<a href="https://github.com/lygttpod/AndroidCustomView/blob/master/app/src/main/java/com/allen/androidcustomview/widget/PayPsdInputView.java" target="_blank" rel="external"><strong>传送门</strong></a></h1><hr>
+<h5 id="按照惯例我们先看看微信和支付宝支付密码输入框的样式吧"><a href="#按照惯例我们先看看微信和支付宝支付密码输入框的样式吧" class="headerlink" title="按照惯例我们先看看微信和支付宝支付密码输入框的样式吧"></a>按照惯例我们先看看微信和支付宝支付密码输入框的样式吧</h5><p><img src="http://upload-images.jianshu.io/upload_images/2057501-3f88acf3ff12f333.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="微信支付密码"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-19692affea7ac536.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="支付宝支付密码"></p>
+<h5 id="看到这样的效果相信很多开发者第一反应就是先网上搜一下看看有没有现成的（哈哈，我也不例外哦），因为这都是简单的一些view不涉及动画所以网上相关例子还是很多的，我这边总结了一下大致可以分为一下几类"><a href="#看到这样的效果相信很多开发者第一反应就是先网上搜一下看看有没有现成的（哈哈，我也不例外哦），因为这都是简单的一些view不涉及动画所以网上相关例子还是很多的，我这边总结了一下大致可以分为一下几类" class="headerlink" title="看到这样的效果相信很多开发者第一反应就是先网上搜一下看看有没有现成的（哈哈，我也不例外哦），因为这都是简单的一些view不涉及动画所以网上相关例子还是很多的，我这边总结了一下大致可以分为一下几类"></a>看到这样的效果相信很多开发者第一反应就是先网上搜一下看看有没有现成的（哈哈，我也不例外哦），因为这都是简单的一些view不涉及动画所以网上相关例子还是很多的，我这边总结了一下大致可以分为一下几类</h5><p>1、通过布局的方式：</p>
+<blockquote>
+<p>在布局里边放置6个EditView,在每个输入框中间再放置一个view用于设置中间分割线，每个EditVIew只允许输入一个字符，然后对每个进行监听，一个密码输入完之后让另一个EditView获取焦点，以此类推就可以大致实现图中的效果了（这样确实可以实现，实现起来也很简单，但是代码量不少，而且这种方式是不是显得逼格不够高或者没有逼格呐）</p>
+</blockquote>
+<p> 2、完全自定义view（继承View）：</p>
+<blockquote>
+<p>这个就稍微复杂一点，大致流程是，先监听触摸事件，按下时弹出键盘，然后对软键盘进行监听，获取每次点击键盘对应的字符串，然后在onDraw方法里边画6个圆，在绘制外边框，然后是中间的分割线。这里边有个问题就是每次都要对软键盘进行监听取值等一系列操作，加上Android机型众多整不好哪块软键盘就出问题了呐。（虽然有逼格，但是不实用哦）<br><img src="http://upload-images.jianshu.io/upload_images/2057501-c44b427f30d67465.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="欲步又止"></p>
+</blockquote>
+<p> 3、继承自EditView实现自定义view:</p>
+<blockquote>
+<p>大致流程和上一种差不多，不过我们不需要对软键盘进行处理了,少了很多繁琐及兼容性的操作，同时又不失逼格，哈哈。</p>
+</blockquote>
+<h5 id="看到以上三种实现方式想必你大概已经知道我们要使用哪种方式实现了，没错就是集成EditView的自定义view-这样我们还可以使用很多EditView的属性哦"><a href="#看到以上三种实现方式想必你大概已经知道我们要使用哪种方式实现了，没错就是集成EditView的自定义view-这样我们还可以使用很多EditView的属性哦" class="headerlink" title="看到以上三种实现方式想必你大概已经知道我们要使用哪种方式实现了，没错就是集成EditView的自定义view,这样我们还可以使用很多EditView的属性哦"></a>看到以上三种实现方式想必你大概已经知道我们要使用哪种方式实现了，没错就是集成EditView的自定义view,这样我们还可以使用很多EditView的属性哦</h5><h1 id="开发前先整理一下实现步骤："><a href="#开发前先整理一下实现步骤：" class="headerlink" title="开发前先整理一下实现步骤："></a>开发前先整理一下实现步骤：</h1><blockquote>
+<p>1、绘制外边框（可以是直角也可以是圆角，设计师要什么我们就给他什么）<br>2、绘制密码之间的分割线（竖线）<br>3、绘制实心圆代替输入的字符<br>4、对输入字符进行监听，便于扩展处理<br>5、实现一些常用的外部接口方法调用</p>
+</blockquote>
+<h1 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h1><h5 id="1、绘制外边框："><a href="#1、绘制外边框：" class="headerlink" title="1、绘制外边框："></a>1、绘制外边框：</h5><h6 id="要想绘制边框我们首先要知道view的宽高，通过onSizeChanged方法去初始化宽高等数据，然后绘制圆角矩形（默认让他矩形显示直接传入圆角半径为0即可）"><a href="#要想绘制边框我们首先要知道view的宽高，通过onSizeChanged方法去初始化宽高等数据，然后绘制圆角矩形（默认让他矩形显示直接传入圆角半径为0即可）" class="headerlink" title="要想绘制边框我们首先要知道view的宽高，通过onSizeChanged方法去初始化宽高等数据，然后绘制圆角矩形（默认让他矩形显示直接传入圆角半径为0即可）"></a>要想绘制边框我们首先要知道view的宽高，通过onSizeChanged方法去初始化宽高等数据，然后绘制圆角矩形（默认让他矩形显示直接传入圆角半径为0即可）</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">@Override</div><div class="line">protected void onSizeChanged(int w, int h, int oldw, int oldh) &#123;</div><div class="line">    super.onSizeChanged(w, h, oldw, oldh);</div><div class="line">    height = h;</div><div class="line">    width = w;</div><div class="line"></div><div class="line">    divideLineWStartX = w / maxCount;</div><div class="line"></div><div class="line">    startX = w / maxCount / 2; //第一个圆心的x坐标</div><div class="line">    startY = h / 2; //第一个圆心的y坐标</div><div class="line"></div><div class="line">    bottomLineLength = w / (maxCount + 2);</div><div class="line"></div><div class="line">    rectF.set(0, 0, width, height);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">RectF rectF = new RectF()</div><div class="line">rectF.set(0, 0, width, height);</div><div class="line"></div><div class="line">canvas.drawRoundRect(rectF, rectAngle, rectAngle, borderPaint);</div></pre></td></tr></table></figure>
+<h5 id="2、绘制密码之间的分割线："><a href="#2、绘制密码之间的分割线：" class="headerlink" title="2、绘制密码之间的分割线："></a>2、绘制密码之间的分割线：</h5><h6 id="既然是分割线肯定是等均分的，假设我们的密码最大输入maxCount-6，那么我们只需画5个分割线就可以了，分割线坐标的计算"><a href="#既然是分割线肯定是等均分的，假设我们的密码最大输入maxCount-6，那么我们只需画5个分割线就可以了，分割线坐标的计算" class="headerlink" title="既然是分割线肯定是等均分的，假设我们的密码最大输入maxCount=6，那么我们只需画5个分割线就可以了，分割线坐标的计算"></a>既然是分割线肯定是等均分的，假设我们的密码最大输入maxCount=6，那么我们只需画5个分割线就可以了，分割线坐标的计算</h6><p><img src="http://upload-images.jianshu.io/upload_images/2057501-c036f62a54567431.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="计算分割线的起点和终点的坐标"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">通过循环画出每个分割线</div><div class="line">for (int i = 0; i &lt; maxCount - 1; i++) &#123;</div><div class="line">            canvas.drawLine((i + 1) * divideLineWStartX,</div><div class="line">                    0,</div><div class="line">                    (i + 1) * divideLineWStartX,</div><div class="line">                    height,</div><div class="line">                    divideLinePaint);</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>完成这一步我们先运行一下看看边框效果吧</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-ffc8650ab8bd526a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="模拟器上运行效果"></p>
+<h5 id="3、绘制实心圆代替输入的字符："><a href="#3、绘制实心圆代替输入的字符：" class="headerlink" title="3、绘制实心圆代替输入的字符："></a>3、绘制实心圆代替输入的字符：</h5><p>这里需要监听EditView的输入，重写onTextChanged方法获取输入字符的长度,然后计算每个圆圆心的坐标位置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">    //第一个圆心的x坐标</div><div class="line">    startX = w / maxCount / 2;</div><div class="line">    //第一个圆心的y坐标</div><div class="line">    startY = h / 2;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 画密码实心圆</div><div class="line"> *</div><div class="line"> * @param canvas</div><div class="line"> */</div><div class="line">private void drawPsdCircle(Canvas canvas) &#123;</div><div class="line">    for (int i = 0; i &lt; textLength; i++) &#123;</div><div class="line">        canvas.drawCircle(startX + i * 2 * startX,</div><div class="line">                startY,</div><div class="line">                radius,</div><div class="line">                circlePaint);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>写到这里的时候是不是感觉样式问题已经完成的差不多了，运行以来输入几个字符串一看，MD出问题了(看图说话)<br><img src="http://upload-images.jianshu.io/upload_images/2057501-c874ff85c2765f6d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>从图中可以看出是绘制了相应的实心圆，但是自带的底部线、光标、字符还在，要是拿这个去交差绝逼会被产品骂死。<br><img src="http://upload-images.jianshu.io/upload_images/2057501-5c9272f1fafc688c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="产品的内心独白"><br>出现这个问题肯定是代码的问题喽，我们根据问题去一个一个解决，首先给view设置一个透明的背景色，然后隐藏光标，再跑一下看看<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">this.setBackgroundColor(Color.TRANSPARENT);</div><div class="line">this.setCursorVisible(false);</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-2eb902a15e6f185b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>这次底部的线和光标都见了，但是输入的字符还在，这又是什么问题？？？我们明明重写了onDraw方法，怎么还会出现原来的字符呐，等等。。。对啊，我们只是重写，他肯定还有自己的方法，我们只要把EditView内部重绘的方法干掉不就行了，想到这里喜出望外，拿跟辣条先压压惊，在ondraw方法中这样做<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">    @Override</div><div class="line">    protected void onDraw(Canvas canvas) &#123;</div><div class="line">        //不删除的话会默认绘制输入的文字</div><div class="line">       // super.onDraw(canvas);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">你没看错，就是这一行代码注释掉就ok，</div><div class="line">至于是为什么你肯定知道，</div><div class="line">不注释的话在我们重写之前他已经调用了内部方法</div><div class="line">去绘制输入的字符了，</div><div class="line">我们在重写后虽然我们的方法生效了，</div><div class="line">但它的方法也生效了哦。</div></pre></td></tr></table></figure></p>
+<p>此时压抑不住内心的小激动赶紧运行起来看看（哈哈，完美解决问题）<br><img src="http://upload-images.jianshu.io/upload_images/2057501-3ddeb0b87582796a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>至此主要功能已经完成，剩下的需要去封装一些方法供外部调用，我这里已经封装几个方法，我们知道这样设置支付密码的页面一般有两个：一个设置密码，一个重新设置密码，按照正常的逻辑我们去监听这个密码输入框，输入密码之后进行比较看是否相等就完事了，为了方便以后使用不要每次自己再去写一大堆监听方法，我们直接在内部封装好是不是对以后使用起来更方便一点呐<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">  * 密码比较监听</div><div class="line">  */</div><div class="line"> public interface onPasswordListener &#123;</div><div class="line">     void onDifference();</div><div class="line">     void onEqual(String psd);</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> //使用者需要调用的方法</div><div class="line"> public void setComparePassword(String comparePassword, onPasswordListener listener) &#123;</div><div class="line">     mComparePassword = comparePassword;</div><div class="line">     mListener = listener;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>这里就直接上代码了,代码通俗易懂<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) &#123;</div><div class="line">    super.onTextChanged(text, start, lengthBefore, lengthAfter);</div><div class="line">    textLength = text.toString().length();</div><div class="line"></div><div class="line">    if (mComparePassword != null &amp;&amp; textLength == maxCount) &#123;</div><div class="line">        if (TextUtils.equals(mComparePassword, getPasswordString())) &#123;</div><div class="line">            mListener.onEqual(getPasswordString());</div><div class="line">        &#125; else &#123;</div><div class="line">            mListener.onDifference();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    invalidate();</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>实际使用中我们这样设置(是不是瞬间感觉用的过程简单了很多)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">passwordInputView.setComparePassword(&quot;123456&quot;, new PayPsdInputView.onPasswordListener() &#123;</div><div class="line">    @Override</div><div class="line">    public void onDifference() &#123;</div><div class="line">        // TODO: 2017/5/7   和上次输入的密码不一致  做相应的业务逻辑处理 </div><div class="line">        Toast.makeText(MainActivity.this,&quot;两次密码输入不同&quot;,Toast.LENGTH_SHORT).show();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onEqual(String psd) &#123;</div><div class="line">        // TODO: 2017/5/7 两次输入密码相同，那就去进行支付楼 </div><div class="line">        Toast.makeText(MainActivity.this,&quot;密码相同&quot;+psd,Toast.LENGTH_SHORT).show();</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h2 id="文章到此本应该结束了，可是我们UI设计师给出的效果图不是这样子的，不按常理出牌（心中顿时飘过一万只草泥马）"><a href="#文章到此本应该结束了，可是我们UI设计师给出的效果图不是这样子的，不按常理出牌（心中顿时飘过一万只草泥马）" class="headerlink" title="文章到此本应该结束了，可是我们UI设计师给出的效果图不是这样子的，不按常理出牌（心中顿时飘过一万只草泥马）"></a>文章到此本应该结束了，可是我们UI设计师给出的效果图不是这样子的，不按常理出牌（心中顿时飘过一万只草泥马）</h2><p><img src="http://upload-images.jianshu.io/upload_images/2057501-03c297d8cb4eaaa5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="草泥马"></p>
+<p>来看看我们的效果图<br><img src="http://upload-images.jianshu.io/upload_images/2057501-0b4ffe583ec6b1e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="Paste_Image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-34d96808da101a95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="大哥，算了算了，还是去给他实现一下吧"></p>
+<p>他不按常量出牌，不过这也是他们一贯的作风，既然他们要这样的效果那我们就去做喽，整个流程还是一样的，唯一的不同就是外边框和密码之间的分割线变成了底部间断的线，这肯定难不倒我们啦，不就是画六条线吗，每根线的起点终点坐标和上边圆心左边计算差不多，就不多描述了看代码最实在<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 画底部显示的分割线</div><div class="line"> *</div><div class="line"> * @param canvas</div><div class="line"> */</div><div class="line">private void drawBottomBorder(Canvas canvas) &#123;</div><div class="line"></div><div class="line">    for (int i = 0; i &lt; maxCount; i++) &#123;</div><div class="line">        cX = startX + i * 2 * startX;</div><div class="line">        canvas.drawLine(cX - bottomLineLength / 2,</div><div class="line">                height,</div><div class="line">                cX + bottomLineLength / 2,</div><div class="line">                height, bottomLinePaint);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>项目至此完美收工，看看效果吧<br><img src="http://upload-images.jianshu.io/upload_images/2057501-5966bec7cb34dd21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="MD你要的效果给你.png"></p>
+<h1 id="最后总结"><a href="#最后总结" class="headerlink" title="最后总结"></a>最后总结</h1><blockquote>
+<p>以上微信支付密码和我们这种现实效果我都封装在PayPsdInputView中了，可以根据需求切换不同的样式，<br><img src="http://upload-images.jianshu.io/upload_images/2057501-8b24b3524f0cd749.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="Paste_Image.png"><br>如果以后还要其他的支付密码输入的样式的话同样会添加进来的，目的只有一个———&gt;下次开发省时省力。<br><img src="http://upload-images.jianshu.io/upload_images/2057501-3ca764c315dcdea2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="两种样式供你选择"></p>
+</blockquote>
+<h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2><blockquote>
+<p>我相信看到这里肯定有一部分小伙伴会说MDZZ,这不就是简单的画矩形、画圆、画线吗，有什么好写的，谁都会做。我想说的是你们说的没错，涉及的知识点是很简单，但是不要忘了，麻雀虽小五腑俱全，真正你去一行一行敲的时候你会发现有很多不曾注意过的问题都会浮出水面。只是单纯的会几个知识点其实没什么卵用，把所学知识点运用起来重组成一个功能模块的时候你才算真正的掌握。<br><img src="http://upload-images.jianshu.io/upload_images/2057501-0c1557eb6c1b9cac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="来，老表，抽根烟，平复一下暴躁的心情"></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>谨以此篇来记录自己项目中遇到的问题，献给需要类似功能的小伙伴们。如果你有好的建议欢迎评论指出，大家一起讨论、学习、进步！</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 工具 封装 retrofit rxjava</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Android View 自定义</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://lygttpod.github.io/2017/05/07/Android实用View系列-仿微信支付宝等风格的支付密码输入框的实现/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/29/SuperTextView-万能android布局工具类/" class="archive-article-date">
-  	<time datetime="2017-08-29T08:19:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-29</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/06/03/Android实用view系列-炫酷的进度条/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Android实用view系列------炫酷的进度条
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/29/Android自定义动画酷炫的提交按钮/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android自定义动画酷炫的提交按钮</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/29/SuperTextView-万能android布局工具类/">SuperTextView 万能android布局工具类</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Android 库文件 SuperTextView</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -249,8 +371,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
