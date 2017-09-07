@@ -9,7 +9,7 @@
   <title>Allen的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="在Android开发路上不断探索的菜鸟">
-<meta name="keywords" content="android">
+<meta name="keywords" content="android,动画,网络">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Allen的博客">
 <meta property="og:url" content="https://lygttpod.github.io/page/2/index.html">
@@ -19,10 +19,8 @@
 <meta name="twitter:title" content="Allen的博客">
 <meta name="twitter:description" content="在Android开发路上不断探索的菜鸟">
   
-    <link rel="alternative" href="/atom.xml" title="Allen的博客" type="application/atom+xml">
   
-  
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/assets/img/favicon.ico">
   
   <link rel="stylesheet" type="text/css" href="/./main.266c1c.css">
   <style type="text/css">
@@ -34,6 +32,16 @@
   
 
   
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?a30844fa2bcbce0a9e001fe06cefeddf";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
 
 </head>
 
@@ -69,6 +77,8 @@
     			
             
     			
+            
+    			
     			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
     			
             
@@ -77,6 +87,8 @@
 			<div class="social">
 				
 					<a class="github" target="_blank" href="https://github.com/lygttpod" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:lygttpod@163.com" title="mail"><i class="icon-mail"></i></a>
 		        
 			</div>
 		</nav>
@@ -112,6 +124,8 @@
 				<div class="social">
 					
 						<a class="github" target="_blank" href="https://github.com/lygttpod" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:lygttpod@163.com" title="mail"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -159,50 +173,10 @@
       
         <p>一、开篇<br>距离上次写文章已经有段时间了，说实话真不知道最近在忙些什么，现在沉下心来把最近项目中遇到的问题记录下来便于以后遇到中使用吧！<br>废话不多说，先看一下效果图</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-f266b868c9bbf702.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="Paste_Image.png"></p>
-<p>###二、需求解析<br>1、先说下项目需求，不管是好评还是差评下边的Tag标签有不同的展示类型，有的字数多的会单独占一行处理（这边其实也可以扩充，比如说两三个字的可以一行显示三个Tag标签），第一眼看到这个需求准备使用网上的开源库TagLayout去实现，但是尝试了一下后发现其实他们实现的效果同项目要的效果还是有蛮大差距的，可以看到效果图里边是要求文字是居中对齐的，左右对称的。<br>2、想到使用GridView实现这个功能，定义adapter去实现没问题，问题是什么时候显示一行什么时候显示两行三行并不能确定，毕竟有时候服务端返回的没有类型标示只有tag_name和tag_id，你要根据什么设置类型呐，而且自从recyclerview之后现在要是还用GridView的话岂不是太落伍了。下边就重点介绍一下使用recyclerview实现如图效果。</p>
-<p>###三、功能实现<br>我们知道recyclerview实现GridView效果只需配置一下参数就行了</p>
-<pre><code>GridLayoutManager layoutManage = new GridLayoutManager(getContext(), 2);
-recycerView.setLayoutManager(layoutManage);
-</code></pre><p>可以看到GridLayoutManager需要传递两个参数，一个是上下文对象，另一个是一行显示几列的参数常量，既然这个常量可以指定那么是不是这个值可以去控制呐，答案当然是yes</p>
-<p>我们会注意到GridLayoutManager里边有个setSpanSizeLookup方法,本篇的重点就是这个方法（这个方法具体意义大家可以网上搜索，会有很多相关介绍，以及通过它实现一些复杂的布局，再次不做过多讨论）</p>
-<pre><code>layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                return 0;
-            }
-        });
-</code></pre><p>其实getSpanSize返回值就是控制每行有几列的，根据这个思路我们不妨试试。因为recyclerview填充数据是根据adapter实现的，我们就把给adapter的数据源同样在setSpanSizeLookup这个方法里边判断一下不就行了吗？<br>根据这个思路于是有了下面的代码</p>
-<pre><code>/**
- * 如果单个item显示的字数大于指定某个值就显示一列  默认2列
- */
-
- //设置item数据大于多少字只显示一行  默认 超过九个字的程度只显示一列
-
- private static final int MAX = 9;
-
-
-private int setSpanSize(int position, List&lt;TagBean&gt; listEntities) {
-    int count;
-    if (listEntities.get(position).getTag_name().length() &gt; MAX) {
-        count = 2;
-    } else {
-        count = 1;
-    }
-
-    return count;
-}
-
-
-layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                     @Override
-                     public int getSpanSize(int position) {
-                         return setSpanSize(position,list);
-                     }
-                 });
-</code></pre><p>核心代码就这么多，我们可以根据自己的需求随意定制样式</p>
-<p>最后奉上源码地址：<a href="https://github.com/lygttpod/AndroidCustomView" target="_blank" rel="external">https://github.com/lygttpod/AndroidCustomView</a></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2057501-a4d09d5892ca1518.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="Paste_Image.png"></p>
-
+<p>###二、需求解析<br>1、先说下项目需求，不管是好评还是差评下边的Tag标签有不同的展示类型，有的字数多的会单独占一行处理（这边其实也可以扩充，比如说两三个字的可以一行显示三个Tag标签），第一眼看到这个需求准备使用网上的开源库TagLayout去实现，但是尝试了一下后发现其实他们实现的效果同项目要的效果还是有蛮大差距的，可以看到效果图里边是要求文字是居中对齐的，左右对称的。<br>2、想到使用GridView实现这个功能，定义adapter去实现没问题，问题是什么时候显示一行什么时候显示两行三行并不能确定，毕竟有时候服务端返回的没有类型标示只有tag_name和tag_id，你要根据什么设置类型呐，而且自从recyclerview之后现在要是还用GridView的话岂不是太落伍了。下边就重点介绍一下使用recyclerview实现如图效果。<br>
+        
+          <a class="article-more-a" href="/2017/04/15/RecyclerView通过GridLayoutManager实现多样式布局/#more">more >></a>
+        
       
 
       
@@ -357,7 +331,7 @@ layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: false,
+		open_in_new: true,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
@@ -381,6 +355,8 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
     
       
+    
+      
       
       
     
@@ -391,6 +367,8 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
       
       <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
       
         
       
@@ -415,10 +393,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Android 库文件 SuperTextView</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Android View 自定义</a>
               </li>
              
@@ -428,6 +402,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Android 工具 封装 retrofit rxjava</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Android 库文件 SuperTextView</a>
               </li>
             
             <div class="clearfix"></div>

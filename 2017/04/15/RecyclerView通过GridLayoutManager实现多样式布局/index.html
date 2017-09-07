@@ -17,16 +17,14 @@
 <meta property="og:description" content="一、开篇距离上次写文章已经有段时间了，说实话真不知道最近在忙些什么，现在沉下心来把最近项目中遇到的问题记录下来便于以后遇到中使用吧！废话不多说，先看一下效果图  ###二、需求解析1、先说下项目需求，不管是好评还是差评下边的Tag标签有不同的展示类型，有的字数多的会单独占一行处理（这边其实也可以扩充，比如说两三个字的可以一行显示三个Tag标签），第一眼看到这个需求准备使用网上的开源库TagLayo">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-f266b868c9bbf702.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-a4d09d5892ca1518.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
-<meta property="og:updated_time" content="2017-08-29T08:31:46.947Z">
+<meta property="og:updated_time" content="2017-09-07T04:25:42.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RecyclerView通过GridLayoutManager实现多样式布局">
 <meta name="twitter:description" content="一、开篇距离上次写文章已经有段时间了，说实话真不知道最近在忙些什么，现在沉下心来把最近项目中遇到的问题记录下来便于以后遇到中使用吧！废话不多说，先看一下效果图  ###二、需求解析1、先说下项目需求，不管是好评还是差评下边的Tag标签有不同的展示类型，有的字数多的会单独占一行处理（这边其实也可以扩充，比如说两三个字的可以一行显示三个Tag标签），第一眼看到这个需求准备使用网上的开源库TagLayo">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2057501-f266b868c9bbf702.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
   
-    <link rel="alternative" href="/atom.xml" title="Allen的博客" type="application/atom+xml">
   
-  
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/assets/img/favicon.ico">
   
   <link rel="stylesheet" type="text/css" href="/./main.266c1c.css">
   <style type="text/css">
@@ -38,6 +36,16 @@
   
 
   
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?a30844fa2bcbce0a9e001fe06cefeddf";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
 
 </head>
 
@@ -73,6 +81,8 @@
     			
             
     			
+            
+    			
     			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
     			
             
@@ -81,6 +91,8 @@
 			<div class="social">
 				
 					<a class="github" target="_blank" href="https://github.com/lygttpod" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:lygttpod@163.com" title="mail"><i class="icon-mail"></i></a>
 		        
 			</div>
 		</nav>
@@ -116,6 +128,8 @@
 				<div class="social">
 					
 						<a class="github" target="_blank" href="https://github.com/lygttpod" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:lygttpod@163.com" title="mail"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -161,7 +175,7 @@
       
         <p>一、开篇<br>距离上次写文章已经有段时间了，说实话真不知道最近在忙些什么，现在沉下心来把最近项目中遇到的问题记录下来便于以后遇到中使用吧！<br>废话不多说，先看一下效果图</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-f266b868c9bbf702.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="Paste_Image.png"></p>
-<p>###二、需求解析<br>1、先说下项目需求，不管是好评还是差评下边的Tag标签有不同的展示类型，有的字数多的会单独占一行处理（这边其实也可以扩充，比如说两三个字的可以一行显示三个Tag标签），第一眼看到这个需求准备使用网上的开源库TagLayout去实现，但是尝试了一下后发现其实他们实现的效果同项目要的效果还是有蛮大差距的，可以看到效果图里边是要求文字是居中对齐的，左右对称的。<br>2、想到使用GridView实现这个功能，定义adapter去实现没问题，问题是什么时候显示一行什么时候显示两行三行并不能确定，毕竟有时候服务端返回的没有类型标示只有tag_name和tag_id，你要根据什么设置类型呐，而且自从recyclerview之后现在要是还用GridView的话岂不是太落伍了。下边就重点介绍一下使用recyclerview实现如图效果。</p>
+<p>###二、需求解析<br>1、先说下项目需求，不管是好评还是差评下边的Tag标签有不同的展示类型，有的字数多的会单独占一行处理（这边其实也可以扩充，比如说两三个字的可以一行显示三个Tag标签），第一眼看到这个需求准备使用网上的开源库TagLayout去实现，但是尝试了一下后发现其实他们实现的效果同项目要的效果还是有蛮大差距的，可以看到效果图里边是要求文字是居中对齐的，左右对称的。<br>2、想到使用GridView实现这个功能，定义adapter去实现没问题，问题是什么时候显示一行什么时候显示两行三行并不能确定，毕竟有时候服务端返回的没有类型标示只有tag_name和tag_id，你要根据什么设置类型呐，而且自从recyclerview之后现在要是还用GridView的话岂不是太落伍了。下边就重点介绍一下使用recyclerview实现如图效果。<br><a id="more"></a></p>
 <p>###三、功能实现<br>我们知道recyclerview实现GridView效果只需配置一下参数就行了</p>
 <pre><code>GridLayoutManager layoutManage = new GridLayoutManager(getContext(), 2);
 recycerView.setLayoutManager(layoutManage);
@@ -356,7 +370,7 @@ layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: false,
+		open_in_new: true,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
@@ -380,6 +394,8 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
     
       
+    
+      
       
       
     
@@ -390,6 +406,8 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
       
       <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
       
         
       
@@ -414,10 +432,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Android 库文件 SuperTextView</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Android View 自定义</a>
               </li>
              
@@ -427,6 +441,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Android 工具 封装 retrofit rxjava</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Android 库文件 SuperTextView</a>
               </li>
             
             <div class="clearfix"></div>

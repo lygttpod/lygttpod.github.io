@@ -9,7 +9,7 @@
   <title>Android实用View------水波动画效果多种实现方式详解 | Allen的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="这次给大家带来的是一篇关于自定义View实现水波动画效果的文章，其实在去年项目中使用过类似的动画，当时就自定义View也实现了预期的效果，最近项目中又使用了相似的效果，于是对代码重新整理了一下并且记录下来，便于以后有类似需求可以当作参考！ 按照惯例，无图无真相   实现方式：1、正余弦函数实现2、贝塞尔曲线实现  开篇看到上边的两种实现方式是不是感觉都和数学公式有关呐，这对于毕业多年之后的我们来说">
-<meta name="keywords" content="android">
+<meta name="keywords" content="android,动画,网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android实用View------水波动画效果多种实现方式详解">
 <meta property="og:url" content="https://lygttpod.github.io/2017/06/20/Android实用View-水波动画效果多种实现方式详解/index.html">
@@ -28,16 +28,14 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-e00cc93880b06942.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/360">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-9066d77672dae515.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-43358432099e1e71.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2017-08-29T08:26:54.915Z">
+<meta property="og:updated_time" content="2017-09-07T04:22:40.739Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android实用View------水波动画效果多种实现方式详解">
 <meta name="twitter:description" content="这次给大家带来的是一篇关于自定义View实现水波动画效果的文章，其实在去年项目中使用过类似的动画，当时就自定义View也实现了预期的效果，最近项目中又使用了相似的效果，于是对代码重新整理了一下并且记录下来，便于以后有类似需求可以当作参考！ 按照惯例，无图无真相   实现方式：1、正余弦函数实现2、贝塞尔曲线实现  开篇看到上边的两种实现方式是不是感觉都和数学公式有关呐，这对于毕业多年之后的我们来说">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2057501-54627974b2ad1172.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/280">
   
-    <link rel="alternative" href="/atom.xml" title="Allen的博客" type="application/atom+xml">
   
-  
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/assets/img/favicon.ico">
   
   <link rel="stylesheet" type="text/css" href="/./main.266c1c.css">
   <style type="text/css">
@@ -49,6 +47,16 @@
   
 
   
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?a30844fa2bcbce0a9e001fe06cefeddf";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
 
 </head>
 
@@ -84,6 +92,8 @@
     			
             
     			
+            
+    			
     			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
     			
             
@@ -92,6 +102,8 @@
 			<div class="social">
 				
 					<a class="github" target="_blank" href="https://github.com/lygttpod" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:lygttpod@163.com" title="mail"><i class="icon-mail"></i></a>
 		        
 			</div>
 		</nav>
@@ -127,6 +139,8 @@
 				<div class="social">
 					
 						<a class="github" target="_blank" href="https://github.com/lygttpod" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:lygttpod@163.com" title="mail"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -176,26 +190,26 @@
 <p>实现方式：<br>1、正余弦函数实现<br>2、贝塞尔曲线实现</p>
 </blockquote>
 <h3 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h3><p>看到上边的两种实现方式是不是感觉都和数学公式有关呐，这对于毕业多年之后的我们来说如果当初数学基础不是很好现在估计也全部还给老师了吧，所以一提到相关的数学计算公式只能用一个表情表达了。。。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2057501-446557da3b08f646.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这TM都是什么.jpg"></p>
-<h3 id="1、正余弦函数实现"><a href="#1、正余弦函数实现" class="headerlink" title="1、正余弦函数实现"></a>1、正余弦函数实现</h3><p>正余弦的函数不知道大家还记不记得，我们温习一下相关参数的意义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">y=A*sin(ωx+φ)+k</div><div class="line"> A—振幅越大，波形在y轴上最大与最小值的差值越大</div><div class="line"> ω—角速度， 控制正弦周期(单位角度内震动的次数)</div><div class="line"> φ—初相，反映在坐标系上则为图像的左右移动。这里通过不断改变φ,达到波浪移动效果</div><div class="line"> k—偏距，反映在坐标系上则为图像的上移或下移。</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-446557da3b08f646.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这TM都是什么.jpg"><br><a id="more"></a></p>
+<h3 id="1、正余弦函数实现"><a href="#1、正余弦函数实现" class="headerlink" title="1、正余弦函数实现"></a>1、正余弦函数实现</h3><p>正余弦的函数不知道大家还记不记得，我们温习一下相关参数的意义<br><figure class="highlight dns"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">y=<span class="keyword">A</span>*sin(ωx+φ)+k</div><div class="line"> <span class="keyword">A</span>—振幅越大，波形在y轴上最大与最小值的差值越大</div><div class="line"> ω—角速度， 控制正弦周期(单位角度内震动的次数)</div><div class="line"> φ—初相，反映在坐标系上则为图像的左右移动。这里通过不断改变φ,达到波浪移动效果</div><div class="line"> k—偏距，反映在坐标系上则为图像的上移或下移。</div></pre></td></tr></table></figure></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-bf78d0285b32cc65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="正余弦函数图.png"></p>
 <p>我们要实现移动的波形首先是先画出静态的波形，那么怎么来绘制一个波形图呐，Math函数里已经提供了相应的方法，我们可以直接使用</p>
 <blockquote>
 <p> A<em> Math.sin(ω </em> x + φ ) + K)<br>开始绘制之前首先定义相关画笔之类的参数，在此就不做过多说明了，根据上边的公式我们知道需要哪些参数，首先是A，这是振幅，就是波形最高和最低点的差值，我们可以设置定值或者外界传入；其次是ω，角速度，给一个定制或者外界传入；φ，相位，我们就是根据不断改变相位来达到波形移动的效果，每次移动多少可以从外界传入，便于控制速度；K，波形偏移上下的距离，知道了以上各个参数的具体使用意义，下边就可以直接通过代码看下具体实现效果了，毕竟公式都有了，参数也发给你了，剩下的就是根据公式填写以下相应参数就ok了</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">private void drawSin(Canvas canvas) &#123;</div><div class="line"></div><div class="line">      φ -= 0.03;</div><div class="line">      float y;</div><div class="line"></div><div class="line">      path.reset();</div><div class="line">      path.moveTo(0, getHeight());</div><div class="line"></div><div class="line">      for (float x = 0; x &lt;= getWidth(); x += 20) &#123;</div><div class="line">          y = (float) (A * Math.sin(ω * x + φ ) + K);</div><div class="line">          path.lineTo(x, getHeight() - y);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      canvas.drawPath(path, paint);</div><div class="line"></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">private void drawSin(Canvas canvas) &#123;</div><div class="line"></div><div class="line">      φ -= <span class="number">0</span>.<span class="number">03</span><span class="comment">;</span></div><div class="line">      float y<span class="comment">;</span></div><div class="line"></div><div class="line">      path.reset()<span class="comment">;</span></div><div class="line">      path.<span class="keyword">moveTo(0, </span>getHeight())<span class="comment">;</span></div><div class="line"></div><div class="line">      for (float x = <span class="number">0</span><span class="comment">; x &lt;= getWidth(); x += 20) &#123;</span></div><div class="line">          y = (float) (A * Math.sin(ω * x + φ ) + K)<span class="comment">;</span></div><div class="line">          path.lineTo(x, getHeight() - y)<span class="comment">;</span></div><div class="line">      &#125;</div><div class="line"></div><div class="line">      canvas.drawPath(path, paint)<span class="comment">;</span></div><div class="line"></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-cfa3fc462d692d21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="静态的波形图.png"></p>
-<p>静态的波形出来之后我们就要借助属性动画来让波形动起来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">private void initAnimation() &#123;</div><div class="line">    valueAnimator = ValueAnimator.ofInt(0, getWidth());</div><div class="line">    valueAnimator.setDuration(1000);</div><div class="line">    valueAnimator.setRepeatCount(ValueAnimator.INFINITE);</div><div class="line">    valueAnimator.setInterpolator(new LinearInterpolator());</div><div class="line">    valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">        @Override</div><div class="line">        public void onAnimationUpdate(ValueAnimator animation) &#123;</div><div class="line">            /**</div><div class="line">             * 刷新页面调取onDraw方法，通过变更φ 达到移动效果</div><div class="line">             */</div><div class="line">            invalidate();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">    if (waveStart) &#123;</div><div class="line">        valueAnimator.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>静态的波形出来之后我们就要借助属性动画来让波形动起来<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">initAnimation</span><span class="params">()</span> </span>&#123;</div><div class="line">    valueAnimator = ValueAnimator.ofInt(<span class="number">0</span>, getWidth());</div><div class="line">    valueAnimator.setDuration(<span class="number">1000</span>);</div><div class="line">    valueAnimator.setRepeatCount(ValueAnimator.INFINITE);</div><div class="line">    valueAnimator.setInterpolator(<span class="keyword">new</span> LinearInterpolator());</div><div class="line">    valueAnimator.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator animation)</span> </span>&#123;</div><div class="line">            <span class="comment">/**</span></div><div class="line"><span class="comment">             * 刷新页面调取onDraw方法，通过变更φ 达到移动效果</span></div><div class="line"><span class="comment">             */</span></div><div class="line">            invalidate();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">    <span class="keyword">if</span> (waveStart) &#123;</div><div class="line">        valueAnimator.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>开启动画之后再运行一下看看效果吧</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-3f16ab58ff1e0b9a.gif?imageMogr2/auto-orient/strip" alt="gif录制不流畅，真机效果很好哦.gif"></p>
-<p>看到这里只是一个单纯的波形，我们一般使用的时候并不是这样的，而是一个封闭的波形，可以向上封闭也可以向下封闭，我们在波形绘制完成之后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.........省略部分代码</div><div class="line">//填充矩形</div><div class="line">        path.lineTo(getWidth(), getHeight());</div><div class="line">        path.lineTo(0, getHeight());</div><div class="line">        path.close();</div></pre></td></tr></table></figure></p>
+<p>看到这里只是一个单纯的波形，我们一般使用的时候并不是这样的，而是一个封闭的波形，可以向上封闭也可以向下封闭，我们在波形绘制完成之后<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.........省略部分代码</div><div class="line"><span class="comment">//填充矩形</span></div><div class="line">        path.lineTo(getWidth(), getHeight());</div><div class="line">        path.lineTo(<span class="number">0</span>, getHeight());</div><div class="line">        path.close();</div></pre></td></tr></table></figure></p>
 <p>这样就绘制出封闭的波形了，然后画笔设成填充就ok</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-52af38ccc5393c93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p>代码中我已经对向下密封还是向上密封封装了方法，在此就不再赘述，需要的可以看源码哦，除此之外还有其他的参数都进行了可配置话，可以通过xml进行设置，至此通过正余弦函数进行绘制波形图已经介绍完毕了。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-2f453c720bb88907.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h3 id="2、贝塞尔曲线实现"><a href="#2、贝塞尔曲线实现" class="headerlink" title="2、贝塞尔曲线实现"></a>2、贝塞尔曲线实现</h3><p>对贝塞尔曲线不是很了解的可以自行百度，概念性的东东就不在此赘述，我们使用二阶的贝塞尔进行绘制，为什么选择二阶的呐，看一个图就知道啦</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-77ed94910b7752c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/360" alt="二阶贝塞尔曲线.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2057501-99d98724e5070d0c.gif?imageMogr2/auto-orient/strip" alt="二阶贝塞尔曲线.gif"><br> 一段完整的波形其实就是两个二阶的贝塞尔组成的，来看下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * sin函数图像的波形</div><div class="line"> *</div><div class="line"> * @param canvas</div><div class="line"> */</div><div class="line">private void drawSinPath(Canvas canvas) &#123;</div><div class="line">    mWavePath.reset();</div><div class="line"></div><div class="line">    mWavePath.moveTo(-mWaveLength + mOffset, mWaveAmplitude);</div><div class="line"></div><div class="line">     //相信很多人会疑惑为什么控制点的纵坐标是以下值,</div><div class="line">     //是根据公式计算出来的,具体计算方法情况文章内容</div><div class="line"></div><div class="line">    for (int i = 0; i &lt; mWaveCount; i++) &#123;</div><div class="line"></div><div class="line">        //第一个控制点的坐标为(-mWaveLength * 3 / 4,-mWaveAmplitude)</div><div class="line">        mWavePath.quadTo(-mWaveLength * 3 / 4 + mOffset + i * mWaveLength,</div><div class="line">                -mWaveAmplitude,</div><div class="line">                -mWaveLength / 2 + mOffset + i * mWaveLength,</div><div class="line">                mWaveAmplitude);</div><div class="line"></div><div class="line">        //第二个控制点的坐标为(-mWaveLength / 4,3 * mWaveAmplitude)</div><div class="line">        mWavePath.quadTo(-mWaveLength / 4 + mOffset + i * mWaveLength,</div><div class="line">                3 * mWaveAmplitude,</div><div class="line">                mOffset + i * mWaveLength,</div><div class="line">                mWaveAmplitude);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    mWavePath.lineTo(getWidth(), getHeight());</div><div class="line">    mWavePath.lineTo(0, getHeight());</div><div class="line">    mWavePath.close();</div><div class="line"></div><div class="line">    canvas.drawPath(mWavePath, mWavePaint);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-99d98724e5070d0c.gif?imageMogr2/auto-orient/strip" alt="二阶贝塞尔曲线.gif"><br> 一段完整的波形其实就是两个二阶的贝塞尔组成的，来看下代码<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * sin函数图像的波形</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * @param canvas</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="selector-tag">private</span> <span class="selector-tag">void</span> <span class="selector-tag">drawSinPath</span>(Canvas canvas) &#123;</div><div class="line">    <span class="selector-tag">mWavePath</span><span class="selector-class">.reset</span>();</div><div class="line"></div><div class="line">    <span class="selector-tag">mWavePath</span><span class="selector-class">.moveTo</span>(-mWaveLength + mOffset, mWaveAmplitude);</div><div class="line"></div><div class="line">     <span class="comment">//相信很多人会疑惑为什么控制点的纵坐标是以下值,</span></div><div class="line">     <span class="comment">//是根据公式计算出来的,具体计算方法情况文章内容</span></div><div class="line"></div><div class="line">    <span class="selector-tag">for</span> (int i = <span class="number">0</span>; i &lt; mWaveCount; i++) &#123;</div><div class="line"></div><div class="line">        <span class="comment">//第一个控制点的坐标为(-mWaveLength * 3 / 4,-mWaveAmplitude)</span></div><div class="line">        <span class="selector-tag">mWavePath</span><span class="selector-class">.quadTo</span>(-mWaveLength * <span class="number">3</span> / <span class="number">4</span> + mOffset + i * mWaveLength,</div><div class="line">                -mWaveAmplitude,</div><div class="line">                -mWaveLength / <span class="number">2</span> + mOffset + i * mWaveLength,</div><div class="line">                mWaveAmplitude);</div><div class="line"></div><div class="line">        <span class="comment">//第二个控制点的坐标为(-mWaveLength / 4,3 * mWaveAmplitude)</span></div><div class="line">        <span class="selector-tag">mWavePath</span><span class="selector-class">.quadTo</span>(-mWaveLength / <span class="number">4</span> + mOffset + i * mWaveLength,</div><div class="line">                <span class="number">3</span> * mWaveAmplitude,</div><div class="line">                mOffset + i * mWaveLength,</div><div class="line">                mWaveAmplitude);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="selector-tag">mWavePath</span><span class="selector-class">.lineTo</span>(getWidth(), getHeight());</div><div class="line">    <span class="selector-tag">mWavePath</span><span class="selector-class">.lineTo</span>(<span class="number">0</span>, getHeight());</div><div class="line">    <span class="selector-tag">mWavePath</span><span class="selector-class">.close</span>();</div><div class="line"></div><div class="line">    <span class="selector-tag">canvas</span><span class="selector-class">.drawPath</span>(mWavePath, mWavePaint);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-32a8fc8204cd227d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/360" alt="当时的手绘内容，可能有点乱，只是大致描述一下.png"></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-e00cc93880b06942.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/360" alt="计算控制点纵坐标的方式.png"></p>
 <blockquote>
@@ -351,7 +365,7 @@
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: false,
+		open_in_new: true,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
@@ -375,6 +389,8 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
     
       
+    
+      
       
       
     
@@ -385,6 +401,8 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
       
       <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
       
         
       
@@ -409,10 +427,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Android 库文件 SuperTextView</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Android View 自定义</a>
               </li>
              
@@ -422,6 +436,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Android 工具 封装 retrofit rxjava</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Android 库文件 SuperTextView</a>
               </li>
             
             <div class="clearfix"></div>
