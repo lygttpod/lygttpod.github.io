@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -74,20 +74,18 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Allen的博客" type="application/atom+xml" />
-
 
 
 
 
 
 <meta name="description" content="不知不觉距离上次写文章已经过去大半个月了，原本计划每周写一篇的想法在坚持几周之后最终还是被生活中各种各样的琐事打乱，无奈中夹杂这对自己的一点失望。当初的愿望实现了吗事到如今只好祭奠吗任岁月风干理想再也找不回真的我抬头仰望着满天星河那时候陪伴我的那颗这里的故事你是否还记得  今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。 按照惯例先上效果图，俗话说无图无有真">
-<meta name="keywords" content="android,动画,网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android实用view系列------炫酷的进度条">
-<meta property="og:url" content="https://lygttpod.github.io/2017/06/03/Android实用view系列-炫酷的进度条/index.html">
-<meta property="og:site_name" content="Allen的博客">
+<meta property="og:url" content="https://github.com/lygttpod/2017/06/03/Android实用view系列-炫酷的进度条/index.html">
+<meta property="og:site_name" content="Allen&#39;s World">
 <meta property="og:description" content="不知不觉距离上次写文章已经过去大半个月了，原本计划每周写一篇的想法在坚持几周之后最终还是被生活中各种各样的琐事打乱，无奈中夹杂这对自己的一点失望。当初的愿望实现了吗事到如今只好祭奠吗任岁月风干理想再也找不回真的我抬头仰望着满天星河那时候陪伴我的那颗这里的故事你是否还记得  今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。 按照惯例先上效果图，俗话说无图无有真">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-2f7d716b6474a6e7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/200">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-6a56cf5ae61b543f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-2fef3dc9943f5f99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
@@ -114,7 +112,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     version: '5.1.3',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -122,7 +120,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -136,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://lygttpod.github.io/2017/06/03/Android实用view系列-炫酷的进度条/"/>
+  <link rel="canonical" href="https://github.com/lygttpod/2017/06/03/Android实用view系列-炫酷的进度条/"/>
 
 
 
 
 
-  <title>Android实用view系列------炫酷的进度条 | Allen的博客</title>
+  <title>Android实用view系列------炫酷的进度条 | Allen's World</title>
   
 
 
@@ -154,7 +152,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -172,12 +170,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Allen的博客</span>
+        <span class="site-title">Allen's World</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">分享是一种美德</p>
+        <p class="site-subtitle"></p>
       
   </div>
 
@@ -202,7 +200,27 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
           </a>
         </li>
       
@@ -212,7 +230,17 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -249,16 +277,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lygttpod.github.io/2017/06/03/Android实用view系列-炫酷的进度条/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/lygttpod/2017/06/03/Android实用view系列-炫酷的进度条/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="http://osnoex6vf.bkt.clouddn.com/Allen_Header_Icon.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Allen的博客">
+      <meta itemprop="name" content="Allen's World">
     </span>
 
     
@@ -276,9 +304,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-03T16:23:36+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-03T16:23:36+08:00">
                 2017-06-03
               </time>
             
@@ -330,8 +358,8 @@
 <p>如果真是一个简简单单的进度条的话确实没什么好讲的，仔细观察效果图后你会发现其实还是有点内容的，麻雀虽小五脏俱全。</p>
 <p>这里边有几个点需要说明一下：<br>①、进度条有动画效果<br>②、进度条上边有个百分比的样式的绘制<br>③、百分比tip框跟随进度条移动需要注意的事项</p>
 </blockquote>
-<h4 id="1、带动画的进度条效果"><a href="#1、带动画的进度条效果" class="headerlink" title="1、带动画的进度条效果"></a>1、带动画的进度条效果</h4><p>因为我们是自定义view，看到的所有元素都是在onDraw里边绘制出来的，分析进度条效果我们可以分解出几个步骤，先绘制底层百分百进度条（也就是背景色），再绘制真实的进度。<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onDraw(canvas);</div><div class="line"></div><div class="line">    <span class="comment">//  tipHeight + progressMarginTop其实是把进度条绘制到百分比tip框的下边</span></div><div class="line">    <span class="comment">//  这里只是给出大概的计算，如有需求可以精确计算高度</span></div><div class="line">    <span class="comment">//绘制背景</span></div><div class="line">    canvas.drawLine(getPaddingLeft(),</div><div class="line">            tipHeight + progressMarginTop,</div><div class="line">            getWidth(),</div><div class="line">            tipHeight + progressMarginTop,</div><div class="line">            bgPaint);</div><div class="line">    <span class="comment">//绘制真实进度</span></div><div class="line">    canvas.drawLine(getPaddingLeft(),</div><div class="line">            tipHeight + progressMarginTop,</div><div class="line">            currentProgress,</div><div class="line">            tipHeight + progressMarginTop,</div><div class="line">            progressPaint);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>进度条画完之后就是让它动起来，我们使用属性动画试试改变当前进度的值重新绘制就可以了，动画效果我们继续使用ValueAnimator<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">   * 进度移动动画  通过插值的方式改变移动的距离</span></div><div class="line"><span class="comment">   */</span></div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initAnimation</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      progressAnimator = ValueAnimator.ofFloat(<span class="number">0</span>, mProgress);</div><div class="line">      progressAnimator.setDuration(duration);</div><div class="line">      progressAnimator.setStartDelay(startDelay);</div><div class="line">      progressAnimator.setInterpolator(<span class="keyword">new</span> LinearInterpolator());</div><div class="line">      progressAnimator.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">          @Override</div><div class="line">          <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span>(<span class="params">ValueAnimator valueAnimator</span>) </span>&#123;</div><div class="line">              <span class="keyword">float</span> <span class="keyword">value</span> = (<span class="keyword">float</span>) valueAnimator.getAnimatedValue();</div><div class="line">              <span class="comment">//这是我们自己的需求进度只显示整数</span></div><div class="line">              textString = formatNum(format2Int(<span class="keyword">value</span>));</div><div class="line">              <span class="comment">//百分比的进度转换成view宽度一样的比例</span></div><div class="line">              currentProgress = <span class="keyword">value</span> * mWidth / <span class="number">100</span>;</div><div class="line">              <span class="comment">//进度回调方法</span></div><div class="line">              <span class="keyword">if</span> (progressListener != <span class="literal">null</span>) &#123;</div><div class="line">                  progressListener.currentProgressListener(<span class="keyword">value</span>);</div><div class="line">              &#125;               </div><div class="line">              invalidate();</div><div class="line">          &#125;</div><div class="line">      &#125;);</div><div class="line">      progressAnimator.start();</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<h4 id="1、带动画的进度条效果"><a href="#1、带动画的进度条效果" class="headerlink" title="1、带动画的进度条效果"></a>1、带动画的进度条效果</h4><p>因为我们是自定义view，看到的所有元素都是在onDraw里边绘制出来的，分析进度条效果我们可以分解出几个步骤，先绘制底层百分百进度条（也就是背景色），再绘制真实的进度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onDraw(Canvas canvas) &#123;</div><div class="line">    super.onDraw(canvas);</div><div class="line"></div><div class="line">    //  tipHeight + progressMarginTop其实是把进度条绘制到百分比tip框的下边</div><div class="line">    //  这里只是给出大概的计算，如有需求可以精确计算高度</div><div class="line">    //绘制背景</div><div class="line">    canvas.drawLine(getPaddingLeft(),</div><div class="line">            tipHeight + progressMarginTop,</div><div class="line">            getWidth(),</div><div class="line">            tipHeight + progressMarginTop,</div><div class="line">            bgPaint);</div><div class="line">    //绘制真实进度</div><div class="line">    canvas.drawLine(getPaddingLeft(),</div><div class="line">            tipHeight + progressMarginTop,</div><div class="line">            currentProgress,</div><div class="line">            tipHeight + progressMarginTop,</div><div class="line">            progressPaint);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>进度条画完之后就是让它动起来，我们使用属性动画试试改变当前进度的值重新绘制就可以了，动画效果我们继续使用ValueAnimator<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">   * 进度移动动画  通过插值的方式改变移动的距离</div><div class="line">   */</div><div class="line">  private void initAnimation() &#123;</div><div class="line">      progressAnimator = ValueAnimator.ofFloat(0, mProgress);</div><div class="line">      progressAnimator.setDuration(duration);</div><div class="line">      progressAnimator.setStartDelay(startDelay);</div><div class="line">      progressAnimator.setInterpolator(new LinearInterpolator());</div><div class="line">      progressAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">          @Override</div><div class="line">          public void onAnimationUpdate(ValueAnimator valueAnimator) &#123;</div><div class="line">              float value = (float) valueAnimator.getAnimatedValue();</div><div class="line">              //这是我们自己的需求进度只显示整数</div><div class="line">              textString = formatNum(format2Int(value));</div><div class="line">              //百分比的进度转换成view宽度一样的比例</div><div class="line">              currentProgress = value * mWidth / 100;</div><div class="line">              //进度回调方法</div><div class="line">              if (progressListener != null) &#123;</div><div class="line">                  progressListener.currentProgressListener(value);</div><div class="line">              &#125;               </div><div class="line">              invalidate();</div><div class="line">          &#125;</div><div class="line">      &#125;);</div><div class="line">      progressAnimator.start();</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
 <p>到此带动画的进度条就实现了，一起看一下效果吧</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-cac05310af11b961.gif?imageMogr2/auto-orient/strip" alt="progress1.gif"></p>
 <h4 id="2、绘制上边的百分比布局"><a href="#2、绘制上边的百分比布局" class="headerlink" title="2、绘制上边的百分比布局"></a>2、绘制上边的百分比布局</h4><p><img src="http://upload-images.jianshu.io/upload_images/2057501-928e96a9e021f9eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
@@ -343,18 +371,18 @@
 <blockquote>
 <p>在苦思的时候突然又看了一眼设计图发现这个矩形是带圆角的，我这样绘制闭合的线是达不到圆角效果的，等等，圆角？圆角不是可以通过绘制圆角矩形画出来么，我擦，貌似这是一个不错的思路，赶紧去验证。<br><img src="http://upload-images.jianshu.io/upload_images/2057501-7bf4c15bbd18b17b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="圆角矩形+三角形.png"></p>
 </blockquote>
-<p>果不其然，堪称完美，先绘制一个圆角矩形，在其下边绘制一个三角形，至于里边的进度数值直接drawText就行了<br><img src="http://upload-images.jianshu.io/upload_images/2057501-7dd12b21adaa8f94.gif?imageMogr2/auto-orient/strip" alt="嘚瑟.gif"><br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 绘制进度上边提示百分比的view</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * @param canvas</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="selector-tag">private</span> <span class="selector-tag">void</span> <span class="selector-tag">drawTipView</span>(Canvas canvas) &#123;</div><div class="line">    <span class="selector-tag">drawRoundRect</span>(canvas);</div><div class="line">    <span class="selector-tag">drawTriangle</span>(canvas);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 绘制圆角矩形</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * @param canvas</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="selector-tag">private</span> <span class="selector-tag">void</span> <span class="selector-tag">drawRoundRect</span>(Canvas canvas) &#123;</div><div class="line">    <span class="selector-tag">rectF</span><span class="selector-class">.set</span>(moveDis, <span class="number">0</span>, tipWidth + moveDis, tipHeight);</div><div class="line">    <span class="selector-tag">canvas</span><span class="selector-class">.drawRoundRect</span>(rectF, roundRectRadius, roundRectRadius, tipPaint);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 绘制三角形</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * @param canvas</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="selector-tag">private</span> <span class="selector-tag">void</span> <span class="selector-tag">drawTriangle</span>(Canvas canvas) &#123;</div><div class="line">    <span class="selector-tag">path</span><span class="selector-class">.moveTo</span>(tipWidth / <span class="number">2</span> - triangleHeight + moveDis, tipHeight);</div><div class="line">    <span class="selector-tag">path</span><span class="selector-class">.lineTo</span>(tipWidth / <span class="number">2</span> + moveDis, tipHeight + triangleHeight);</div><div class="line">    <span class="selector-tag">path</span><span class="selector-class">.lineTo</span>(tipWidth / <span class="number">2</span> + triangleHeight + moveDis, tipHeight);</div><div class="line">    <span class="selector-tag">canvas</span><span class="selector-class">.drawPath</span>(path, tipPaint);</div><div class="line">    <span class="selector-tag">path</span><span class="selector-class">.reset</span>();</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>果不其然，堪称完美，先绘制一个圆角矩形，在其下边绘制一个三角形，至于里边的进度数值直接drawText就行了<br><img src="http://upload-images.jianshu.io/upload_images/2057501-7dd12b21adaa8f94.gif?imageMogr2/auto-orient/strip" alt="嘚瑟.gif"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 绘制进度上边提示百分比的view</div><div class="line"> *</div><div class="line"> * @param canvas</div><div class="line"> */</div><div class="line">private void drawTipView(Canvas canvas) &#123;</div><div class="line">    drawRoundRect(canvas);</div><div class="line">    drawTriangle(canvas);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">/**</div><div class="line"> * 绘制圆角矩形</div><div class="line"> *</div><div class="line"> * @param canvas</div><div class="line"> */</div><div class="line">private void drawRoundRect(Canvas canvas) &#123;</div><div class="line">    rectF.set(moveDis, 0, tipWidth + moveDis, tipHeight);</div><div class="line">    canvas.drawRoundRect(rectF, roundRectRadius, roundRectRadius, tipPaint);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 绘制三角形</div><div class="line"> *</div><div class="line"> * @param canvas</div><div class="line"> */</div><div class="line">private void drawTriangle(Canvas canvas) &#123;</div><div class="line">    path.moveTo(tipWidth / 2 - triangleHeight + moveDis, tipHeight);</div><div class="line">    path.lineTo(tipWidth / 2 + moveDis, tipHeight + triangleHeight);</div><div class="line">    path.lineTo(tipWidth / 2 + triangleHeight + moveDis, tipHeight);</div><div class="line">    canvas.drawPath(path, tipPaint);</div><div class="line">    path.reset();</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h4 id="3、计算百分比Tip框的起始位置及移动分析"><a href="#3、计算百分比Tip框的起始位置及移动分析" class="headerlink" title="3、计算百分比Tip框的起始位置及移动分析"></a>3、计算百分比Tip框的起始位置及移动分析</h4><p>样式绘制出来接下来就是各种计算了，先来张手绘图凑合着看哈</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-ca13ff89043bb230.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="手绘图，忽略字迹看内容哈.png"></p>
 <blockquote>
 <p>担心图片不清晰就再对图片内容描述一下，重要信息有四个，进度的起始点A和B、tip框的起始点M和N，动画执行过程是这样的：刚开始的时候只有进度条移动，此时tip框是不动的，当进度条到达tip框中间三角形顶点x坐标的时候，tip框跟着进度开始一起移动，当tip框右边界到达整个进度的右边界的时候，tip框停止移动，进度条继续移动一直到终点。</p>
 </blockquote>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">    * 进度移动动画  通过插值的方式改变移动的距离</span></div><div class="line"><span class="comment">    */</span></div><div class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initAnimation</span>(<span class="params"></span>) </span>&#123;</div><div class="line">       progressAnimator = ValueAnimator.ofFloat(<span class="number">0</span>, mProgress);</div><div class="line">       progressAnimator.setDuration(duration);</div><div class="line">       progressAnimator.setStartDelay(startDelay);</div><div class="line">       progressAnimator.setInterpolator(<span class="keyword">new</span> LinearInterpolator());</div><div class="line">       progressAnimator.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">           @Override</div><div class="line">           <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span>(<span class="params">ValueAnimator valueAnimator</span>) </span>&#123;</div><div class="line">               <span class="keyword">float</span> <span class="keyword">value</span> = (<span class="keyword">float</span>) valueAnimator.getAnimatedValue();</div><div class="line">               <span class="comment">//进度数值只显示整数，我们自己的需求，可以忽略</span></div><div class="line">               textString = formatNum(format2Int(<span class="keyword">value</span>));</div><div class="line">               <span class="comment">//把当前百分比进度转化成view宽度对应的比例</span></div><div class="line">               currentProgress = <span class="keyword">value</span> * mWidth / <span class="number">100</span>;</div><div class="line">               <span class="comment">//进度回调方法</span></div><div class="line">               <span class="keyword">if</span> (progressListener != <span class="literal">null</span>) &#123;</div><div class="line">                   progressListener.currentProgressListener(<span class="keyword">value</span>);</div><div class="line">               &#125;</div><div class="line">               <span class="comment">//移动百分比提示框，只有当前进度到提示框中间位置之后开始移动，</span></div><div class="line">               <span class="comment">//当进度框移动到最右边的时候停止移动，但是进度条还可以继续移动</span></div><div class="line">               <span class="comment">//moveDis是tip框移动的距离</span></div><div class="line">               <span class="keyword">if</span> (currentProgress &gt;= (tipWidth / <span class="number">2</span>) &amp;&amp;</div><div class="line">                       currentProgress &lt;= (mWidth - tipWidth / <span class="number">2</span>)) &#123;</div><div class="line">                   moveDis = currentProgress - tipWidth / <span class="number">2</span>;</div><div class="line">               &#125;</div><div class="line">               invalidate();</div><div class="line">           &#125;</div><div class="line">       &#125;);</div><div class="line">       progressAnimator.start();</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">    * 进度移动动画  通过插值的方式改变移动的距离</div><div class="line">    */</div><div class="line">   private void initAnimation() &#123;</div><div class="line">       progressAnimator = ValueAnimator.ofFloat(0, mProgress);</div><div class="line">       progressAnimator.setDuration(duration);</div><div class="line">       progressAnimator.setStartDelay(startDelay);</div><div class="line">       progressAnimator.setInterpolator(new LinearInterpolator());</div><div class="line">       progressAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">           @Override</div><div class="line">           public void onAnimationUpdate(ValueAnimator valueAnimator) &#123;</div><div class="line">               float value = (float) valueAnimator.getAnimatedValue();</div><div class="line">               //进度数值只显示整数，我们自己的需求，可以忽略</div><div class="line">               textString = formatNum(format2Int(value));</div><div class="line">               //把当前百分比进度转化成view宽度对应的比例</div><div class="line">               currentProgress = value * mWidth / 100;</div><div class="line">               //进度回调方法</div><div class="line">               if (progressListener != null) &#123;</div><div class="line">                   progressListener.currentProgressListener(value);</div><div class="line">               &#125;</div><div class="line">               //移动百分比提示框，只有当前进度到提示框中间位置之后开始移动，</div><div class="line">               //当进度框移动到最右边的时候停止移动，但是进度条还可以继续移动</div><div class="line">               //moveDis是tip框移动的距离</div><div class="line">               if (currentProgress &gt;= (tipWidth / 2) &amp;&amp;</div><div class="line">                       currentProgress &lt;= (mWidth - tipWidth / 2)) &#123;</div><div class="line">                   moveDis = currentProgress - tipWidth / 2;</div><div class="line">               &#125;</div><div class="line">               invalidate();</div><div class="line">           &#125;</div><div class="line">       &#125;);</div><div class="line">       progressAnimator.start();</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
 <h5 id="最终实现的效果"><a href="#最终实现的效果" class="headerlink" title="最终实现的效果"></a>最终实现的效果</h5><p><img src="http://upload-images.jianshu.io/upload_images/2057501-615ad5fe97faf782.gif?imageMogr2/auto-orient/strip" alt="progress.gif"></p>
 <h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>到此本篇文章终点部分已经结束，按照惯例应该做下总结的，但今天并没有这个打算(毕竟文章里边技术点描述的很清楚了，哈哈😆)。这里就分享一下我的一些看法吧，敲代码其实是一件很枯燥的事，每天面对一大堆字母时间久了或多或少会心烦，那么我们怎样才能保持一个好的状态去coding呐，培养自己的兴趣，兴趣真的很重要，有了兴趣你会把敲代码当做生活的一部分而不仅仅是工作。这样生活才有意义，否则时间久了真的会颓废。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-a2b4eca9a8ddfc04.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="网络图片，仅供娱乐"></p>
 <hr>
-<h1 id="github源码地址传送门"><a href="#github源码地址传送门" class="headerlink" title="github源码地址传送门"></a>github源码地址<a href="https://github.com/lygttpod/AndroidCustomView/blob/master/app/src/main/java/com/allen/androidcustomview/widget/HorizontalProgressBar.java" target="_blank" rel="external"><strong>传送门</strong></a></h1><hr>
+<h1 id="github源码地址传送门"><a href="#github源码地址传送门" class="headerlink" title="github源码地址传送门"></a>github源码地址<a href="https://github.com/lygttpod/AndroidCustomView/blob/master/app/src/main/java/com/allen/androidcustomview/widget/HorizontalProgressBar.java"><strong>传送门</strong></a></h1><hr>
 <blockquote>
 <p>谨以此篇来记录自己项目中遇到的问题，献给需要类似功能的小伙伴们。如果你有好的建议欢迎评论指出，大家一起讨论、学习、进步！</p>
 </blockquote>
@@ -448,10 +476,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            站点概览
           </li>
         </ul>
       
@@ -460,8 +488,12 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="http://osnoex6vf.bkt.clouddn.com/Allen_Header_Icon.png"
+                alt="Allen" />
+            
               <p class="site-author-name" itemprop="name">Allen</p>
-              <p class="site-description motion-element" itemprop="description">在Android开发路上不断探索的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">Great People Share Knowledge!</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -472,7 +504,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">10</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -483,25 +515,32 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">4</span>
-                  <span class="site-state-item-name">Tags</span>
-                
+                  <span class="site-state-item-name">标签</span>
+                </a>
               </div>
             
 
           </nav>
 
           
-            <div class="feed-link motion-element">
-              <a href="/atom.xml" rel="alternate">
-                <i class="fa fa-rss"></i>
-                RSS
-              </a>
-            </div>
-          
 
           <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/lygttpod" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:lygttpod@163.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
             
           </div>
 
@@ -556,7 +595,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -564,7 +603,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
 
 
 
@@ -611,7 +650,12 @@
   
 
 
+  
 
+
+
+  
+  
 
 
 
@@ -649,6 +693,21 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
   
 
 

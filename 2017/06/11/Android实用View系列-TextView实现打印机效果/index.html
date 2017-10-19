@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -74,20 +74,18 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Allen的博客" type="application/atom+xml" />
-
 
 
 
 
 
 <meta name="description" content="在审美疲劳的今天，如何能开发出一款应用让用户耳目一新呐，适当的动画特效能为你的APP加分不少，这一点在海外的APP上表现颇为明显。今天为大家带来一篇实用的自定义view，就是是TextView实现文字逐个显示（类似打印机打字一样，逐个显示的效果）。  按照惯例，无图无真相 1、开篇在开始讲解之前先问一下大家，看到这样的一个动画效果，脑海中首先先闪的思路是什么，如果你的UI设计师让你去实现的话，你">
-<meta name="keywords" content="android,动画,网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android实用View系列------TextView实现打印机效果">
-<meta property="og:url" content="https://lygttpod.github.io/2017/06/11/Android实用View系列-TextView实现打印机效果/index.html">
-<meta property="og:site_name" content="Allen的博客">
+<meta property="og:url" content="https://github.com/lygttpod/2017/06/11/Android实用View系列-TextView实现打印机效果/index.html">
+<meta property="og:site_name" content="Allen&#39;s World">
 <meta property="og:description" content="在审美疲劳的今天，如何能开发出一款应用让用户耳目一新呐，适当的动画特效能为你的APP加分不少，这一点在海外的APP上表现颇为明显。今天为大家带来一篇实用的自定义view，就是是TextView实现文字逐个显示（类似打印机打字一样，逐个显示的效果）。  按照惯例，无图无真相 1、开篇在开始讲解之前先问一下大家，看到这样的一个动画效果，脑海中首先先闪的思路是什么，如果你的UI设计师让你去实现的话，你">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-a7a751b456b25494.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-cd8637ab476d003b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-a85fb59fa751e268.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -107,7 +105,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     version: '5.1.3',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -115,7 +113,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -129,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://lygttpod.github.io/2017/06/11/Android实用View系列-TextView实现打印机效果/"/>
+  <link rel="canonical" href="https://github.com/lygttpod/2017/06/11/Android实用View系列-TextView实现打印机效果/"/>
 
 
 
 
 
-  <title>Android实用View系列------TextView实现打印机效果 | Allen的博客</title>
+  <title>Android实用View系列------TextView实现打印机效果 | Allen's World</title>
   
 
 
@@ -147,7 +145,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -165,12 +163,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Allen的博客</span>
+        <span class="site-title">Allen's World</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">分享是一种美德</p>
+        <p class="site-subtitle"></p>
       
   </div>
 
@@ -195,7 +193,27 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
           </a>
         </li>
       
@@ -205,7 +223,17 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -242,16 +270,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lygttpod.github.io/2017/06/11/Android实用View系列-TextView实现打印机效果/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/lygttpod/2017/06/11/Android实用View系列-TextView实现打印机效果/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="http://osnoex6vf.bkt.clouddn.com/Allen_Header_Icon.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Allen的博客">
+      <meta itemprop="name" content="Allen's World">
     </span>
 
     
@@ -269,9 +297,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-11T16:23:57+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-11T16:23:57+08:00">
                 2017-06-11
               </time>
             
@@ -323,23 +351,23 @@
 <p>其实这样的效果实现思路还是挺多的，有的是动态生成多个TextView,每次设置一个字符控制显示隐藏，有的继承自View完全自定义，从头绘制到底。这里我的方式是继承自TextView，我们只需实现文字逐个显示的效果的逻辑就ok了，至于设置文字颜色，字体大小之类的属性我们直接使用TextView自己属性就好了，这样大大简化了我们的开发流程。</p>
 <p>实现步骤：</p>
 <p>1、重写onDraw方法，绘制文字<br>2、利用属性动画在固定时间内重绘显示的文字<br>3、封装并暴露外部调用的方法</p>
-<h4 id="2-1-、重绘文字"><a href="#2-1-、重绘文字" class="headerlink" title="2.1 、重绘文字"></a>2.1 、重绘文字</h4><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(<span class="keyword">final</span> Canvas canvas)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onDraw(canvas);</div><div class="line">    <span class="keyword">if</span> (stringBuffer != <span class="keyword">null</span>) &#123;</div><div class="line">        drawText(canvas, stringBuffer.toString());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>stringBuffer就是需要绘制的文字<br><figure class="highlight nsis"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 绘制文字   </span></div><div class="line"><span class="comment"> *           </span></div><div class="line"><span class="comment"> * @param canvas 画布</span></div><div class="line"><span class="comment"> */</span></div><div class="line">private void drawText(Canvas canvas, String textString) &#123;</div><div class="line">     //设置文字绘制的区域</div><div class="line">    textRect.<span class="literal">left</span> = getPaddingLeft()<span class="comment">;</span></div><div class="line">    textRect.<span class="literal">top</span> = getPaddingTop()<span class="comment">;</span></div><div class="line">    textRect.<span class="literal">right</span> = getWidth() - getPaddingRight()<span class="comment">;</span></div><div class="line">    textRect.<span class="literal">bottom</span> = getHeight() - getPaddingBottom()<span class="comment">;</span></div><div class="line">    Paint.FontMetricsInt fontMetrics = getPaint().getFontMetricsInt()<span class="comment">;</span></div><div class="line">    int baseline = (textRect.<span class="literal">bottom</span> + textRect.<span class="literal">top</span> - fontMetrics.<span class="literal">bottom</span> - fontMetrics.<span class="literal">top</span>) / <span class="number">2</span><span class="comment">;</span></div><div class="line">    //文字绘制到整个布局的中心位置</div><div class="line">    canvas.drawText(textString, getPaddingLeft(), baseline, getPaint())<span class="comment">;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="2-1-、重绘文字"><a href="#2-1-、重绘文字" class="headerlink" title="2.1 、重绘文字"></a>2.1 、重绘文字</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onDraw(final Canvas canvas) &#123;</div><div class="line">    super.onDraw(canvas);</div><div class="line">    if (stringBuffer != null) &#123;</div><div class="line">        drawText(canvas, stringBuffer.toString());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>stringBuffer就是需要绘制的文字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 绘制文字   </div><div class="line"> *           </div><div class="line"> * @param canvas 画布</div><div class="line"> */</div><div class="line">private void drawText(Canvas canvas, String textString) &#123;</div><div class="line">     //设置文字绘制的区域</div><div class="line">    textRect.left = getPaddingLeft();</div><div class="line">    textRect.top = getPaddingTop();</div><div class="line">    textRect.right = getWidth() - getPaddingRight();</div><div class="line">    textRect.bottom = getHeight() - getPaddingBottom();</div><div class="line">    Paint.FontMetricsInt fontMetrics = getPaint().getFontMetricsInt();</div><div class="line">    int baseline = (textRect.bottom + textRect.top - fontMetrics.bottom - fontMetrics.top) / 2;</div><div class="line">    //文字绘制到整个布局的中心位置</div><div class="line">    canvas.drawText(textString, getPaddingLeft(), baseline, getPaint());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>看过我之前写的那几篇文章的朋友会发现我们自定义view系列的文章基本都有这个方法，可以封装一下，以后在任何需要使用的地方都可以拿来直接使用。这个方法没什么复杂的逻辑我们不过多解读了。</p>
-<h4 id="2-2、利用属性动画动态改变绘制的文字"><a href="#2-2、利用属性动画动态改变绘制的文字" class="headerlink" title="2.2、利用属性动画动态改变绘制的文字"></a>2.2、利用属性动画动态改变绘制的文字</h4><p>代码很好理解先上代码，跟着代码我们去学习实现思路<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">  * 文字逐个显示动画  通过插值的方式改变数据源</span></div><div class="line"><span class="comment">  */</span></div><div class="line"> <span class="keyword">private</span> <span class="keyword">void</span> initAnimation() &#123;</div><div class="line"></div><div class="line">     <span class="comment">//从0到textCount - 1  是设置从第一个字到最后一个字的变化因子</span></div><div class="line">     textAnimation = ValueAnimator.ofInt(<span class="number">0</span>, textCount - <span class="number">1</span>);</div><div class="line">     <span class="comment">//执行总时间就是每个字的时间乘以字数</span></div><div class="line">     textAnimation.setDuration(textCount * duration);</div><div class="line">     <span class="comment">//匀速显示文字</span></div><div class="line">     textAnimation.setInterpolator(<span class="keyword">new</span> LinearInterpolator());</div><div class="line">     textAnimation.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">         @Override</div><div class="line">         <span class="keyword">public</span> <span class="keyword">void</span> onAnimationUpdate(ValueAnimator valueAnimator) &#123;</div><div class="line">             <span class="keyword">int</span> <span class="keyword">index</span> = (<span class="keyword">int</span>) valueAnimator.getAnimatedValue();</div><div class="line">             <span class="comment">//过滤去重，保证每个字只重绘一次</span></div><div class="line">             <span class="keyword">if</span> (currentIndex != <span class="keyword">index</span>) &#123;</div><div class="line">                 stringBuffer.append(arr[<span class="keyword">index</span>]);</div><div class="line"></div><div class="line">                 currentIndex = <span class="keyword">index</span>;</div><div class="line">                 <span class="comment">//所有文字都显示完成之后进度回调结束动画</span></div><div class="line">                 <span class="keyword">if</span> (currentIndex == (textCount - <span class="number">1</span>)) &#123;</div><div class="line">                     <span class="keyword">if</span> (textAnimationListener != <span class="keyword">null</span>) &#123;</div><div class="line">                         textAnimationListener.animationFinish();</div><div class="line">                     &#125;</div><div class="line">                 &#125;</div><div class="line"></div><div class="line">                 invalidate();</div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">     &#125;);</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<h4 id="2-2、利用属性动画动态改变绘制的文字"><a href="#2-2、利用属性动画动态改变绘制的文字" class="headerlink" title="2.2、利用属性动画动态改变绘制的文字"></a>2.2、利用属性动画动态改变绘制的文字</h4><p>代码很好理解先上代码，跟着代码我们去学习实现思路<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">  * 文字逐个显示动画  通过插值的方式改变数据源</div><div class="line">  */</div><div class="line"> private void initAnimation() &#123;</div><div class="line"></div><div class="line">     //从0到textCount - 1  是设置从第一个字到最后一个字的变化因子</div><div class="line">     textAnimation = ValueAnimator.ofInt(0, textCount - 1);</div><div class="line">     //执行总时间就是每个字的时间乘以字数</div><div class="line">     textAnimation.setDuration(textCount * duration);</div><div class="line">     //匀速显示文字</div><div class="line">     textAnimation.setInterpolator(new LinearInterpolator());</div><div class="line">     textAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">         @Override</div><div class="line">         public void onAnimationUpdate(ValueAnimator valueAnimator) &#123;</div><div class="line">             int index = (int) valueAnimator.getAnimatedValue();</div><div class="line">             //过滤去重，保证每个字只重绘一次</div><div class="line">             if (currentIndex != index) &#123;</div><div class="line">                 stringBuffer.append(arr[index]);</div><div class="line"></div><div class="line">                 currentIndex = index;</div><div class="line">                 //所有文字都显示完成之后进度回调结束动画</div><div class="line">                 if (currentIndex == (textCount - 1)) &#123;</div><div class="line">                     if (textAnimationListener != null) &#123;</div><div class="line">                         textAnimationListener.animationFinish();</div><div class="line">                     &#125;</div><div class="line">                 &#125;</div><div class="line"></div><div class="line">                 invalidate();</div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">     &#125;);</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
 <p>思路是这样的：为每个文字显示的时间设置一个固定值duration，我这里默认显示300毫秒，动画执行的总时间就是总共的字数乘以每个字显示的时间（ textCount * duration），ValueAnimator.ofInt(0, textCount - 1)是为了根据这个字数的因子当做下标获取单个字符，每次追加到                    stringBuffer.append(arr[index])，代码中我做了过滤重绘的判断，保证每次只绘制一遍，提升性能，因为我们的valueAnimator.getAnimatedValue()这个变化因子会不断变化及时转成int类型，每次也是有很多重复的，所以去重这一步就显得格外重要，我们可以看一下打印日志。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-f6ab25a6863ac5e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="index每次的变化，看到这个就知道去重的重要性了.png"></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-cd8637ab476d003b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="去重后保证每增加一个字符只绘制一次.png"></p>
-<p>看到这里其估计有人会问怎么设置要显示的字符串呐还有arr[index]十个什么鬼，不要着急，继续往下看就明白了<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 设置逐渐显示的字符串</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * <span class="doctag">@param</span> textString</span></div><div class="line"><span class="comment"> * <span class="doctag">@return</span></span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">public</span> <span class="function">FadeInTextView <span class="title">setTextString</span><span class="params">(String textString)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (textString != <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="comment">//总字数</span></div><div class="line">        textCount = textString.length();</div><div class="line">        <span class="comment">//存放单个字的数组</span></div><div class="line">        arr = <span class="keyword">new</span> String[textCount];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; textCount; i++) &#123;</div><div class="line">            arr[i] = textString.substring(i, i + <span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">        initAnimation();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>看到这里其估计有人会问怎么设置要显示的字符串呐还有arr[index]十个什么鬼，不要着急，继续往下看就明白了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 设置逐渐显示的字符串</div><div class="line"> *</div><div class="line"> * @param textString</div><div class="line"> * @return</div><div class="line"> */</div><div class="line">public FadeInTextView setTextString(String textString) &#123;</div><div class="line">    if (textString != null) &#123;</div><div class="line">        //总字数</div><div class="line">        textCount = textString.length();</div><div class="line">        //存放单个字的数组</div><div class="line">        arr = new String[textCount];</div><div class="line">        for (int i = 0; i &lt; textCount; i++) &#123;</div><div class="line">            arr[i] = textString.substring(i, i + 1);</div><div class="line">        &#125;</div><div class="line">        initAnimation();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return this;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>我把传入的字符串都存放到一个数组里边每次根据index去取相应的字符，好啦，到此这个功能的实现已经完成了。</p>
-<h3 id="3、对外暴露的方法"><a href="#3、对外暴露的方法" class="headerlink" title="3、对外暴露的方法"></a>3、对外暴露的方法</h3><p>设置字符的方法少不了，接下来开启动画和停止动画，然后就是动画结束的回调。<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">  </div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 开启动画</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * @return</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> FadeInTextView <span class="title">startFadeInAnimation</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (textAnimation != <span class="literal">null</span>) &#123;</div><div class="line">        <span class="comment">//动画开启的时候参数都设置成初始状态</span></div><div class="line">        stringBuffer.setLength(<span class="number">0</span>);</div><div class="line">        currentIndex = <span class="number">-1</span>;</div><div class="line">        textAnimation.start();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 停止动画</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * @return</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> FadeInTextView <span class="title">stopFadeInAnimation</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (textAnimation != <span class="literal">null</span>) &#123;</div><div class="line">        textAnimation.end();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 回调接口</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">TextAnimationListener</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">animationFinish</span>(<span class="params"></span>)</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="4、如何使用"><a href="#4、如何使用" class="headerlink" title="4、如何使用"></a>4、如何使用</h3><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">fadeInTextView</span></div><div class="line">        <span class="selector-class">.setTextString</span>(<span class="string">"自定义view实现字符串逐字显示"</span>)</div><div class="line">        <span class="selector-class">.startFadeInAnimation</span>()</div><div class="line">        <span class="selector-class">.setTextAnimationListener</span>(new FadeInTextView.TextAnimationListener() &#123;</div><div class="line">            <span class="variable">@Override</span></div><div class="line">            public void animationFinish() &#123;</div><div class="line">                </div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<h3 id="3、对外暴露的方法"><a href="#3、对外暴露的方法" class="headerlink" title="3、对外暴露的方法"></a>3、对外暴露的方法</h3><p>设置字符的方法少不了，接下来开启动画和停止动画，然后就是动画结束的回调。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">  </div><div class="line">/**</div><div class="line"> * 开启动画</div><div class="line"> *</div><div class="line"> * @return</div><div class="line"> */</div><div class="line">public FadeInTextView startFadeInAnimation() &#123;</div><div class="line">    if (textAnimation != null) &#123;</div><div class="line">        //动画开启的时候参数都设置成初始状态</div><div class="line">        stringBuffer.setLength(0);</div><div class="line">        currentIndex = -1;</div><div class="line">        textAnimation.start();</div><div class="line">    &#125;</div><div class="line">    return this;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 停止动画</div><div class="line"> *</div><div class="line"> * @return</div><div class="line"> */</div><div class="line">public FadeInTextView stopFadeInAnimation() &#123;</div><div class="line">    if (textAnimation != null) &#123;</div><div class="line">        textAnimation.end();</div><div class="line">    &#125;</div><div class="line">    return this;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 回调接口</div><div class="line"> */</div><div class="line">public interface TextAnimationListener &#123;</div><div class="line">    void animationFinish();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="4、如何使用"><a href="#4、如何使用" class="headerlink" title="4、如何使用"></a>4、如何使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">fadeInTextView</div><div class="line">        .setTextString(&quot;自定义view实现字符串逐字显示&quot;)</div><div class="line">        .startFadeInAnimation()</div><div class="line">        .setTextAnimationListener(new FadeInTextView.TextAnimationListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void animationFinish() &#123;</div><div class="line">                </div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
 <blockquote>
 <p>至此本篇文章的介绍已经结束，接下来会继续推出相关系列的文章。小功能大智慧，功能再小还要新手敲一敲，不然。。。不然。。。看图意会吧，哈哈😆!</p>
 </blockquote>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-1d023c2dd1fa3b33.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="语言上的老司机，行动上的大怂逼.jpg"></p>
 <hr>
-<h1 id="github源码地址传送门"><a href="#github源码地址传送门" class="headerlink" title="github源码地址传送门"></a>github源码地址<a href="https://github.com/lygttpod/AndroidCustomView/blob/master/app/src/main/java/com/allen/androidcustomview/widget/FadeInTextView.java" target="_blank" rel="external"><strong>传送门</strong></a></h1><hr>
+<h1 id="github源码地址传送门"><a href="#github源码地址传送门" class="headerlink" title="github源码地址传送门"></a>github源码地址<a href="https://github.com/lygttpod/AndroidCustomView/blob/master/app/src/main/java/com/allen/androidcustomview/widget/FadeInTextView.java"><strong>传送门</strong></a></h1><hr>
 <blockquote>
 <p>谨以此篇来记录自己项目中遇到的问题，献给需要类似功能的小伙伴们。如果你有好的建议欢迎评论指出，大家一起讨论、学习、进步！</p>
 </blockquote>
@@ -433,10 +461,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            站点概览
           </li>
         </ul>
       
@@ -445,8 +473,12 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="http://osnoex6vf.bkt.clouddn.com/Allen_Header_Icon.png"
+                alt="Allen" />
+            
               <p class="site-author-name" itemprop="name">Allen</p>
-              <p class="site-description motion-element" itemprop="description">在Android开发路上不断探索的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">Great People Share Knowledge!</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -457,7 +489,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">10</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -468,25 +500,32 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">4</span>
-                  <span class="site-state-item-name">Tags</span>
-                
+                  <span class="site-state-item-name">标签</span>
+                </a>
               </div>
             
 
           </nav>
 
           
-            <div class="feed-link motion-element">
-              <a href="/atom.xml" rel="alternate">
-                <i class="fa fa-rss"></i>
-                RSS
-              </a>
-            </div>
-          
 
           <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/lygttpod" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:lygttpod@163.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
             
           </div>
 
@@ -541,7 +580,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -549,7 +588,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
 
 
 
@@ -596,7 +635,12 @@
   
 
 
+  
 
+
+
+  
+  
 
 
 
@@ -634,6 +678,21 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
   
 
 
