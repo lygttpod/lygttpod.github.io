@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="android,自定义View,动画," />
 
 
 
@@ -79,12 +79,13 @@
 
 
 
-<meta name="description" content="今天开始记录工作中遇到的需要实现的动画效果实现自定义view动画，后期会有一些列动画设计思路的文章。 在这里分享的是设计实现思路，仅供学习使用，让大家拿到稍微复杂点的动画的时候要知道该如何去一步步分解实现，而不是抱怨下边就先来看看设计需要的效果图及我们最终实现的效果图，毕竟有图有真相嘛！   其实我刚拿到设计图的时候心想，MD直接给一张gif图不就行了何必这个麻烦呐，随后冷静下来之后（其实就是抱怨">
+<meta name="description" content="今天开始记录工作中遇到的需要实现的动画效果实现自定义view动画，后期会有一些列动画设计思路的文章。 在这里分享的是设计实现思路，仅供学习使用，让大家拿到稍微复杂点的动画的时候要知道该如何去一步步分解实现，而不是抱怨下边就先来看看设计需要的效果图及我们最终实现的效果图，毕竟有图有真相嘛！">
+<meta name="keywords" content="android,自定义View,动画">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android自定义动画酷炫的提交按钮">
 <meta property="og:url" content="https://github.com/lygttpod/2017/04/29/Android自定义动画酷炫的提交按钮/index.html">
 <meta property="og:site_name" content="Allen&#39;s World">
-<meta property="og:description" content="今天开始记录工作中遇到的需要实现的动画效果实现自定义view动画，后期会有一些列动画设计思路的文章。 在这里分享的是设计实现思路，仅供学习使用，让大家拿到稍微复杂点的动画的时候要知道该如何去一步步分解实现，而不是抱怨下边就先来看看设计需要的效果图及我们最终实现的效果图，毕竟有图有真相嘛！   其实我刚拿到设计图的时候心想，MD直接给一张gif图不就行了何必这个麻烦呐，随后冷静下来之后（其实就是抱怨">
+<meta property="og:description" content="今天开始记录工作中遇到的需要实现的动画效果实现自定义view动画，后期会有一些列动画设计思路的文章。 在这里分享的是设计实现思路，仅供学习使用，让大家拿到稍微复杂点的动画的时候要知道该如何去一步步分解实现，而不是抱怨下边就先来看看设计需要的效果图及我们最终实现的效果图，毕竟有图有真相嘛！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-d710bca1e166fbc4.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-563392a36b5dee6f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/160">
@@ -98,10 +99,10 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-0d1119721429bf71.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-79b33b27b17bc7e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/160">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-45c40b556d39f646.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
-<meta property="og:updated_time" content="2017-09-07T04:25:19.459Z">
+<meta property="og:updated_time" content="2017-10-19T07:30:53.708Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android自定义动画酷炫的提交按钮">
-<meta name="twitter:description" content="今天开始记录工作中遇到的需要实现的动画效果实现自定义view动画，后期会有一些列动画设计思路的文章。 在这里分享的是设计实现思路，仅供学习使用，让大家拿到稍微复杂点的动画的时候要知道该如何去一步步分解实现，而不是抱怨下边就先来看看设计需要的效果图及我们最终实现的效果图，毕竟有图有真相嘛！   其实我刚拿到设计图的时候心想，MD直接给一张gif图不就行了何必这个麻烦呐，随后冷静下来之后（其实就是抱怨">
+<meta name="twitter:description" content="今天开始记录工作中遇到的需要实现的动画效果实现自定义view动画，后期会有一些列动画设计思路的文章。 在这里分享的是设计实现思路，仅供学习使用，让大家拿到稍微复杂点的动画的时候要知道该如何去一步步分解实现，而不是抱怨下边就先来看看设计需要的效果图及我们最终实现的效果图，毕竟有图有真相嘛！">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2057501-d710bca1e166fbc4.gif?imageMogr2/auto-orient/strip">
 
 
@@ -315,6 +316,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -345,10 +368,9 @@
         <h3 id="今天开始记录工作中遇到的需要实现的动画效果实现自定义view动画，后期会有一些列动画设计思路的文章。"><a href="#今天开始记录工作中遇到的需要实现的动画效果实现自定义view动画，后期会有一些列动画设计思路的文章。" class="headerlink" title="今天开始记录工作中遇到的需要实现的动画效果实现自定义view动画，后期会有一些列动画设计思路的文章。"></a>今天开始记录工作中遇到的需要实现的动画效果实现自定义view动画，后期会有一些列动画设计思路的文章。</h3><blockquote>
 <p>在这里分享的是设计实现思路，仅供学习使用，让大家拿到稍微复杂点的动画的时候要知道该如何去一步步分解实现，而不是抱怨<br>下边就先来看看设计需要的效果图及我们最终实现的效果图，毕竟有图有真相嘛！</p>
 </blockquote>
-<p><img src="http://upload-images.jianshu.io/upload_images/2057501-d710bca1e166fbc4.gif?imageMogr2/auto-orient/strip" alt="99.gif"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-d710bca1e166fbc4.gif?imageMogr2/auto-orient/strip" alt="99.gif"><br><a id="more"></a></p>
 <h5 id="其实我刚拿到设计图的时候心想，MD直接给一张gif图不就行了何必这个麻烦呐，"><a href="#其实我刚拿到设计图的时候心想，MD直接给一张gif图不就行了何必这个麻烦呐，" class="headerlink" title="其实我刚拿到设计图的时候心想，MD直接给一张gif图不就行了何必这个麻烦呐，"></a>其实我刚拿到设计图的时候心想，MD直接给一张gif图不就行了何必这个麻烦呐，</h5><p>随后冷静下来之后（其实就是抱怨之后）想想作为一名Android开发者总不能什么动画都依赖设计师吧，那样的话会显得我们开发者没什么卵用啊，说不定还会被设计师鄙视哦，<br><img src="http://upload-images.jianshu.io/upload_images/2057501-563392a36b5dee6f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/160" alt="设计师对你深深的鄙视"><br>于是就开始了动画分析及实现之旅。</p>
 <hr>
-<a id="more"></a>
 <h3 id="通过这个gif动画我们分析出动画过程的实质："><a href="#通过这个gif动画我们分析出动画过程的实质：" class="headerlink" title="通过这个gif动画我们分析出动画过程的实质："></a>通过这个gif动画我们分析出动画过程的实质：</h3><blockquote>
 <p>一个长方形（或者是圆角长方形）逐渐过渡成为两边是半圆的长方形，于此同时长方形两边向中间靠拢最终形成一个圆，然后圆上升一定高度，最后在圆里边画出对勾(✔).整个动画分解的其实就是这几个部分，那么我们该如何实现呐，不要捉急，继续往下看。</p>
 </blockquote>
@@ -394,6 +416,16 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/自定义View/" rel="tag"># 自定义View</a>
+          
+            <a href="/tags/动画/" rel="tag"># 动画</a>
+          
+        </div>
       
 
       
@@ -504,13 +536,22 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -648,9 +689,6 @@
 
 
 
-  
-  
-
 
 
 
@@ -692,16 +730,6 @@
   
   
     <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
   
 
 

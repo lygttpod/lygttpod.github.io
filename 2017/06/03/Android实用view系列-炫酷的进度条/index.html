@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="android,自定义View,动画," />
 
 
 
@@ -79,12 +79,13 @@
 
 
 
-<meta name="description" content="不知不觉距离上次写文章已经过去大半个月了，原本计划每周写一篇的想法在坚持几周之后最终还是被生活中各种各样的琐事打乱，无奈中夹杂这对自己的一点失望。当初的愿望实现了吗事到如今只好祭奠吗任岁月风干理想再也找不回真的我抬头仰望着满天星河那时候陪伴我的那颗这里的故事你是否还记得  今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。 按照惯例先上效果图，俗话说无图无有真">
+<meta name="description" content="不知不觉距离上次写文章已经过去大半个月了，原本计划每周写一篇的想法在坚持几周之后最终还是被生活中各种各样的琐事打乱，无奈中夹杂这对自己的一点失望。当初的愿望实现了吗事到如今只好祭奠吗任岁月风干理想再也找不回真的我抬头仰望着满天星河那时候陪伴我的那颗这里的故事你是否还记得  今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。">
+<meta name="keywords" content="android,自定义View,动画">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android实用view系列------炫酷的进度条">
 <meta property="og:url" content="https://github.com/lygttpod/2017/06/03/Android实用view系列-炫酷的进度条/index.html">
 <meta property="og:site_name" content="Allen&#39;s World">
-<meta property="og:description" content="不知不觉距离上次写文章已经过去大半个月了，原本计划每周写一篇的想法在坚持几周之后最终还是被生活中各种各样的琐事打乱，无奈中夹杂这对自己的一点失望。当初的愿望实现了吗事到如今只好祭奠吗任岁月风干理想再也找不回真的我抬头仰望着满天星河那时候陪伴我的那颗这里的故事你是否还记得  今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。 按照惯例先上效果图，俗话说无图无有真">
+<meta property="og:description" content="不知不觉距离上次写文章已经过去大半个月了，原本计划每周写一篇的想法在坚持几周之后最终还是被生活中各种各样的琐事打乱，无奈中夹杂这对自己的一点失望。当初的愿望实现了吗事到如今只好祭奠吗任岁月风干理想再也找不回真的我抬头仰望着满天星河那时候陪伴我的那颗这里的故事你是否还记得  今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-2f7d716b6474a6e7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/200">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-6a56cf5ae61b543f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
@@ -100,10 +101,10 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-ca13ff89043bb230.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-615ad5fe97faf782.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-a2b4eca9a8ddfc04.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
-<meta property="og:updated_time" content="2017-09-07T04:24:53.554Z">
+<meta property="og:updated_time" content="2017-10-19T07:30:38.123Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android实用view系列------炫酷的进度条">
-<meta name="twitter:description" content="不知不觉距离上次写文章已经过去大半个月了，原本计划每周写一篇的想法在坚持几周之后最终还是被生活中各种各样的琐事打乱，无奈中夹杂这对自己的一点失望。当初的愿望实现了吗事到如今只好祭奠吗任岁月风干理想再也找不回真的我抬头仰望着满天星河那时候陪伴我的那颗这里的故事你是否还记得  今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。 按照惯例先上效果图，俗话说无图无有真">
+<meta name="twitter:description" content="不知不觉距离上次写文章已经过去大半个月了，原本计划每周写一篇的想法在坚持几周之后最终还是被生活中各种各样的琐事打乱，无奈中夹杂这对自己的一点失望。当初的愿望实现了吗事到如今只好祭奠吗任岁月风干理想再也找不回真的我抬头仰望着满天星河那时候陪伴我的那颗这里的故事你是否还记得  今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2057501-2f7d716b6474a6e7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/200">
 
 
@@ -317,6 +318,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -347,13 +370,14 @@
         <blockquote>
 <p> 不知不觉距离上次写文章已经过去大半个月了，原本计划每周写一篇的想法在坚持几周之后最终还是被生活中各种各样的琐事打乱，无奈中夹杂这对自己的一点失望。<br><img src="http://upload-images.jianshu.io/upload_images/2057501-2f7d716b6474a6e7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/200" alt="心痛.jpg"><br>当初的愿望实现了吗<br>事到如今只好祭奠吗<br>任岁月风干理想再也找不回真的我<br>抬头仰望着满天星河<br>那时候陪伴我的那颗<br>这里的故事你是否还记得</p>
 </blockquote>
-<h5 id="今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。"><a href="#今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。" class="headerlink" title="今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。"></a>今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。</h5><p> 按照惯例先上效果图，俗话说无图无有真相嘛。</p>
+<h5 id="今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。"><a href="#今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。" class="headerlink" title="今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。"></a>今天给大家带来的是自定义view系列之炫酷的进度条的效果，让你的进度条从此与众不同。</h5><a id="more"></a>
+<p> 按照惯例先上效果图，俗话说无图无有真相嘛。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-6a56cf5ae61b543f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="60%的进度条.png"></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-2fef3dc9943f5f99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="100%的进度条.png"></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-615ad5fe97faf782.gif?imageMogr2/auto-orient/strip" alt="模拟器的效果没有真机好.gif"></p>
 <p>我们可以看出来这其实就是一个进度条，此时的你或许心生疑惑，MD一个进度条有什么好说的，无论是官方的ProgressBar的还是GitHub开源的一抓一大把，这有什么好讲的。有这样的想法很正常，毕竟我曾经看别人写的文章的时候也会冒出这样的想法。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-79d6913926a01388.gif?imageMogr2/auto-orient/strip" alt="哈哈"></p>
-<p>那么我为什么还要写呐，首先并不是我们所有的需求都能在网上找到，其次，即使找到类似的代码修修补补也能用，但对我们的提升并不大，作为一名合格的开发人员只有亲手撸出来的代码用着才踏实嘛，我们是抱着学习的心态看问题，分析问题，并解决它的。<br><a id="more"></a></p>
+<p>那么我为什么还要写呐，首先并不是我们所有的需求都能在网上找到，其次，即使找到类似的代码修修补补也能用，但对我们的提升并不大，作为一名合格的开发人员只有亲手撸出来的代码用着才踏实嘛，我们是抱着学习的心态看问题，分析问题，并解决它的。</p>
 <h3 id="说了那么多废话下边就开始步入正题吧"><a href="#说了那么多废话下边就开始步入正题吧" class="headerlink" title="说了那么多废话下边就开始步入正题吧"></a>说了那么多废话下边就开始步入正题吧</h3><blockquote>
 <p>如果真是一个简简单单的进度条的话确实没什么好讲的，仔细观察效果图后你会发现其实还是有点内容的，麻雀虽小五脏俱全。</p>
 <p>这里边有几个点需要说明一下：<br>①、进度条有动画效果<br>②、进度条上边有个百分比的样式的绘制<br>③、百分比tip框跟随进度条移动需要注意的事项</p>
@@ -400,6 +424,16 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/自定义View/" rel="tag"># 自定义View</a>
+          
+            <a href="/tags/动画/" rel="tag"># 动画</a>
+          
+        </div>
       
 
       
@@ -510,13 +544,22 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -654,9 +697,6 @@
 
 
 
-  
-  
-
 
 
 
@@ -698,16 +738,6 @@
   
   
     <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
   
 
 

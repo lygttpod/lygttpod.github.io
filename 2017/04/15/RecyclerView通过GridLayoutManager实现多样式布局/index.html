@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="android,recycerView," />
 
 
 
@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="一、开篇距离上次写文章已经有段时间了，说实话真不知道最近在忙些什么，现在沉下心来把最近项目中遇到的问题记录下来便于以后遇到中使用吧！废话不多说，先看一下效果图  ###二、需求解析1、先说下项目需求，不管是好评还是差评下边的Tag标签有不同的展示类型，有的字数多的会单独占一行处理（这边其实也可以扩充，比如说两三个字的可以一行显示三个Tag标签），第一眼看到这个需求准备使用网上的开源库TagLayo">
-<meta name="keywords" content="Android">
+<meta name="description" content="一、开篇距离上次写文章已经有段时间了，说实话真不知道最近在忙些什么，现在沉下心来把最近项目中遇到的问题记录下来便于以后遇到中使用吧！废话不多说，先看一下效果图">
+<meta name="keywords" content="android,recycerView">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RecyclerView通过GridLayoutManager实现多样式布局">
 <meta property="og:url" content="https://github.com/lygttpod/2017/04/15/RecyclerView通过GridLayoutManager实现多样式布局/index.html">
 <meta property="og:site_name" content="Allen&#39;s World">
-<meta property="og:description" content="一、开篇距离上次写文章已经有段时间了，说实话真不知道最近在忙些什么，现在沉下心来把最近项目中遇到的问题记录下来便于以后遇到中使用吧！废话不多说，先看一下效果图  ###二、需求解析1、先说下项目需求，不管是好评还是差评下边的Tag标签有不同的展示类型，有的字数多的会单独占一行处理（这边其实也可以扩充，比如说两三个字的可以一行显示三个Tag标签），第一眼看到这个需求准备使用网上的开源库TagLayo">
+<meta property="og:description" content="一、开篇距离上次写文章已经有段时间了，说实话真不知道最近在忙些什么，现在沉下心来把最近项目中遇到的问题记录下来便于以后遇到中使用吧！废话不多说，先看一下效果图">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-f266b868c9bbf702.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-a4d09d5892ca1518.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
-<meta property="og:updated_time" content="2017-09-07T04:25:42.435Z">
+<meta property="og:updated_time" content="2017-10-19T07:31:11.691Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RecyclerView通过GridLayoutManager实现多样式布局">
-<meta name="twitter:description" content="一、开篇距离上次写文章已经有段时间了，说实话真不知道最近在忙些什么，现在沉下心来把最近项目中遇到的问题记录下来便于以后遇到中使用吧！废话不多说，先看一下效果图  ###二、需求解析1、先说下项目需求，不管是好评还是差评下边的Tag标签有不同的展示类型，有的字数多的会单独占一行处理（这边其实也可以扩充，比如说两三个字的可以一行显示三个Tag标签），第一眼看到这个需求准备使用网上的开源库TagLayo">
+<meta name="twitter:description" content="一、开篇距离上次写文章已经有段时间了，说实话真不知道最近在忙些什么，现在沉下心来把最近项目中遇到的问题记录下来便于以后遇到中使用吧！废话不多说，先看一下效果图">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2057501-f266b868c9bbf702.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
 
 
@@ -306,6 +306,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -334,8 +356,8 @@
 
       
         <p>一、开篇<br>距离上次写文章已经有段时间了，说实话真不知道最近在忙些什么，现在沉下心来把最近项目中遇到的问题记录下来便于以后遇到中使用吧！<br>废话不多说，先看一下效果图</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2057501-f266b868c9bbf702.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="Paste_Image.png"></p>
-<p>###二、需求解析<br>1、先说下项目需求，不管是好评还是差评下边的Tag标签有不同的展示类型，有的字数多的会单独占一行处理（这边其实也可以扩充，比如说两三个字的可以一行显示三个Tag标签），第一眼看到这个需求准备使用网上的开源库TagLayout去实现，但是尝试了一下后发现其实他们实现的效果同项目要的效果还是有蛮大差距的，可以看到效果图里边是要求文字是居中对齐的，左右对称的。<br>2、想到使用GridView实现这个功能，定义adapter去实现没问题，问题是什么时候显示一行什么时候显示两行三行并不能确定，毕竟有时候服务端返回的没有类型标示只有tag_name和tag_id，你要根据什么设置类型呐，而且自从recyclerview之后现在要是还用GridView的话岂不是太落伍了。下边就重点介绍一下使用recyclerview实现如图效果。<br><a id="more"></a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-f266b868c9bbf702.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="Paste_Image.png"><br><a id="more"></a></p>
+<p>###二、需求解析<br>1、先说下项目需求，不管是好评还是差评下边的Tag标签有不同的展示类型，有的字数多的会单独占一行处理（这边其实也可以扩充，比如说两三个字的可以一行显示三个Tag标签），第一眼看到这个需求准备使用网上的开源库TagLayout去实现，但是尝试了一下后发现其实他们实现的效果同项目要的效果还是有蛮大差距的，可以看到效果图里边是要求文字是居中对齐的，左右对称的。<br>2、想到使用GridView实现这个功能，定义adapter去实现没问题，问题是什么时候显示一行什么时候显示两行三行并不能确定，毕竟有时候服务端返回的没有类型标示只有tag_name和tag_id，你要根据什么设置类型呐，而且自从recyclerview之后现在要是还用GridView的话岂不是太落伍了。下边就重点介绍一下使用recyclerview实现如图效果。</p>
 <p>###三、功能实现<br>我们知道recyclerview实现GridView效果只需配置一下参数就行了</p>
 <pre><code>GridLayoutManager layoutManage = new GridLayoutManager(getContext(), 2);
 recycerView.setLayoutManager(layoutManage);
@@ -395,7 +417,9 @@ layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag"># Android</a>
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/recycerView/" rel="tag"># recycerView</a>
           
         </div>
       
@@ -499,13 +523,22 @@ layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -627,9 +660,6 @@ layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
 
 
 
-  
-  
-
 
 
 
@@ -671,16 +701,6 @@ layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
   
   
     <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
   
 
 

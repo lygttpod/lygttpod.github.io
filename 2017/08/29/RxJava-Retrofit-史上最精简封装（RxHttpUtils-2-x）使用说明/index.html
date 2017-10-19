@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Android 工具 封装 retrofit rxjava," />
+  <meta name="keywords" content="Android,工具,封装,retrofit,rxjava," />
 
 
 
@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="重磅推出 RxHttpUtils 2.x 版本RxJava+Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用 上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！ 添加Gradle依赖先在项目根目录的 build.gradle 的">
-<meta name="keywords" content="Android 工具 封装 retrofit rxjava">
+<meta name="description" content="重磅推出 RxHttpUtils 2.x 版本 RxJava+Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用   上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！">
+<meta name="keywords" content="Android,工具,封装,retrofit,rxjava">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RxJava+Retrofit 史上最精简封装（RxHttpUtils 2.x）使用说明">
 <meta property="og:url" content="https://github.com/lygttpod/2017/08/29/RxJava-Retrofit-史上最精简封装（RxHttpUtils-2-x）使用说明/index.html">
 <meta property="og:site_name" content="Allen&#39;s World">
-<meta property="og:description" content="重磅推出 RxHttpUtils 2.x 版本RxJava+Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用 上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！ 添加Gradle依赖先在项目根目录的 build.gradle 的">
+<meta property="og:description" content="重磅推出 RxHttpUtils 2.x 版本 RxJava+Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用   上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-d124727b987f8c33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-09-07T04:25:49.058Z">
+<meta property="og:updated_time" content="2017-10-19T07:31:35.068Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RxJava+Retrofit 史上最精简封装（RxHttpUtils 2.x）使用说明">
-<meta name="twitter:description" content="重磅推出 RxHttpUtils 2.x 版本RxJava+Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用 上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！ 添加Gradle依赖先在项目根目录的 build.gradle 的">
+<meta name="twitter:description" content="重磅推出 RxHttpUtils 2.x 版本 RxJava+Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用   上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2057501-d124727b987f8c33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -305,6 +305,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -332,12 +354,13 @@
       
 
       
-        <h1 id="重磅推出-RxHttpUtils-2-x-版本"><a href="#重磅推出-RxHttpUtils-2-x-版本" class="headerlink" title="重磅推出 RxHttpUtils 2.x 版本"></a>重磅推出 RxHttpUtils 2.x 版本</h1><h2 id="RxJava-Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用"><a href="#RxJava-Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用" class="headerlink" title="RxJava+Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用"></a>RxJava+Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用</h2><blockquote>
-<h2 id="上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！"><a href="#上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！" class="headerlink" title="上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！"></a>上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！</h2></blockquote>
+        <p> 重磅推出 RxHttpUtils 2.x 版本<br> RxJava+Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用</p>
+<blockquote>
+<p> 上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！<br><a id="more"></a></p>
+</blockquote>
 <h3 id="添加Gradle依赖"><a href="#添加Gradle依赖" class="headerlink" title="添加Gradle依赖"></a>添加Gradle依赖</h3><p>先在项目根目录的 build.gradle 的 repositories 添加:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> allprojects &#123;</div><div class="line">     repositories &#123;</div><div class="line">        ...</div><div class="line">        maven &#123; url &quot;https://jitpack.io&quot; &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p> 然后在dependencies添加:</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">...</div><div class="line">        compile &apos;com.github.lygttpod:RxHttpUtils:2.0.1&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<a id="more"></a>
 <h1 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h1><h3 id="1、使用前自己的application类必须继承BaseRxHttpApplication"><a href="#1、使用前自己的application类必须继承BaseRxHttpApplication" class="headerlink" title="1、使用前自己的application类必须继承BaseRxHttpApplication"></a>1、使用前自己的application类必须继承BaseRxHttpApplication</h3><blockquote>
 <h5 id="继承BaseRxHttpApplication之后在自己的Application的onCreate方法中进行初始化配置"><a href="#继承BaseRxHttpApplication之后在自己的Application的onCreate方法中进行初始化配置" class="headerlink" title="继承BaseRxHttpApplication之后在自己的Application的onCreate方法中进行初始化配置"></a>继承BaseRxHttpApplication之后在自己的Application的onCreate方法中进行初始化配置</h5></blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">public class MyApplication extends BaseRxHttpApplication &#123;</div><div class="line"></div><div class="line">    Map&lt;String, Object&gt; headerMaps = new HashMap&lt;&gt;();</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate() &#123;</div><div class="line">        super.onCreate();</div><div class="line"></div><div class="line">        headerMaps.put(&quot;header1&quot;, &quot;header1&quot;);</div><div class="line">        headerMaps.put(&quot;header1&quot;, &quot;header1&quot;);</div><div class="line"></div><div class="line">        /**</div><div class="line">         * 全局请求的统一配置</div><div class="line">         */</div><div class="line">        RxHttpUtils</div><div class="line">                .getInstance()</div><div class="line">                //开启全局配置</div><div class="line">                .config()</div><div class="line">                //全局的BaseUrl,必须配置(baseurl以 / 结尾)</div><div class="line">                .setBaseUrl(BuildConfig.BASE_URL)</div><div class="line">                //开启缓存策略</div><div class="line">                .setCache()</div><div class="line">                //全局的请求头信息</div><div class="line">                .setHeaders(headerMaps)</div><div class="line">                //全局持久话cookie,保存本地每次都会携带在header中</div><div class="line">                .setCookie(false)</div><div class="line">                //全局ssl证书认证，支持三种方式</div><div class="line">                //1、信任所有证书,不安全有风险</div><div class="line">                .setSslSocketFactory()</div><div class="line">                //2、使用预埋证书，校验服务端证书（自签名证书）</div><div class="line">                //.setSslSocketFactory(getAssets().open(&quot;your.cer&quot;))</div><div class="line">                //3、使用bks证书和密码管理客户端证书（双向认证），使用预埋证书，校验服务端证书（自签名证书）</div><div class="line">                //.setSslSocketFactory(getAssets().open(&quot;your.bks&quot;), &quot;123456&quot;, getAssets().open(&quot;your.cer&quot;))</div><div class="line">                //全局超时配置</div><div class="line">                .setReadTimeout(10)</div><div class="line">                //全局超时配置</div><div class="line">                .setWriteTimeout(10)</div><div class="line">                //全局超时配置</div><div class="line">                .setConnectTimeout(10)</div><div class="line">                //全局是否打开请求log日志</div><div class="line">                .setLog(true);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -387,7 +410,15 @@ msg: 错误描述...,
       
         <div class="post-tags">
           
-            <a href="/tags/Android-工具-封装-retrofit-rxjava/" rel="tag"># Android 工具 封装 retrofit rxjava</a>
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/工具/" rel="tag"># 工具</a>
+          
+            <a href="/tags/封装/" rel="tag"># 封装</a>
+          
+            <a href="/tags/retrofit/" rel="tag"># retrofit</a>
+          
+            <a href="/tags/rxjava/" rel="tag"># rxjava</a>
           
         </div>
       
@@ -496,13 +527,22 @@ msg: 错误描述...,
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -551,7 +591,7 @@ msg: 错误描述...,
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#重磅推出-RxHttpUtils-2-x-版本"><span class="nav-number">1.</span> <span class="nav-text">重磅推出 RxHttpUtils 2.x 版本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RxJava-Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用"><span class="nav-number">1.1.</span> <span class="nav-text">RxJava+Retrofit封装，基于RxJava2和Retrofit2重构，便捷使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！"><span class="nav-number">1.2.</span> <span class="nav-text">上次封装的是基于RxJava1版本的，时隔半年多之后现在推出基于RxJava2的版本，相比上一版本提升不少，配置更加灵活，现在放出来供大家学习使用，使用过程中如有问题欢迎提出建议，不断完善这个库！</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加Gradle依赖"><span class="nav-number">1.2.1.</span> <span class="nav-text">添加Gradle依赖</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用说明"><span class="nav-number">2.</span> <span class="nav-text">使用说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、使用前自己的application类必须继承BaseRxHttpApplication"><span class="nav-number">2.0.1.</span> <span class="nav-text">1、使用前自己的application类必须继承BaseRxHttpApplication</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#继承BaseRxHttpApplication之后在自己的Application的onCreate方法中进行初始化配置"><span class="nav-number">2.0.1.0.1.</span> <span class="nav-text">继承BaseRxHttpApplication之后在自己的Application的onCreate方法中进行初始化配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、自己定义的实体类必须继承BaseResponse基类"><span class="nav-number">2.0.2.</span> <span class="nav-text">2、自己定义的实体类必须继承BaseResponse基类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实例—–具体参数意义请看下边的参数说明"><span class="nav-number">3.</span> <span class="nav-text">代码实例—–具体参数意义请看下边的参数说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、使用Application里边的全局配置参数的请求示例"><span class="nav-number">3.0.1.</span> <span class="nav-text">1、使用Application里边的全局配置参数的请求示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、单个请求配置参数示例-可以根据需求选择性的配置"><span class="nav-number">3.0.2.</span> <span class="nav-text">2、单个请求配置参数示例(可以根据需求选择性的配置)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、链式请求–请求参数是上个请求的结果"><span class="nav-number">3.0.3.</span> <span class="nav-text">3、链式请求–请求参数是上个请求的结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、文件下载-—-使用简单粗暴"><span class="nav-number">3.0.4.</span> <span class="nav-text">4、文件下载 —-使用简单粗暴</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参数说明"><span class="nav-number">4.</span> <span class="nav-text">参数说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意事项："><span class="nav-number">5.</span> <span class="nav-text">注意事项：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后面会陆续完成文件上传的封装，敬请期待…"><span class="nav-number">6.</span> <span class="nav-text">后面会陆续完成文件上传的封装，敬请期待…</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系列文章"><span class="nav-number">7.</span> <span class="nav-text">系列文章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo下载地址-或者扫码下载demo"><span class="nav-number">8.</span> <span class="nav-text">Demo下载地址 或者扫码下载demo</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加Gradle依赖"><span class="nav-number">1.</span> <span class="nav-text">添加Gradle依赖</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用说明"><span class="nav-number"></span> <span class="nav-text">使用说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、使用前自己的application类必须继承BaseRxHttpApplication"><span class="nav-number">1.</span> <span class="nav-text">1、使用前自己的application类必须继承BaseRxHttpApplication</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#继承BaseRxHttpApplication之后在自己的Application的onCreate方法中进行初始化配置"><span class="nav-number">1.0.1.</span> <span class="nav-text">继承BaseRxHttpApplication之后在自己的Application的onCreate方法中进行初始化配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、自己定义的实体类必须继承BaseResponse基类"><span class="nav-number">2.</span> <span class="nav-text">2、自己定义的实体类必须继承BaseResponse基类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实例—–具体参数意义请看下边的参数说明"><span class="nav-number"></span> <span class="nav-text">代码实例—–具体参数意义请看下边的参数说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、使用Application里边的全局配置参数的请求示例"><span class="nav-number">1.</span> <span class="nav-text">1、使用Application里边的全局配置参数的请求示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、单个请求配置参数示例-可以根据需求选择性的配置"><span class="nav-number">2.</span> <span class="nav-text">2、单个请求配置参数示例(可以根据需求选择性的配置)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、链式请求–请求参数是上个请求的结果"><span class="nav-number">3.</span> <span class="nav-text">3、链式请求–请求参数是上个请求的结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、文件下载-—-使用简单粗暴"><span class="nav-number">4.</span> <span class="nav-text">4、文件下载 —-使用简单粗暴</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参数说明"><span class="nav-number"></span> <span class="nav-text">参数说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意事项："><span class="nav-number"></span> <span class="nav-text">注意事项：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后面会陆续完成文件上传的封装，敬请期待…"><span class="nav-number"></span> <span class="nav-text">后面会陆续完成文件上传的封装，敬请期待…</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系列文章"><span class="nav-number"></span> <span class="nav-text">系列文章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo下载地址-或者扫码下载demo"><span class="nav-number"></span> <span class="nav-text">Demo下载地址 或者扫码下载demo</span></a></div>
             
 
           </div>
@@ -640,9 +680,6 @@ msg: 错误描述...,
 
 
 
-  
-  
-
 
 
 
@@ -684,16 +721,6 @@ msg: 错误描述...,
   
   
     <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
   
 
 

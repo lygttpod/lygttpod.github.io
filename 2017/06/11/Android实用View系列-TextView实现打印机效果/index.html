@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="android,自定义View,动画," />
 
 
 
@@ -79,12 +79,13 @@
 
 
 
-<meta name="description" content="在审美疲劳的今天，如何能开发出一款应用让用户耳目一新呐，适当的动画特效能为你的APP加分不少，这一点在海外的APP上表现颇为明显。今天为大家带来一篇实用的自定义view，就是是TextView实现文字逐个显示（类似打印机打字一样，逐个显示的效果）。  按照惯例，无图无真相 1、开篇在开始讲解之前先问一下大家，看到这样的一个动画效果，脑海中首先先闪的思路是什么，如果你的UI设计师让你去实现的话，你">
+<meta name="description" content="在审美疲劳的今天，如何能开发出一款应用让用户耳目一新呐，适当的动画特效能为你的APP加分不少，这一点在海外的APP上表现颇为明显。今天为大家带来一篇实用的自定义view，就是是TextView实现文字逐个显示（类似打印机打字一样，逐个显示的效果）。  按照惯例，无图无真相">
+<meta name="keywords" content="android,自定义View,动画">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android实用View系列------TextView实现打印机效果">
 <meta property="og:url" content="https://github.com/lygttpod/2017/06/11/Android实用View系列-TextView实现打印机效果/index.html">
 <meta property="og:site_name" content="Allen&#39;s World">
-<meta property="og:description" content="在审美疲劳的今天，如何能开发出一款应用让用户耳目一新呐，适当的动画特效能为你的APP加分不少，这一点在海外的APP上表现颇为明显。今天为大家带来一篇实用的自定义view，就是是TextView实现文字逐个显示（类似打印机打字一样，逐个显示的效果）。  按照惯例，无图无真相 1、开篇在开始讲解之前先问一下大家，看到这样的一个动画效果，脑海中首先先闪的思路是什么，如果你的UI设计师让你去实现的话，你">
+<meta property="og:description" content="在审美疲劳的今天，如何能开发出一款应用让用户耳目一新呐，适当的动画特效能为你的APP加分不少，这一点在海外的APP上表现颇为明显。今天为大家带来一篇实用的自定义view，就是是TextView实现文字逐个显示（类似打印机打字一样，逐个显示的效果）。  按照惯例，无图无真相">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-a7a751b456b25494.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-cd8637ab476d003b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
@@ -93,10 +94,10 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-f6ab25a6863ac5e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-cd8637ab476d003b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-1d023c2dd1fa3b33.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-09-07T04:24:31.025Z">
+<meta property="og:updated_time" content="2017-10-19T07:30:28.650Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android实用View系列------TextView实现打印机效果">
-<meta name="twitter:description" content="在审美疲劳的今天，如何能开发出一款应用让用户耳目一新呐，适当的动画特效能为你的APP加分不少，这一点在海外的APP上表现颇为明显。今天为大家带来一篇实用的自定义view，就是是TextView实现文字逐个显示（类似打印机打字一样，逐个显示的效果）。  按照惯例，无图无真相 1、开篇在开始讲解之前先问一下大家，看到这样的一个动画效果，脑海中首先先闪的思路是什么，如果你的UI设计师让你去实现的话，你">
+<meta name="twitter:description" content="在审美疲劳的今天，如何能开发出一款应用让用户耳目一新呐，适当的动画特效能为你的APP加分不少，这一点在海外的APP上表现颇为明显。今天为大家带来一篇实用的自定义view，就是是TextView实现文字逐个显示（类似打印机打字一样，逐个显示的效果）。  按照惯例，无图无真相">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2057501-a7a751b456b25494.gif?imageMogr2/auto-orient/strip">
 
 
@@ -310,6 +311,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -340,11 +363,11 @@
         <blockquote>
 <p>在审美疲劳的今天，如何能开发出一款应用让用户耳目一新呐，适当的动画特效能为你的APP加分不少，这一点在海外的APP上表现颇为明显。今天为大家带来一篇实用的自定义view，就是是TextView实现文字逐个显示（类似打印机打字一样，逐个显示的效果）。</p>
 </blockquote>
-<h5 id="按照惯例，无图无真相"><a href="#按照惯例，无图无真相" class="headerlink" title="按照惯例，无图无真相"></a>按照惯例，无图无真相</h5><p><img src="http://upload-images.jianshu.io/upload_images/2057501-a7a751b456b25494.gif?imageMogr2/auto-orient/strip" alt="FadeInTextView.gif"><br><img src="http://upload-images.jianshu.io/upload_images/2057501-cd8637ab476d003b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="绘制过程.png"></p>
+<h5 id="按照惯例，无图无真相"><a href="#按照惯例，无图无真相" class="headerlink" title="按照惯例，无图无真相"></a>按照惯例，无图无真相</h5><p><img src="http://upload-images.jianshu.io/upload_images/2057501-a7a751b456b25494.gif?imageMogr2/auto-orient/strip" alt="FadeInTextView.gif"><br><a id="more"></a><br><img src="http://upload-images.jianshu.io/upload_images/2057501-cd8637ab476d003b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="绘制过程.png"></p>
 <h3 id="1、开篇"><a href="#1、开篇" class="headerlink" title="1、开篇"></a>1、开篇</h3><p>在开始讲解之前先问一下大家，看到这样的一个动画效果，脑海中首先先闪的思路是什么，如果你的UI设计师让你去实现的话，你要怎么做呐，希望读者在思考片刻之后再继续阅读，看看我们的设计思路是不是一样，如果不一样比较一下哪种实现起来更方便，哪种效率更高，欢迎评论交流。你有一个思想，我有一个思想，交换一下我们都有两个思想。</p>
 <h6 id="当你读到这里的时候说明你应该思考过上边的问题了，就问你第一想法是不是网上搜相关资料，看看有没有现成的，有的话直接拿来，没的话换个方式继续搜索。。。比如到各个开发群里询问有没有类似效果的demo之类的。。。"><a href="#当你读到这里的时候说明你应该思考过上边的问题了，就问你第一想法是不是网上搜相关资料，看看有没有现成的，有的话直接拿来，没的话换个方式继续搜索。。。比如到各个开发群里询问有没有类似效果的demo之类的。。。" class="headerlink" title="当你读到这里的时候说明你应该思考过上边的问题了，就问你第一想法是不是网上搜相关资料，看看有没有现成的，有的话直接拿来，没的话换个方式继续搜索。。。比如到各个开发群里询问有没有类似效果的demo之类的。。。"></a>当你读到这里的时候说明你应该思考过上边的问题了，就问你第一想法是不是网上搜相关资料，看看有没有现成的，有的话直接拿来，没的话换个方式继续搜索。。。比如到各个开发群里询问有没有类似效果的demo之类的。。。</h6><p><img src="http://upload-images.jianshu.io/upload_images/2057501-a85fb59fa751e268.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="城市套路深，我要回农村.jpg"></p>
 <p>哈哈，开个玩笑啦，第一时间去网上搜索不见得不好，汲取各个大神设计思路之精华嘛，不过我好想近期没这么做哦，因为被伤过，曾经也是一有问题就直接复制到网上和各个开发群询问，但大部分得到的反馈都是没人叼，记得收到回复最多的是这张图！有种被鄙视的感觉有没有。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2057501-070de7e0f1da2b4f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="程序猿看到这张图内心是崩溃的.jpg"><br><a id="more"></a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-070de7e0f1da2b4f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="程序猿看到这张图内心是崩溃的.jpg"></p>
 <h3 id="2、实现"><a href="#2、实现" class="headerlink" title="2、实现"></a>2、实现</h3><blockquote>
 <p>扯了半天蛋，终于步入正题了。</p>
 </blockquote>
@@ -385,6 +408,16 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/自定义View/" rel="tag"># 自定义View</a>
+          
+            <a href="/tags/动画/" rel="tag"># 动画</a>
+          
+        </div>
       
 
       
@@ -495,13 +528,22 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -639,9 +681,6 @@
 
 
 
-  
-  
-
 
 
 
@@ -683,16 +722,6 @@
   
   
     <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
   
 
 

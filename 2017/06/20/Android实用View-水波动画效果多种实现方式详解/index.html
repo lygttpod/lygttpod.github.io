@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="android,自定义View,动画," />
 
 
 
@@ -79,12 +79,13 @@
 
 
 
-<meta name="description" content="这次给大家带来的是一篇关于自定义View实现水波动画效果的文章，其实在去年项目中使用过类似的动画，当时就自定义View也实现了预期的效果，最近项目中又使用了相似的效果，于是对代码重新整理了一下并且记录下来，便于以后有类似需求可以当作参考！ 按照惯例，无图无真相   实现方式：1、正余弦函数实现2、贝塞尔曲线实现  开篇看到上边的两种实现方式是不是感觉都和数学公式有关呐，这对于毕业多年之后的我们来说">
+<meta name="description" content="这次给大家带来的是一篇关于自定义View实现水波动画效果的文章，其实在去年项目中使用过类似的动画，当时就自定义View也实现了预期的效果，最近项目中又使用了相似的效果，于是对代码重新整理了一下并且记录下来，便于以后有类似需求可以当作参考！ 按照惯例，无图无真相   实现方式：1、正余弦函数实现2、贝塞尔曲线实现">
+<meta name="keywords" content="android,自定义View,动画">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android实用View------水波动画效果多种实现方式详解">
 <meta property="og:url" content="https://github.com/lygttpod/2017/06/20/Android实用View-水波动画效果多种实现方式详解/index.html">
 <meta property="og:site_name" content="Allen&#39;s World">
-<meta property="og:description" content="这次给大家带来的是一篇关于自定义View实现水波动画效果的文章，其实在去年项目中使用过类似的动画，当时就自定义View也实现了预期的效果，最近项目中又使用了相似的效果，于是对代码重新整理了一下并且记录下来，便于以后有类似需求可以当作参考！ 按照惯例，无图无真相   实现方式：1、正余弦函数实现2、贝塞尔曲线实现  开篇看到上边的两种实现方式是不是感觉都和数学公式有关呐，这对于毕业多年之后的我们来说">
+<meta property="og:description" content="这次给大家带来的是一篇关于自定义View实现水波动画效果的文章，其实在去年项目中使用过类似的动画，当时就自定义View也实现了预期的效果，最近项目中又使用了相似的效果，于是对代码重新整理了一下并且记录下来，便于以后有类似需求可以当作参考！ 按照惯例，无图无真相   实现方式：1、正余弦函数实现2、贝塞尔曲线实现">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-54627974b2ad1172.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/280">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-446557da3b08f646.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -99,10 +100,10 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-e00cc93880b06942.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/360">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-9066d77672dae515.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2057501-43358432099e1e71.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2017-09-07T04:22:40.739Z">
+<meta property="og:updated_time" content="2017-10-19T07:30:26.236Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android实用View------水波动画效果多种实现方式详解">
-<meta name="twitter:description" content="这次给大家带来的是一篇关于自定义View实现水波动画效果的文章，其实在去年项目中使用过类似的动画，当时就自定义View也实现了预期的效果，最近项目中又使用了相似的效果，于是对代码重新整理了一下并且记录下来，便于以后有类似需求可以当作参考！ 按照惯例，无图无真相   实现方式：1、正余弦函数实现2、贝塞尔曲线实现  开篇看到上边的两种实现方式是不是感觉都和数学公式有关呐，这对于毕业多年之后的我们来说">
+<meta name="twitter:description" content="这次给大家带来的是一篇关于自定义View实现水波动画效果的文章，其实在去年项目中使用过类似的动画，当时就自定义View也实现了预期的效果，最近项目中又使用了相似的效果，于是对代码重新整理了一下并且记录下来，便于以后有类似需求可以当作参考！ 按照惯例，无图无真相   实现方式：1、正余弦函数实现2、贝塞尔曲线实现">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2057501-54627974b2ad1172.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/280">
 
 
@@ -316,6 +317,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -346,10 +369,10 @@
         <p>这次给大家带来的是一篇关于自定义View实现水波动画效果的文章，其实在去年项目中使用过类似的动画，当时就自定义View也实现了预期的效果，最近项目中又使用了相似的效果，于是对代码重新整理了一下并且记录下来，便于以后有类似需求可以当作参考！<br> 按照惯例，无图无真相</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-54627974b2ad1172.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/280" alt="image.png"></p>
 <blockquote>
-<p>实现方式：<br>1、正余弦函数实现<br>2、贝塞尔曲线实现</p>
-</blockquote>
+<p>实现方式：<br>1、正余弦函数实现<br>2、贝塞尔曲线实现<br><a id="more"></a></p>
 <h3 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h3><p>看到上边的两种实现方式是不是感觉都和数学公式有关呐，这对于毕业多年之后的我们来说如果当初数学基础不是很好现在估计也全部还给老师了吧，所以一提到相关的数学计算公式只能用一个表情表达了。。。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2057501-446557da3b08f646.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这TM都是什么.jpg"><br><a id="more"></a></p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/2057501-446557da3b08f646.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这TM都是什么.jpg"></p>
 <h3 id="1、正余弦函数实现"><a href="#1、正余弦函数实现" class="headerlink" title="1、正余弦函数实现"></a>1、正余弦函数实现</h3><p>正余弦的函数不知道大家还记不记得，我们温习一下相关参数的意义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">y=A*sin(ωx+φ)+k</div><div class="line"> A—振幅越大，波形在y轴上最大与最小值的差值越大</div><div class="line"> ω—角速度， 控制正弦周期(单位角度内震动的次数)</div><div class="line"> φ—初相，反映在坐标系上则为图像的左右移动。这里通过不断改变φ,达到波浪移动效果</div><div class="line"> k—偏距，反映在坐标系上则为图像的上移或下移。</div></pre></td></tr></table></figure></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2057501-bf78d0285b32cc65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="正余弦函数图.png"></p>
 <p>我们要实现移动的波形首先是先画出静态的波形，那么怎么来绘制一个波形图呐，Math函数里已经提供了相应的方法，我们可以直接使用</p>
@@ -397,6 +420,16 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/自定义View/" rel="tag"># 自定义View</a>
+          
+            <a href="/tags/动画/" rel="tag"># 动画</a>
+          
+        </div>
       
 
       
@@ -507,13 +540,22 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -651,9 +693,6 @@
 
 
 
-  
-  
-
 
 
 
@@ -695,16 +734,6 @@
   
   
     <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
   
 
 
