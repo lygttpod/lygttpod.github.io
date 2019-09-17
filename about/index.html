@@ -300,6 +300,9 @@
             <a href="intent://vision.open.page/jump?jump_url=spero://com.spero.vision/albumDetail?id=314&title=+0%E4%BB%98%E8%B4%B9%E4%B8%93%E8%BE%912#Intent;scheme=spero;package=com.spero.vision.vsnapp;S.browser_fallback_url=https://a.app.qq.com/dom/micro/open.jsp?pkgname=com.spero.vision.vsnapp&fromcase=40002;end" target="_blank" class="nav-more">打开股拍APP（方法2)</a>
 
 	      </div>
+	      	 <div>  <a href="javascript:;" id="openApp1">打开股拍APP（方法3)</a> </div>
+	      	 <div>  <a href="javascript:;" id="openApp2">打开股拍APP（方法4)</a> </div>
+
 	      
       </div>
       
@@ -739,6 +742,20 @@
         showTime(Counter);
       }
     });
+ <script type="text/javascript">
+     document.getElementById('openApp1').onclick = function(e){
+         window.location.href = "spero://vision.open.page/jump?jump_url=spero://com.spero.vision/allAlbums";
+         window.setTimeout(function(){
+             window.location.href = "https://a.app.qq.com/dom/micro/open.jsp?pkgname=com.spero.vision.vsnapp&fromcase=40002";//打开app下载地址，有app同事提供
+         },2000)
+     };
+	   <script type="text/javascript">
+     document.getElementById('openApp2').onclick = function(e){
+         window.location.href = "intent://vision.open.page/jump?jump_url=spero://com.spero.vision/albumDetail?id=314&title=+0%E4%BB%98%E8%B4%B9%E4%B8%93%E8%BE%912#Intent;scheme=spero;package=com.spero.vision.vsnapp;S.browser_fallback_url=https://a.app.qq.com/dom/micro/open.jsp?pkgname=com.spero.vision.vsnapp&fromcase=40002;end";
+         window.setTimeout(function(){
+             window.location.href = "https://a.app.qq.com/dom/micro/open.jsp?pkgname=com.spero.vision.vsnapp&fromcase=40002";//打开app下载地址，有app同事提供
+         },2000)
+     };
   </script>
 
 
